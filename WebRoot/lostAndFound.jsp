@@ -95,7 +95,7 @@ body {
 							<a href="javascript:" class="weui_search_cancel"
 								id="search_cancel">取消</a>
 						</div>
-						<div class="weui_panel_hd">寻物 招领 列表</div>
+						<div class="weui_panel_hd" style="text-align: center;">寻物 招领 列表</div>
 						<hr />
 					</div>
 
@@ -325,8 +325,6 @@ body {
 							<a id="formSubmitBtn" href="javascript:"
 								class="weui_btn weui_btn_primary">信息属实 确认提交</a>
 						</div>
-
-
 					</form>
 
 				</div>
