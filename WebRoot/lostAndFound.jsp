@@ -11,7 +11,8 @@
 
 <link rel='stylesheet prefetch'
 	href='http://rawgit.com/weui/weui/develop/dist/style/weui.css'>
-
+<script
+		src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <style>
 html, body, .container {
 	height: 100%;
@@ -353,8 +354,6 @@ body {
 
 	<script
 		src="//assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js"></script>
-	<script
-		src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 	<script src='http://rawgit.com/progrape/weui.js/master/dist/weui.js'></script>
 	<%-- 
 	<script src='./plugins/weui/dist/example/zepto.min.js'></script>
