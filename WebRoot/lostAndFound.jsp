@@ -3,10 +3,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-
 <title>湖商失物招领首页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
 
 
 <link rel='stylesheet prefetch'
@@ -63,6 +62,10 @@ body {
 </script>
 
 
+=======
+<link rel='stylesheet prefetch' href='/we4hnuc/plugins/weui/dist/style/weui.css'>
+<link rel='stylesheet prefetch' href='/we4hnuc/css/index.css'>
+>>>>>>> branch 'master' of https://github.com/well-studio/we4hnuc
 
 </head>
 
@@ -340,7 +343,8 @@ body {
 							alt="">
 					</div>
 					<p class="weui_tabbar_label">失物信息</p>
-				</a> <a href="javascript:;" class="weui_tabbar_item">
+				</a> 
+				<a href="javascript:;" class="weui_tabbar_item">
 					<div class="weui_tabbar_icon">
 						<img src="https://weui.github.io/weui/images/icon_nav_msg.png"
 							alt="">
@@ -348,9 +352,12 @@ body {
 					<p class="weui_tabbar_label">发布信息</p>
 				</a>
 			</div>
+			
+			
 		</div>
 	</div>
 
+<<<<<<< HEAD
 
 	<script
 		src="//assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js"></script>
@@ -473,6 +480,14 @@ body {
 	</script>
 
 
+=======
+	<script src='/we4hnuc/plugins/jquery/jquery.min.js'></script>
+	<script type="text/javascript" src="/we4hnuc/js/index.js"></script>
+	<!--这个有什么用？。。
+	<script src="http://assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js"></script>
+	  -->
+	<script src='/we4hnuc/plugins/weui/dist/weui.min.js'></script>
+>>>>>>> branch 'master' of https://github.com/well-studio/we4hnuc
 </body>
 </html>
 

@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+html, body, .container {
+	height: 100%;
+}
+
+body {
+	background-color: #efeff4;
+}
+
+.container {
+	
+}
+
+.padding {
+	padding: 15px;
+}
