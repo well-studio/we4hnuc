@@ -4,38 +4,17 @@
 <head>
 <meta charset="UTF-8">
 
-
 <title>湖商失物招领详情</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
 <link rel='stylesheet prefetch'
-	href='http://rawgit.com/weui/weui/develop/dist/style/weui.css'>
-
-<style>
-html, body, .container {
-	height: 100%;
-}
-
-body {
-	background-color: #efeff4;
-}
-
-.container {
-	
-}
-
-.padding {
-	padding: 15px;
-}
-</style>
-
+	href='/we4hnuc/plugins/weui/dist/style/weui.css'>
+<link rel='stylesheet prefetch' href='/we4hnuc/css/index.css'>
 
 
 </head>
 
 <body translate="no">
-
 	<div class="container">
 		<div class="weui_panel_bd">
 			<div class="weui_media_box weui_media_text">
@@ -95,9 +74,8 @@ body {
 		</div>
 
 		<div class="button_sp_area" style="margin-bottom: 80px;">
-			<br> <a href="javascript:;"
-				class="weui_btn weui_btn_plain_primary"><i
-				class="weui_icon_success"></i> 认领</a>
+			<br> 
+			<a href="javascript:;" class="weui_btn weui_btn_plain_primary"><i class="weui_icon_success"></i> 认领</a>
 		</div>
 
 
@@ -121,7 +99,6 @@ body {
 		</div>
 	</div>
 	</div>
-
 </body>
 </html>
 

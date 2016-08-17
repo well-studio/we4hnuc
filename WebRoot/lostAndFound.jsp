@@ -5,7 +5,8 @@
 <meta charset="UTF-8">
 <title>湖商失物招领首页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel='stylesheet prefetch' href='/we4hnuc/plugins/weui/dist/style/weui.css'>
+<link rel='stylesheet prefetch'
+	href='/we4hnuc/plugins/weui/dist/style/weui.css'>
 <link rel='stylesheet prefetch' href='/we4hnuc/css/index.css'>
 
 </head>
@@ -26,60 +27,63 @@
 				<div class="weui_tab_bd_item" style="display: none;">
 					<div class="padding">
 						<div class="weui_search_bar" id="search_bar">
-							<form class="weui_search_outer">
+							<form class="weui_search_outer" action="">
 								<div class="weui_search_inner">
-									<i class="weui_icon_search"></i> <input type="search"
-										class="weui_search_input" id="search_input" placeholder="搜索"
-										required=""> <a href="javascript:"
-										class="weui_icon_clear" id="search_clear"></a>
+									<i class="weui_icon_search"></i> 
+									<input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required=""> 
+									<a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
 								</div>
 								<label for="search_input" class="weui_search_text"
 									id="search_text"> <i class="weui_icon_search"></i> <span>搜索</span>
 								</label>
 							</form>
-							<a href="javascript:" class="weui_search_cancel"
-								id="search_cancel">取消</a>
+							<a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
 						</div>
-						<div class="weui_panel_hd" style="text-align: center;">寻物 招领 列表</div>
+						<div class="weui_panel_hd" style="text-align: center;">寻物 招领
+							列表
+						</div>
 						<hr />
 					</div>
 
 					<div class="weui_panel_bd">
 						<a href="lostDetail.jsp">
-						<div class="weui_media_box weui_media_text">
-							<h4 class="weui_media_title"
-								style="text-align: center;color: green;">寻物启示</h4>
-							<p class="weui_media_desc">2016.8.13我一不小心把节操忘在实验室了，麻烦各位好心人帮我找回......</p>
-							
+							<div class="weui_media_box weui_media_text">
+								<h4 class="weui_media_title"
+									style="text-align: center;color: green;">寻物启示</h4>
+								<p class="weui_media_desc">2016.8.13我一不小心把节操忘在实验室了，麻烦各位好心人帮我找回......</p>
+
 								<p class="weui_media_desc" style="text-align: right;">
-									<a href="lostDetail.jsp">
-									<span style="color:#6699CC;">详情 ></span>
-									</a>
+									<a href="lostDetail.jsp"> <span style="color:#6699CC;">详情
+											></span> </a>
 								</p>
-							<ul class="weui_media_info">
-								<li class="weui_media_info_meta">愤怒的小苹果</li>
-								<li class="weui_media_info_meta">2016-8-13</li>
-								<li class="weui_media_info_meta weui_media_info_meta_extra"><span style="color:#FF6666;">未寻到</span></li>
-							</ul>
-						</div>
+								<ul class="weui_media_info">
+									<li class="weui_media_info_meta">愤怒的小苹果</li>
+									<li class="weui_media_info_meta">2016-8-13</li>
+									<li class="weui_media_info_meta weui_media_info_meta_extra"><span
+										style="color:#FF6666;">未寻到</span>
+									</li>
+								</ul>
+							</div> 
 						</a>
-						
+
 						<div class="weui_media_box weui_media_text">
 							<h4 class="weui_media_title"
 								style="text-align: center;color: green;">招领启示</h4>
-							<p class="weui_media_desc">2016.8.13我在实验室捡到一斤节操，妈黑妈黑的，求主人麻溜点认领走T T......</p>
+							<p class="weui_media_desc">2016.8.13我在实验室捡到一斤节操，妈黑妈黑的，求主人麻溜点认领走T
+								T......</p>
 							<a href="#">
 								<p class="weui_media_desc" style="text-align: right;">
 									<span style="color:#6699CC;">详情 ></span>
-								</p>
-							</a>
+								</p> </a>
 							<ul class="weui_media_info">
 								<li class="weui_media_info_meta">愤怒的小西瓜</li>
 								<li class="weui_media_info_meta">2016-8-13</li>
-								<li class="weui_media_info_meta weui_media_info_meta_extra"><span style="color:#FF6666;">未认领</span></li>
+								<li class="weui_media_info_meta weui_media_info_meta_extra"><span
+									style="color:#FF6666;">未认领</span>
+								</li>
 							</ul>
 						</div>
-						
+
 						<div class="weui_media_box weui_media_text">
 							<h4 class="weui_media_title"
 								style="text-align: center;color: green;">寻物启示</h4>
@@ -87,31 +91,34 @@
 							<a href="#">
 								<p class="weui_media_desc" style="text-align: right;">
 									<span style="color:#6699CC;">详情 ></span>
-								</p>
-							</a>
+								</p> </a>
 							<ul class="weui_media_info">
 								<li class="weui_media_info_meta">愤怒的小苹果</li>
 								<li class="weui_media_info_meta">2016-8-13</li>
-								<li class="weui_media_info_meta weui_media_info_meta_extra"><span style="color:#FF6666;">未寻到</span></li>
+								<li class="weui_media_info_meta weui_media_info_meta_extra"><span
+									style="color:#FF6666;">未寻到</span>
+								</li>
 							</ul>
 						</div>
-						
+
 						<div class="weui_media_box weui_media_text">
 							<h4 class="weui_media_title"
 								style="text-align: center;color: green;">招领启示</h4>
-							<p class="weui_media_desc">2016.8.13我在实验室捡到一斤节操，妈黑妈黑的，求主人麻溜点认领走T T......</p>
+							<p class="weui_media_desc">2016.8.13我在实验室捡到一斤节操，妈黑妈黑的，求主人麻溜点认领走T
+								T......</p>
 							<a href="#">
 								<p class="weui_media_desc" style="text-align: right;">
 									<span style="color:#6699CC;">详情 ></span>
-								</p>
-							</a>
+								</p> </a>
 							<ul class="weui_media_info">
 								<li class="weui_media_info_meta">愤怒的小西瓜</li>
 								<li class="weui_media_info_meta">2016-8-13</li>
-								<li class="weui_media_info_meta weui_media_info_meta_extra"><span style="color:#FF6666;">未认领</span></li>
+								<li class="weui_media_info_meta weui_media_info_meta_extra"><span
+									style="color:#FF6666;">未认领</span>
+								</li>
 							</ul>
 						</div>
-						
+
 					</div>
 				</div>
 
@@ -134,16 +141,14 @@
 									<div class="weui_cell_ft">
 										<input type="radio" class="weui_check" name="radio1" id="x11"
 											checked="checked"> <span class="weui_icon_checked"></span>
-									</div>
-								</label> <label class="weui_cell weui_check_label" for="x12">
+									</div> </label> <label class="weui_cell weui_check_label" for="x12">
 									<div class="weui_cell_bd weui_cell_primary">
 										<p>我要发布寻物信息</p>
 									</div>
 									<div class="weui_cell_ft">
 										<input type="radio" name="radio1" class="weui_check" id="x12">
 										<span class="weui_icon_checked"></span>
-									</div>
-								</label>
+									</div> </label>
 							</div>
 							<%-- 时间 --%>
 							<div class="weui_cell">
@@ -283,18 +288,16 @@
 						<img src="https://weui.github.io/weui/images/icon_nav_button.png"
 							alt="">
 					</div>
-					<p class="weui_tabbar_label">失物信息</p>
-				</a> 
-				<a href="javascript:;" class="weui_tabbar_item">
+					<p class="weui_tabbar_label">失物信息</p> </a> <a href="javascript:;"
+					class="weui_tabbar_item">
 					<div class="weui_tabbar_icon">
 						<img src="https://weui.github.io/weui/images/icon_nav_msg.png"
 							alt="">
 					</div>
-					<p class="weui_tabbar_label">发布信息</p>
-				</a>
+					<p class="weui_tabbar_label">发布信息</p> </a>
 			</div>
-			
-			
+
+
 		</div>
 	</div>
 
