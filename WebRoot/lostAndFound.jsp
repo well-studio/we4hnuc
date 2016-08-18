@@ -5,12 +5,8 @@
 <meta charset="UTF-8">
 <title>湖商失物招领首页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<<<<<<< HEAD
 <link rel='stylesheet prefetch' href='/we4hnuc/plugins/weui/dist/style/weui.min.css'>
-=======
-<link rel='stylesheet prefetch'
-	href='/we4hnuc/plugins/weui/dist/style/weui.css'>
->>>>>>> 8595f866e734481c55ec0d9e46185191d076a467
+<link rel='stylesheet prefetch' href='/we4hnuc/plugins/weui/dist/style/weui.css'>
 <link rel='stylesheet prefetch' href='/we4hnuc/css/index.css'>
 
 </head>
