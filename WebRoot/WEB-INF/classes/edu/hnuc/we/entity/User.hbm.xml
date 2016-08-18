@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="edu.hnuc.we.entity.User" table="user" catalog="we4hnuc">
+        <id name="usr_id" type="java.lang.Integer">
+            <column name="usr_id" />
+        </id>
+        <property name="usr_stuId" type="java.lang.String">
+            <column name="usr_stuId" length="15" />
+        </property>
+        <property name="usr_name" type="java.lang.String">
+            <column name="usr_name" length="20" />
+        </property>
+        <property name="usr_pwd" type="java.lang.String">
+            <column name="usr_pwd" length="30" />
+        </property>
+    </class>
+</hibernate-mapping>
