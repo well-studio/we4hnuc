@@ -1,5 +1,5 @@
-#Sat Aug 13 14:47:12 CST 2016
+#Thu Aug 25 09:54:55 CST 2016
 eclipse.preferences.version=1
-validator.Checked=WebRoot/plugins
+validator.Checked=WebRoot/plugins,WebRoot/WEB-INF/common
 validator.Revalidate=true
 validator.Unchecked=

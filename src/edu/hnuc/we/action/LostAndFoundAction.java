@@ -30,10 +30,10 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		this.valueMap = valueMap;
 	}
 	private LostAndFound lostAndFound = new LostAndFound();
-	@Override
+	@Override 
 	public LostAndFound getModel() {
 		return lostAndFound;
-	}
+	} 
 	
 	private Integer laf_id; //id
 	public Integer getLaf_id() {
@@ -57,20 +57,17 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String getAllInfo() {
-//		ActionContext.getContext().getSession();
-//		ActionContext.getContext().getApplication();
-//		ActionContext.getContext();
-		
-		return null;
+		valueMap.put("Info", lostAndFoundService.getAllInfo());
+		return "valueMap";
 	}
-	
+	 
 	/**
 	 * 获取所有的招领信息(管理员)
 	 * @return
 	 */
 	public String getLostInfo() {
-		
-		return null;
+		valueMap.put("Info", lostAndFoundService.getLostInfo());
+		return "valueMap";
 	}
 	
 	
@@ -79,8 +76,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String getFoundInfo() {
-		
-		return null;
+		valueMap.put("Info", lostAndFoundService.getFoundInfo());
+		return "valueMap";
 	}
 	
 	/**
@@ -88,8 +85,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String getToCheckInfo() {
-		
-		return null;
+		valueMap.put("Info", lostAndFoundService.getToCheckInfo());
+		return "valueMap";
 	}
 	
 	/**
@@ -97,8 +94,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String letInfoBeTrue() {
-		
-		return null;
+		valueMap.put("Msg", lostAndFoundService.letInfoBeTrue(laf_id));
+		return "valueMap";
 	}
 	
 	/**
@@ -106,8 +103,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String letInfoBeFalse() {
-		
-		return null;
+		valueMap.put("Msg", lostAndFoundService.letInfoBeFalse(laf_id));
+		return "valueMap";
 	}
 	
 	/**
@@ -115,8 +112,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String letInfoBeTimeOut() {
-		
-		return null;
+		valueMap.put("Msg", lostAndFoundService.letInfoBeTimeOut(laf_id));
+		return "valueMap";
 	}
 	
 	/**
@@ -124,8 +121,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String delInfoById() {
-		
-		return null;
+		valueMap.put("Msg", lostAndFoundService.delInfoById(laf_id));
+		return "valueMap";
 	}
 	
 	/**
@@ -133,8 +130,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String getAllValidInfo() {
-		
-		return null;
+		valueMap.put("Info", lostAndFoundService.getAllValidInfo());
+		return "valueMap";
 	}
 	
 	/**
@@ -142,8 +139,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String getLostValidInfo() {
-		
-		return null;
+		valueMap.put("Info", lostAndFoundService.getLostValidInfo());
+		return "valueMap";
 	}
 	
 	/**
@@ -151,8 +148,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String getFoundValidInfo() {
-		
-		return null;
+		valueMap.put("Info", lostAndFoundService.getFoundValidInfo());
+		return "valueMap";
 	}
 	
 	/**
@@ -161,8 +158,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String getInfoById() {
-		
-		return null;
+		valueMap.put("Info", lostAndFoundService.getInfoById(laf_id));
+		return "valueMap";
 	}
 	
 	/**
@@ -171,8 +168,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String searchInfo() {
-		
-		return null;
+		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
+		return "valueMap";
 	}
 	
 	/**
@@ -180,8 +177,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String releaseInfo() {
-		
-		return null;
+		valueMap.put("Msg", lostAndFoundService.releaseInfo(lostAndFound));
+		return "valueMap";
 	}
 	
 	/**
@@ -189,8 +186,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String letInfoBeSuc() {
-		
-		return null;
+		valueMap.put("Msg", lostAndFoundService.letInfoBeSuc(laf_id));
+		return "valueMap";
 	}
 	
 }

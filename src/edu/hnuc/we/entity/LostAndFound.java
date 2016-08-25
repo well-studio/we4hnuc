@@ -13,6 +13,7 @@ public class LostAndFound {
 	Integer laf_stat = 3; // 1  有效 2 过期 3 待审核 4  审核失败  6 认领/寻物成功
 	Timestamp laf_laftime; // 失物丢的大概时间
 	Timestamp laf_pubtime; // 发布时间
+	Timestamp laf_suc; // 成功认领时间
 	String laf_name; // 联系人姓名
 	String laf_stuid;// 学号
 	String laf_phone; // 电话号码
@@ -24,9 +25,11 @@ public class LostAndFound {
 	
 	public LostAndFound() {}
 	
+	
+
 	public LostAndFound(Integer laf_id, Integer laf_type, Integer laf_stat,
-			Timestamp laf_laftime, Timestamp laf_pubtime, String laf_name,
-			String laf_stuid, String laf_phone, String laf_qq,
+			Timestamp laf_laftime, Timestamp laf_pubtime, Timestamp laf_suc,
+			String laf_name, String laf_stuid, String laf_phone, String laf_qq,
 			String laf_wechat, String laf_detail, String laf_pic) {
 		super();
 		this.laf_id = laf_id;
@@ -34,6 +37,7 @@ public class LostAndFound {
 		this.laf_stat = laf_stat;
 		this.laf_laftime = laf_laftime;
 		this.laf_pubtime = laf_pubtime;
+		this.laf_suc = laf_suc;
 		this.laf_name = laf_name;
 		this.laf_stuid = laf_stuid;
 		this.laf_phone = laf_phone;
@@ -42,6 +46,8 @@ public class LostAndFound {
 		this.laf_detail = laf_detail;
 		this.laf_pic = laf_pic;
 	}
+
+
 
 	public Integer getLaf_id() {
 		return laf_id;
@@ -85,6 +91,14 @@ public class LostAndFound {
 
 	public String getLaf_name() {
 		return laf_name;
+	}
+	
+	public Timestamp getLaf_suc() {
+		return laf_suc;
+	}
+
+	public void setLaf_suc(Timestamp laf_suc) {
+		this.laf_suc = laf_suc;
 	}
 
 	public void setLaf_name(String laf_name) {
@@ -143,10 +157,13 @@ public class LostAndFound {
 	public String toString() {
 		return "LostAndFound [laf_id=" + laf_id + ", laf_type=" + laf_type
 				+ ", laf_stat=" + laf_stat + ", laf_laftime=" + laf_laftime
-				+ ", laf_pubtime=" + laf_pubtime + ", laf_name=" + laf_name
-				+ ", laf_stuid=" + laf_stuid + ", laf_phone=" + laf_phone
-				+ ", laf_qq=" + laf_qq + ", laf_wechat=" + laf_wechat
-				+ ", laf_detail=" + laf_detail + ", laf_pic=" + laf_pic + "]";
+				+ ", laf_pubtime=" + laf_pubtime + ", laf_suc=" + laf_suc
+				+ ", laf_name=" + laf_name + ", laf_stuid=" + laf_stuid
+				+ ", laf_phone=" + laf_phone + ", laf_qq=" + laf_qq
+				+ ", laf_wechat=" + laf_wechat + ", laf_detail=" + laf_detail
+				+ ", laf_pic=" + laf_pic + "]";
 	}
+
+	
 	
 }

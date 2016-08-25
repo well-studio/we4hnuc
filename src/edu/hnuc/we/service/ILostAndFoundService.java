@@ -96,12 +96,13 @@ public interface ILostAndFoundService {
 	 * 发布一条新的信息(默认待审核状态)
 	 * @return
 	 */
-	boolean releaseInfo();
+	boolean releaseInfo(LostAndFound laf);
 	
 	/**
 	 * 认领成功 or 寻物成功 (必须核对 二次登录是否是同一个学生所为,用学号judge)
 	 * @return
 	 */
 	boolean letInfoBeSuc(Integer id);
+
 	
 }

@@ -1,14 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>湖商失物招领首页</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel='stylesheet prefetch' href='/we4hnuc/plugins/weui/dist/style/weui.min.css'>
-<link rel='stylesheet prefetch' href='/we4hnuc/plugins/weui/dist/style/weui.css'>
-<link rel='stylesheet prefetch' href='/we4hnuc/css/index.css'>
+<%@include file="./WEB-INF/common/head.jsp"%>
 
+<link rel='stylesheet prefetch' href='<%=path %>/css/lostandfound.css'>
 </head>
 
 <body translate="no">
@@ -300,13 +301,9 @@
 
 		</div>
 	</div>
-
-	<script src='/we4hnuc/plugins/jquery/jquery.min.js'></script>
-	<script type="text/javascript" src="/we4hnuc/js/index.js"></script>
-	<!--这个有什么用？。。
-	<script src="http://assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js"></script>
-	  -->
-	<script src='/we4hnuc/plugins/weui/dist/weui.min.js'></script>
+	<%@ include file="./WEB-INF/common/footer.jsp"%> 
+	<script type="text/javascript" src="<%=path %>/js/index.js"></script>
+	
 </body>
 </html>
 

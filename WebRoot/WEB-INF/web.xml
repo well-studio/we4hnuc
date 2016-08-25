@@ -5,6 +5,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>we4hnuc</display-name>
 	
+  
 	<filter>
 		<filter-name>OpenSessionInView</filter-name>
 		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
@@ -21,15 +22,11 @@
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 	</filter>
 
-	
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
 		<url-pattern>*.hnuc</url-pattern>
 	</filter-mapping>
-	
 
-	
-	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
@@ -69,16 +66,14 @@
 		<welcome-file>index.htm</welcome-file>
 	</welcome-file-list>
 
-
 	<error-page>
 		<error-code>404</error-code>
-		<location>/error/404.html</location>
+		<location>/WEB-INF/error/404.html</location>
 	</error-page>
-
 
 	<error-page>
 		<error-code>500</error-code>
-		<location>/error/500.html</location>
+		<location>/WEB-INF/error/500.html</location>
 	</error-page>
 	
 

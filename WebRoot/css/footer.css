@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+/**
+  * Footer Theme: default
+  */
+.am-footer{
+	text-align: center;
+}  
+
+.am-footer-default {
+  background-color: #fff;
+}
+.am-footer-default a {
+  color: #555555;
+}
+.am-footer-default .am-footer-switch {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.am-footer-default .am-footer-ysp {
+  color: #555555;
+  cursor: pointer;
+}
+.am-footer-default .am-footer-divider {
+  color: #ccc;
+}
+.am-footer-default .am-footer-desktop {
+  color: #0e90d2;
+}
+.am-footer-default .am-footer-miscs {
+  color: #999999;
+  font-size: 13px;
+}
+.am-footer-default .am-footer-miscs p {
+  margin: 5px 0;
+}
+@media only screen and (min-width:641px) {
+  .am-footer-default .am-footer-miscs p {
+    display: inline-block;
+    margin: 5px;
+  }
+}

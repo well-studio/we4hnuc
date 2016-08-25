@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+html,body,.container {
+	height: 100%;
+}
+
+body {
+	background-color: #efeff4;
+}
+
+.padding {
+	padding: 15px;
+}
+
+.weui_cell_bd {
+	font-weight: normal;
+}
+
+.weui_cell_bd > p{
+	font-size: 17px;
+	margin:0;
+}

@@ -21,93 +21,78 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 
 	@Override
 	public List<LostAndFound> getAllInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return lostAndFoundDao.getAllInfo();
 	}
 
 	@Override
 	public List<LostAndFound> getLostInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return lostAndFoundDao.getLostInfo();
 	}
 
 	@Override
 	public List<LostAndFound> getFoundInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return lostAndFoundDao.getFoundInfo();
 	}
 
 	@Override
 	public List<LostAndFound> getToCheckInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return lostAndFoundDao.getToCheckInfo();
 	}
 
 	@Override
 	public boolean letInfoBeTrue(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+		return lostAndFoundDao.letInfoBeTrue(id);
 	}
 
 	@Override
 	public boolean letInfoBeFalse(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+		return lostAndFoundDao.letInfoBeFalse(id);
 	}
 
 	@Override
 	public boolean letInfoBeTimeOut(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+		return lostAndFoundDao.letInfoBeTimeOut(id);
 	}
 
 	@Override
 	public boolean delInfoById(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+		return lostAndFoundDao.delInfoById(id);
 	}
 
 	@Override
 	public List<LostAndFound> getAllValidInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return lostAndFoundDao.getAllValidInfo();
 	}
 
 	@Override
 	public List<LostAndFound> getLostValidInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return lostAndFoundDao.getLostValidInfo();
 	}
 
 	@Override
 	public List<LostAndFound> getFoundValidInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return lostAndFoundDao.getFoundValidInfo();
 	}
 
 	@Override
 	public LostAndFound getInfoById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return lostAndFoundDao.getInfoById(id);
 	}
 
 	@Override
-	public boolean releaseInfo() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean releaseInfo(LostAndFound laf) {
+		return lostAndFoundDao.releaseInfo(laf);
 	}
 
 	@Override
 	public boolean letInfoBeSuc(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+		return lostAndFoundDao.letInfoBeSuc(id);
 	}
 
 
 	@Override
 	public List<LostAndFound> searchInfo(String keyWord) {
-		// TODO Auto-generated method stub
-		return null;
+		return lostAndFoundDao.searchInfo(keyWord);
 	}
 	
 	

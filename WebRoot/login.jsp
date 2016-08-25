@@ -1,16 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%
+String path = request.getContextPath();
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  
-    <title>教务系统登入</title>
-	<link rel='stylesheet prefetch' href='/we4hnuc/plugins/weui/dist/style/weui.css'>
-	<link rel="stylesheet" href="/we4hnuc/css/login.css">
-  </head>
-  
-  <body>
+<%@include file="./WEB-INF/common/head.jsp"%>
+<title>教务系统登入</title>
+<link rel="stylesheet" href="<%=path%>/css/login.css">
+</head>
+
+<body>
  
 	<img class="top-img" src="/we4hnuc/imgs/jwgl.png" width="100%"/>
 	<div class="weui_cells_title">可使用教务系统学号密码登入</div>
@@ -36,7 +35,6 @@
 		
 	</div>
 	<a href="javascript:;" class="weui_btn weui_btn_primary login-btn">登入</a>
-	<script src='/we4hnuc/plugins/jquery/jquery.min.js'></script>
-    <script src='/we4hnuc/plugins/weui/dist/weui.min.js'></script>
+	<%@ include file="./WEB-INF/common/footer.jsp"%> 
 </body>
 </html>

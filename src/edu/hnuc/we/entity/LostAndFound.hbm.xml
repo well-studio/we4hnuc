@@ -6,6 +6,7 @@
     <class name="edu.hnuc.we.entity.LostAndFound" table="lostandfound" catalog="we4hnuc">
         <id name="laf_id" type="java.lang.Integer">
             <column name="laf_id"/>
+            <generator class="increment"></generator>
         </id>
         <property name="laf_type" type="java.lang.Integer">
             <column name="laf_type" />
@@ -18,6 +19,9 @@
         </property>
         <property name="laf_pubtime" type="timestamp">
             <column name="laf_pubtime" />
+        </property>
+        <property name="laf_suc" type="timestamp">
+            <column name="laf_suc" />
         </property>
         <property name="laf_name" type="java.lang.String">
             <column name="laf_name"/>

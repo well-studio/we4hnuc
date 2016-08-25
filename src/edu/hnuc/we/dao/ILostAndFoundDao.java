@@ -96,7 +96,7 @@ public interface ILostAndFoundDao {
 	 * 发布一条新的信息(默认待审核状态)
 	 * @return
 	 */
-	boolean releaseInfo();
+	boolean releaseInfo(LostAndFound laf);
 	
 	/**
 	 * 认领成功 or 寻物成功
