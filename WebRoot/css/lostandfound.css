@@ -16,7 +16,13 @@ body {
 	font-weight: normal;
 }
 
-.weui_cell_bd > p{
+.weui_cell_bd>p {
 	font-size: 17px;
-	margin:0;
+	margin: 0;
 }
+
+.laf-title{
+	text-align: center;
+	color: #00DD00;
+}
+

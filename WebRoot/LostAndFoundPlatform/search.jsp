@@ -1,14 +1,20 @@
+<%@page import="org.springframework.context.support.ClassPathXmlApplicationContext"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
+<%@page import="edu.hnuc.we.entity.LostAndFound"%>
+<%@page import="edu.hnuc.we.dao.impl.LostAndFoundDaoImpl"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
+%>
+<%
+	List<LostAndFound> lists = (List<LostAndFound>)request.getSession().getAttribute("lafSearch");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>湖商失物招领首页</title>
-<%@include file="./WEB-INF/common/head.jsp"%>
-
+<%@include file="../WEB-INF/common/LostAndFoundPlatform/head.jsp"%>
 <link rel='stylesheet prefetch' href='<%=path %>/css/lostandfound.css'>
 </head>
 
@@ -16,42 +22,70 @@ String path = request.getContextPath();
 
 	<div class="container">
 		<div class="weui_tab">
-			<!--<div class="weui_navbar">
-            <div class="weui_navbar_item">
-                按钮
-            </div>
-            <div class="weui_navbar_item">
-                表单
-            </div>
-        </div>-->
 			<div class="weui_tab_bd">
 				<div class="weui_tab_bd_item" style="display: none;">
 					<div class="padding">
 						<div class="weui_search_bar" id="search_bar">
-							<form class="weui_search_outer" action="">
+							<form class="weui_search_outer" action="<%=path %>/LostAndFoundPlatform/lafsearch.hnuc">
 								<div class="weui_search_inner">
 									<i class="weui_icon_search"></i> 
-									<input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required=""> 
-									<a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+									<input type="search"
+										class="weui_search_input" id="search_input" name="keyWord" placeholder="搜索"
+										required=""> 
+										<a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
 								</div>
 								<label for="search_input" class="weui_search_text"
 									id="search_text"> <i class="weui_icon_search"></i> <span>搜索</span>
 								</label>
 							</form>
-							<a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+							<a href="javascript:" class="weui_search_cancel"
+								id="search_cancel">取消</a>
 						</div>
-						<div class="weui_panel_hd" style="text-align: center;">寻物 招领
-							列表
-						</div>
+						<div class="weui_panel_hd" style="text-align: center;">寻物
+							招领列表</div>
 						<hr />
 					</div>
 
 					<div class="weui_panel_bd">
-						<a href="lostDetail.jsp">
+					<%
+							if (lists.size() == 0) {
+						%>
+						亲，还没有数据哦！
+						<%
+							} else {
+
+								for (int i = 0; i < lists.size(); i++) {
+						%>
+							<a href="<%=path%>/LostAndFoundPlatform/lafdetail.hnuc?lid=<%=lists.get(i).getLaf_id()%>">
+								<div class="weui_media_box weui_media_text">
+									<h4 class="weui_media_title laf-title"><%=(lists.get(i).getLaf_type() == 0) ? "招领启事": "寻物启事"%></h4>
+									<p class="weui_media_desc "><%=lists.get(i).getLaf_detail().substring(0, 80) + "...."%></p>
+	
+									<p class="weui_media_desc" style="text-align: right;">
+										<a href="<%=path%>/LostAndFoundPlatform/lafdetail.hnuc?lid=<%=lists.get(i).getLaf_id()%>">
+											<span style="color:#6699CC;">详情</span> 
+										</a>
+									</p>
+									<ul class="weui_media_info">
+										<li class="weui_media_info_meta"><%=lists.get(i).getLaf_phone()%></li>
+										<li class="weui_media_info_meta weui_media_info_meta_extra"><%=lists.get(i).getLaf_laftime()%></li>
+										<li class="weui_media_info_meta weui_media_info_meta_extra">
+											<span style="color:#FF6666;"> <%=lists.get(i).getLaf_stat() == 6 ? "已认领" : ((lists.get(i).getLaf_type() == 0) ? "未认领" : "未寻到")%>
+										</span>
+										</li>
+									</ul>
+								</div> 
+							</a>
+						<%
+							}
+							}
+						%>
+						
+						<%-- 
+						<a href="<%=path %>/LostAndFoundPlatform/lostDetail.jsp">
 							<div class="weui_media_box weui_media_text">
-								<h4 class="weui_media_title"
-									style="text-align: center;color: green;">寻物启示</h4>
-								<p class="weui_media_desc">2016.8.13我一不小心把节操忘在实验室了，麻烦各位好心人帮我找回......</p>
+								<h4 class="weui_media_title laf-title">寻物启示</h4>
+								<p class="weui_media_desc ">2016.8.13我一不小心把节操忘在实验室了，麻烦各位好心人帮我找回......</p>
 
 								<p class="weui_media_desc" style="text-align: right;">
 									<a href="lostDetail.jsp"> <span style="color:#6699CC;">详情
@@ -61,11 +95,9 @@ String path = request.getContextPath();
 									<li class="weui_media_info_meta">愤怒的小苹果</li>
 									<li class="weui_media_info_meta">2016-8-13</li>
 									<li class="weui_media_info_meta weui_media_info_meta_extra"><span
-										style="color:#FF6666;">未寻到</span>
-									</li>
+										style="color:#FF6666;">未寻到</span></li>
 								</ul>
-							</div> 
-						</a>
+							</div> </a>
 
 						<div class="weui_media_box weui_media_text">
 							<h4 class="weui_media_title"
@@ -80,8 +112,7 @@ String path = request.getContextPath();
 								<li class="weui_media_info_meta">愤怒的小西瓜</li>
 								<li class="weui_media_info_meta">2016-8-13</li>
 								<li class="weui_media_info_meta weui_media_info_meta_extra"><span
-									style="color:#FF6666;">未认领</span>
-								</li>
+									style="color:#FF6666;">未认领</span></li>
 							</ul>
 						</div>
 
@@ -97,8 +128,7 @@ String path = request.getContextPath();
 								<li class="weui_media_info_meta">愤怒的小苹果</li>
 								<li class="weui_media_info_meta">2016-8-13</li>
 								<li class="weui_media_info_meta weui_media_info_meta_extra"><span
-									style="color:#FF6666;">未寻到</span>
-								</li>
+									style="color:#FF6666;">未寻到</span></li>
 							</ul>
 						</div>
 
@@ -115,18 +145,14 @@ String path = request.getContextPath();
 								<li class="weui_media_info_meta">愤怒的小西瓜</li>
 								<li class="weui_media_info_meta">2016-8-13</li>
 								<li class="weui_media_info_meta weui_media_info_meta_extra"><span
-									style="color:#FF6666;">未认领</span>
-								</li>
+									style="color:#FF6666;">未认领</span></li>
 							</ul>
 						</div>
 
 					</div>
+					--%>
+					</div>
 				</div>
-
-
-
-
-
 				<%---------------------------------------------------------------------%>
 				<div class="weui_tab_bd_item" style="display: none;">
 					<div class="weui_cells_title">失物信息填写</div>
@@ -297,13 +323,19 @@ String path = request.getContextPath();
 					</div>
 					<p class="weui_tabbar_label">发布信息</p> </a>
 			</div>
-
-
 		</div>
+		<div data-am-widget="gotop" class="am-gotop am-gotop-fixed" style=" max-width: 320px; margin-left: 83%;">
+		    <a href="#top" title=""> <img class="am-gotop-icon-custom"
+				src="http://amazeui.b0.upaiyun.com/assets/i/cpts/gotop/goTop.gif"
+				style=" display: inline-block;max-width: 30px;vertical-align: middle;"
+			/>
+			</a>
+  		</div>
 	</div>
-	<%@ include file="./WEB-INF/common/footer.jsp"%> 
-	<script type="text/javascript" src="<%=path %>/js/index.js"></script>
 	
+	<%@ include file="../WEB-INF/common/LostAndFoundPlatform/footer.jsp"%>
+	<script type="text/javascript" src="<%=path %>/js/index.js"></script>
+
 </body>
 </html>
 

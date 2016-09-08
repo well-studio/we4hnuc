@@ -4,7 +4,7 @@ String path = request.getContextPath();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<%@include file="./WEB-INF/common/head.jsp"%>
+<%@include file="../WEB-INF/common/LostAndFoundPlatform/head.jsp"%>
 <title>教务系统登入</title>
 <link rel="stylesheet" href="<%=path%>/css/login.css">
 </head>
@@ -35,6 +35,6 @@ String path = request.getContextPath();
 		
 	</div>
 	<a href="javascript:;" class="weui_btn weui_btn_primary login-btn">登入</a>
-	<%@ include file="./WEB-INF/common/footer.jsp"%> 
+	<%@ include file="../WEB-INF/common/LostAndFoundPlatform/footer.jsp"%> 
 </body>
 </html>

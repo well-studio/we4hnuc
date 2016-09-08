@@ -12,7 +12,7 @@
 		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/we4hnuc?useUnicode=true&amp;characterEncoding=UTF-8"></property>
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
 		<property name="user" value="root"></property>
-		<property name="password" value=""></property>
+		<property name="password" value="root"></property>
 		<property name="initialPoolSize" value="10"></property>
 		<property name="maxPoolSize" value="200"></property>
 	</bean>
@@ -55,16 +55,27 @@
 	<bean id="lostAndFoundDao" class="edu.hnuc.we.dao.impl.LostAndFoundDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="userDao" class="edu.hnuc.we.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
 
 	<!-- service层的bean管理 -->
 	<bean id="lostAndFoundService" class="edu.hnuc.we.service.impl.LostAndFoundServiceImpl">
 		<property name="lostAndFoundDao" ref="lostAndFoundDao"></property>
+	</bean>
+	<bean id="userService" class="edu.hnuc.we.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
 	</bean>
 
 	<!-- action层的bean管理 -->
 	<bean id="lostAndFoundAction" class="edu.hnuc.we.action.LostAndFoundAction"
 		scope="prototype">
 		<property name="lostAndFoundService" ref="lostAndFoundService"></property>
+	</bean>
+	<bean id="UserAction" class="edu.hnuc.we.action.UserAction"
+		scope="prototype">
+		<property name="userService" ref="userService"></property>
 	</bean>
 	
 

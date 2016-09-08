@@ -2,15 +2,14 @@ package edu.hnuc.we.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.springframework.transaction.annotation.Transactional;
 
 import edu.hnuc.we.dao.ILostAndFoundDao;
 import edu.hnuc.we.entity.LostAndFound;
+import edu.hnuc.we.entity.PageBean;
 import edu.hnuc.we.util.Operation;
 
 /**
@@ -32,20 +31,167 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 		return sessionFactory.getCurrentSession();
 	}
 
+	/*------------获取信息start-------------*/
+	
+	/*------------分页获取start-------------*/
 	@Override
 	/**
-	 * 根据发布时间获取所有的失物招领信息(管理员)
+	 * 分页获取所有的失物招领信息(管理员)
 	 * @return
 	 */
-	public List<LostAndFound> getAllInfo() {
+	public PageBean<LostAndFound> getLimitAllInfo(PageBean<LostAndFound> lafPage) {
 		String hql = "from LostAndFound as laf order by laf.laf_pubtime";
+//		String sql = "select count(*) as t from lostandfound";
+		Integer totalCount = getAllInfo().size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		lafPage.setPageData(getLimitInfo(hql, (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount()));
+		return lafPage;
+	}
+	
+	@Override
+	/**
+	 * 获取所有的需要审核的信息(管理员)
+	 * @return
+	 */
+	public PageBean<LostAndFound>  getLimitToCheckInfo(PageBean<LostAndFound> lafPage) {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 3";
+		Integer totalCount = getAllToCheckInfo().size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		lafPage.setPageData(getLimitInfo(hql, (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount()));
+		return lafPage;
+	}
+	
+	@Override
+	/**
+	 * 获取所有的需要审核的信息(管理员)
+	 * @return
+	 */
+	public PageBean<LostAndFound>  getLimitSucInfo(PageBean<LostAndFound> lafPage) {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 6";
+		Integer totalCount = getAllSucInfo().size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		lafPage.setPageData(getLimitInfo(hql, (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount()));
+		return lafPage;
+	}
+
+	@Override
+	/**
+	 * 
+	 * 分页获取所有有效的的失物招领信息
+	 * @return
+	 */
+	public PageBean<LostAndFound> getLimitAllValidInfo(PageBean<LostAndFound> lafPage){
+		String hql = "from LostAndFound as laf where (laf.laf_stat = 1 or laf.laf_stat = 6) order by laf.laf_pubtime desc";
+		Integer totalCount = getAllValidInfo().size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		lafPage.setPageData(getLimitInfo(hql, (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount()));
+		return lafPage;
+	}
+	
+	
+	@Override
+	/**
+	 * 
+	 * 分页获取所有有效的的失物招领信息
+	 * @return
+	 */
+	public PageBean<LostAndFound> getLimitAllDoingInfo(PageBean<LostAndFound> lafPage){
+		String hql = "from LostAndFound as laf where (laf.laf_stat = 1) order by laf.laf_pubtime desc";
+		Integer totalCount = getAllDoingInfo().size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		lafPage.setPageData(getLimitInfo(hql, (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount()));
+		return lafPage;
+	}
+	
+	@Override
+	public PageBean<LostAndFound> getLimitAllTimeOutInfo(
+			PageBean<LostAndFound> lafPage) {
+		String hql = "from LostAndFound as laf where (laf.laf_stat = 2) order by laf.laf_pubtime desc";
+		Integer totalCount = getAllTimeOutInfo().size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		lafPage.setPageData(getLimitInfo(hql, (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount()));
+		return lafPage;
+	}
+	
+	
+	/*------------分页获取end-------------*/
+	
+	@Override
+	/**
+	 * 根据关键词搜索失物招领信息
+	 * @param KeyWord
+	 * @return
+	 */
+	public List<LostAndFound> searchInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where laf.laf_detail like ?";
 		Operation op = new Operation(getSession());
 		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
+		List<LostAndFound> lists = op.hqlQuery(hql,"%"+keyWord+"%");
 		return lists;
 	}
 	
+	@Override
+	public List<LostAndFound> searchDoingInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 1 and laf.laf_detail like ?";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql,"%"+keyWord+"%");
+		return lists;
+	}
 
+	@Override
+	public List<LostAndFound> searchToCheckInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 3 and laf.laf_detail like ?";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql,"%"+keyWord+"%");
+		return lists;
+	}
+
+	@Override
+	public List<LostAndFound> searchTimeOutInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 2 and laf.laf_detail like ?";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql,"%"+keyWord+"%");
+		return lists;
+	}
+
+	@Override
+	public List<LostAndFound> searchSucInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 6 and laf.laf_detail like ?";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql,"%"+keyWord+"%");
+		return lists;
+	}
+
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	/**
 	 * 获取所有的招领信息(管理员)
@@ -54,11 +200,10 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	public List<LostAndFound> getLostInfo() {
 		String hql = "from LostAndFound as laf where laf.laf_type = 0";
 		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
-		return lists;
+		return op.hqlQuery(hql);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	/**
 	 * 获取所有的寻物信息(管理员)
@@ -67,24 +212,51 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	public List<LostAndFound> getFoundInfo() {
 		String hql = "from LostAndFound as laf where laf.laf_type = 1";
 		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
-		return lists;
+		return op.hqlQuery(hql);
 	}
+	
+	/**
+	 * 获取所有有效的招领信息
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<LostAndFound> getLostValidInfo() {
+		String hql = "from LostAndFound as laf where laf.laf_type = 0 and (laf.laf_stat = 1 or laf.laf_stat = 6) order by laf.laf_pubtime desc";
+		Operation op = new Operation(getSession());
+		return op.hqlQuery(hql);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	/**
+	 * 获取所有有效的寻物信息，包括已认领的
+	 * @return
+	 */
+	public List<LostAndFound> getFoundValidInfo() {
+		String hql = "from LostAndFound as laf where laf.laf_type = 1 and (laf.laf_stat = 1 or laf.laf_stat = 6) order by laf.laf_pubtime desc";
+		Operation op = new Operation(getSession());
+		return op.hqlQuery(hql);
+	}
+	
 
 	@Override
 	/**
-	 * 获取所有的需要审核的信息(管理员)
+	 * 根据id查询一个有效的失物招领信息，包括已认领的
+	 * @param id
 	 * @return
 	 */
-	public List<LostAndFound> getToCheckInfo() {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 3";
+	public LostAndFound getInfoById(Integer id) {
+		String hql = "from LostAndFound as laf where laf.laf_id = ?";
 		Operation op = new Operation(getSession());
 		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
-		return lists;
+		List<LostAndFound> lists = op.hqlQuery(hql,id);
+		if(lists.size()==0) return null;
+		return lists.get(0);
 	}
-
+	
+	/*------------获取信息end-------------*/
+	
 	@Override
 	/**
 	 * 通过审核(管理员)
@@ -131,59 +303,6 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 
 	@Override
 	/**
-	 * 获取所有有效的的失物招领信息
-	 * @return
-	 */
-	public List<LostAndFound> getAllValidInfo() {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 1";
-		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
-		return lists;
-	}
-
-	@Override
-	/**
-	 * 获取所有有效的招领信息
-	 * @return
-	 */
-	public List<LostAndFound> getLostValidInfo() {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 1 and laf.laf_type = 0";
-		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
-		return lists;
-	}
-
-	@Override
-	/**
-	 * 获取所有有效的寻物信息
-	 * @return
-	 */
-	public List<LostAndFound> getFoundValidInfo() {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 1 and laf.laf_type = 1";
-		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
-		return lists;
-	}
-
-	@Override
-	/**
-	 * 根据id查询一个失物招领信息
-	 * @param id
-	 * @return
-	 */
-	public LostAndFound getInfoById(Integer id) {
-		String hql = "from LostAndFound as laf where laf.laf_id = ?";
-		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql,id);
-		return lists.get(0);
-	}
-
-	@Override
-	/**
 	 * 发布一条新的信息(默认待审核状态)
 	 * @return
 	 */
@@ -202,19 +321,114 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 		Operation op = new Operation(getSession());
 		return op.sqlExecute(sql,id);
 	}
+	
+	/**
+	 * 从start位置获取length条信息
+	 * @param start,length,hql
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<LostAndFound> getLimitInfo(String hql ,Integer start, Integer length) {
+		//String hql1 = "from LostAndFound as laf where (laf.laf_stat = 1 or laf.laf_stat = 6) order by laf.laf_pubtime desc";
+		List<LostAndFound> lists = null;
+		Query query;
+		Transaction tr = null;
+		try{
+			session = getSession();
+			tr = session.beginTransaction();
+			query = session.createQuery(hql).setFirstResult(start-1)
+					.setMaxResults(length);
+			lists = query.list();
+			tr.commit();
+		}catch(Exception e){
+			return null;
+		}
+		return lists;
+	}
 
 	@Override
 	/**
-	 * 根据关键词搜索失物招领信息
-	 * @param id
+	 * 获取所有的需要审核的信息(管理员)
 	 * @return
 	 */
-	public List<LostAndFound> searchInfo(String keyWord) {
-		String hql = "from LostAndFound as laf where laf.laf_detail like ?";
+	public List<LostAndFound> getToCheckInfo() {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 3";
 		Operation op = new Operation(getSession());
 		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql,"%"+keyWord+"%");
+		List<LostAndFound> lists = op.hqlQuery(hql);
 		return lists;
-	}	
+	}
+
+
+	@Override
+	/**
+	 * 获取所有有效的的失物招领信息
+	 * @return
+	 */
+	public List<LostAndFound> getAllValidInfo() {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 1 order by laf.laf_pubtime";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql);
+		return lists;
+	}
+	
+	@Override
+	/**
+	 * 根据发布时间获取所有的失物招领信息(管理员)
+	 * @return
+	 */
+	public List<LostAndFound> getAllInfo() {
+		String hql = "from LostAndFound as laf order by laf.laf_pubtime";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql);
+		return lists;
+	}
+	
+	/**
+	 * 根据发布时间获取所有的失物招领信息(管理员)
+	 * @return
+	 */
+	public List<LostAndFound> getAllDoingInfo() {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 1 order by laf.laf_pubtime";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql);
+		return lists;
+	}
+	
+	/**
+	 * 根据发布时间获取所有的失物招领信息(管理员)
+	 * @return
+	 */
+	public List<LostAndFound> getAllTimeOutInfo() {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 2";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql);
+		return lists;
+	}
+	
+	/**
+	 * 根据发布时间获取所有的失物招领信息(管理员)
+	 * @return
+	 */
+	public List<LostAndFound> getAllToCheckInfo() {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 3";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql);
+		return lists;
+	}
+	
+	public List<LostAndFound> getAllSucInfo() {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 6";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql);
+		return lists;
+	}
+
 
 }

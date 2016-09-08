@@ -1,12 +1,15 @@
 package edu.hnuc.we.test;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import edu.hnuc.we.dao.impl.LostAndFoundDaoImpl;
 import edu.hnuc.we.entity.LostAndFound;
+import edu.hnuc.we.entity.PageBean;
 
 /**
  * @author xxmodd 失物招领持久层测试
@@ -14,9 +17,6 @@ import edu.hnuc.we.entity.LostAndFound;
  */
 public class LostAndFoundTest {
 
-	
-
-	
 	private static ApplicationContext context = null;
 	private static LostAndFoundDaoImpl lad = null;
 	static {
@@ -82,12 +82,19 @@ public class LostAndFoundTest {
 
 	@Test //true
 	public void getInfoByIdTest() {
-		System.out.println(lad.getInfoById(1).toString());
+		System.out.println(lad.getInfoById(10).toString());
 	}
 	
 	@Test //true
 	public void releaseInfoTest() {
-		System.out.println(lad.releaseInfo(new LostAndFound()));
+		LostAndFound laf = new LostAndFound();
+		laf.setLaf_detail("测试1111....");
+		laf.setLaf_name("曾胡洪11");
+		laf.setLaf_phone("15211183722");
+		laf.setLaf_stuid("140930021");
+		laf.setLaf_pubtime(new Timestamp(new Date().getTime()));
+		laf.setLaf_wechat("愤怒的小荔枝");
+		System.out.println(lad.releaseInfo(laf));
 	}
 	
 	@Test //true
@@ -99,5 +106,21 @@ public class LostAndFoundTest {
 	public void searchInfoTest() {
 		System.out.println(lad.searchInfo("啦"));
 	}
+	
+	@Test //true
+	public void getLimitAllInfoTest() {
+		System.out.println(lad.getLimitAllInfo(new PageBean<LostAndFound>()).getPageData().size());
+	}
+	
+	@Test //true
+	public void getLimitToCheckInfo() {
+		System.out.println(lad.getLimitToCheckInfo(new PageBean<LostAndFound>()).getPageData().size());
+	}
+	
+	@Test //true
+	public void getLimitAllValidInfo() {
+		System.out.println(lad.getLimitAllValidInfo(new PageBean<LostAndFound>()).getPageData().size());
+	}
+	
 	
 }

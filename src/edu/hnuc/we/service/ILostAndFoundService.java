@@ -3,6 +3,7 @@ package edu.hnuc.we.service;
 import java.util.List;
 
 import edu.hnuc.we.entity.LostAndFound;
+import edu.hnuc.we.entity.PageBean;
 
 /**
  * 失物招领业务接口
@@ -10,7 +11,6 @@ import edu.hnuc.we.entity.LostAndFound;
  *
  */
 public interface ILostAndFoundService {
-	
 	
 	/**
 	 * 获取所有的失物招领信息(管理员)
@@ -79,18 +79,47 @@ public interface ILostAndFoundService {
 	List<LostAndFound> getFoundValidInfo();
 	
 	/**
-	 * 根据id查询一个失物招领信息
-	 * @param id
-	 * @return
-	 */
-	LostAndFound getInfoById(Integer id);
-	
-	/**
 	 * 根据关键词搜索失物招领信息
 	 * @param id
 	 * @return
 	 */
 	List<LostAndFound> searchInfo(String keyWord);
+	
+	/**
+	 * 根据关键词搜索正在进行的失物招领信息
+	 * @param id
+	 * @return
+	 */
+	List<LostAndFound> searchDoingInfo(String keyWord);
+	
+	/**
+	 * 根据关键词搜索待审核的失物招领信息
+	 * @param id
+	 * @return
+	 */
+	List<LostAndFound> searchToCheckInfo(String keyWord);
+	
+	/**
+	 * 根据关键词搜索失效了的失物招领信息
+	 * @param id
+	 * @return
+	 */
+	List<LostAndFound> searchTimeOutInfo(String keyWord);
+	
+	/**
+	 * 根据关键词搜索成功的失物招领信息
+	 * @param id
+	 * @return
+	 */
+	List<LostAndFound> searchSucInfo(String keyWord);
+	
+	
+	/**
+	 * 根据id查询一个失物招领信息
+	 * @param id
+	 * @return
+	 */
+	LostAndFound getInfoById(Integer id);
 	
 	/**
 	 * 发布一条新的信息(默认待审核状态)
@@ -99,10 +128,56 @@ public interface ILostAndFoundService {
 	boolean releaseInfo(LostAndFound laf);
 	
 	/**
-	 * 认领成功 or 寻物成功 (必须核对 二次登录是否是同一个学生所为,用学号judge)
+	 * 认领成功 or 寻物成功
 	 * @return
 	 */
 	boolean letInfoBeSuc(Integer id);
+	
+	/**
+	 * 分页查询所有信息(管理员)
+	 * @param start
+	 * @param length
+	 * @return
+	 */
+	PageBean<LostAndFound> getLimitAllInfo(PageBean<LostAndFound> lafPage);
 
+	/**
+	 * 分页查询待审核的信息(管理员)
+	 * @param start
+	 * @param length
+	 * @return
+	 */
+	PageBean<LostAndFound> getLimitToCheckInfo(PageBean<LostAndFound> lafPage);
+	
+	/**
+	 * 分页查询失效的信息(用户)
+	 * @param start
+	 * @param length
+	 * @return
+	 */
+	PageBean<LostAndFound> getLimitAllTimeOutInfo(PageBean<LostAndFound> lafPage);
+	
+	/**
+	 * 分页查询正在进行的信息(用户)
+	 * @param start
+	 * @param length
+	 * @return
+	 */
+	PageBean<LostAndFound> getLimitAllDoingInfo(PageBean<LostAndFound> lafPage);
+	
+	/**
+	 * 分页查询有效的信息(用户)
+	 * @param start
+	 * @param length
+	 * @return
+	 */
+	PageBean<LostAndFound> getLimitAllValidInfo(PageBean<LostAndFound> lafPage);
+	
+	/**
+	 * 分页获取成功的信息
+	 * @param lafPage
+	 * @return
+	 */
+	PageBean<LostAndFound> getLimitSucInfo(PageBean<LostAndFound> lafPage);
 	
 }

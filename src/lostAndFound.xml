@@ -21,10 +21,49 @@
 				result="error" />
 		</global-exception-mappings>
 		
-		<action name="laf_*" method="{1}" class="edu.hnuc.we.action.LostAndFoundAction">
-		
+		<!-- 转发 -->
+		<action name="lafdetail" method="getInfoById" class="edu.hnuc.we.action.LostAndFoundAction">
+			<result name="lostAndFoundDetail">
+				/LostAndFoundPlatform/lostDetail.jsp
+			</result>
 		</action>
 		
+		<action name="lafindex" method="getIndexLimitValidInfo" class="edu.hnuc.we.action.LostAndFoundAction">
+			<result name="lostAndFoundIndex">
+				/LostAndFoundPlatform/lostAndFound.jsp
+			</result>
+		</action>
+		
+		<action name="lafsearch" method="searchInfo" class="edu.hnuc.we.action.LostAndFoundAction">
+			<result name="lostAndFoundSearch">
+				/LostAndFoundPlatform/search.jsp
+			</result>
+		</action>
+		
+		<!-- json数据 -->
+		<action name="laf_*" method="{1}" class="edu.hnuc.we.action.LostAndFoundAction">
+			<result name="lostAndFound" type="dispatcher">
+				/LostAndFoundPlatform/lostAndFound.jsp
+			</result>
+			<result name="detail" type="dispatcher">
+				/LostAndFoundPlatform/lostDetail.jsp
+			</result>
+			<result name="allValidList" type="dispatcher">
+				/LostAndFoundAdmin/jsp/lafAllDoingList.jsp
+			</result>
+			<result name="allDoingList" type="dispatcher">
+				/LostAndFoundAdmin/jsp/lafAllDoingList.jsp
+			</result>
+			<result name="allSucList" type="dispatcher">
+				/LostAndFoundAdmin/jsp/lafAllSucList.jsp
+			</result>
+			<result name="allTimeOutList" type="dispatcher">
+				/LostAndFoundAdmin/jsp/lafAllTimeOutList.jsp
+			</result>
+			<result name="allToCheckList" type="dispatcher">
+				/LostAndFoundAdmin/jsp/lafAllToCheckList.jsp
+			</result>
+		</action>
 		
 		<!-- 
 		<action name="laf_*" method="{1}" class="cn.wellstudio.precisehelp.action.GoodsTypeAction">

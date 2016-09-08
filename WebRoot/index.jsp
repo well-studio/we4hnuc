@@ -1,17 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
+	String path = request.getContextPath();
 %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 
-<%@include file="./WEB-INF/common/head.jsp"%>
+<%@include file="./WEB-INF/common/LostAndFoundPlatform/head.jsp"%>
 <link rel='stylesheet prefetch' href='<%=path %>/plugins/AmazeUI-2.7.1/assets/css/amazeui.min.css'>
 <style type="text/css">
 .fa{
 	font-size: 1.7em;
 }
-
 </style>
 <title>微主页</title>
 </head>
@@ -34,7 +33,7 @@ String path = request.getContextPath();
 			</li>
 		</ul>
 	</div>
-	<div class="weui_grids">
+	<div class="weui_grids" id="cont">
 		<a href="javascript:layer.msg('亲，还在开发中哦!')" class="weui_grid">
 			<div class="weui_grid_icon">
 				<i class="fa fa-mortar-board" aria-hidden="true"></i>
@@ -95,10 +94,9 @@ String path = request.getContextPath();
 			</div>
 			<p class="weui_grid_label">待定</p> 
 		</a>
-		
 	</div>
 	
-	<%@ include file="./WEB-INF/common/footer.jsp"%> 
+	<%@ include file="./WEB-INF/common/LostAndFoundPlatform/footer.jsp"%> 
 	<script src='<%=path %>/plugins/AmazeUI-2.7.1/assets/js/amazeui.min.js'></script>
 
 

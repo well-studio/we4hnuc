@@ -20,6 +20,7 @@ public class LostAndFound {
 	String laf_qq; //QQ号码
 	String laf_wechat; // 微信号码
 	String laf_detail; // 描述
+	String laf_mainDetail; // 概述
 	String laf_pic; // 图片地址(参考华商只能上传一张图片,上传多张图片用 **号分割)
 	
 	
@@ -152,6 +153,15 @@ public class LostAndFound {
 	public void setLaf_pic(String laf_pic) {
 		this.laf_pic = laf_pic;
 	}
+
+	public String getLaf_mainDetail() {
+		return laf_mainDetail;
+	}
+	public void setLaf_mainDetail(String laf_mainDetail) {
+		this.laf_mainDetail = laf_mainDetail;
+	}
+
+
 
 	@Override
 	public String toString() {

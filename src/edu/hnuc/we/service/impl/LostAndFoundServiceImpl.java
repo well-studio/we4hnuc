@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.hnuc.we.dao.ILostAndFoundDao;
 import edu.hnuc.we.entity.LostAndFound;
+import edu.hnuc.we.entity.PageBean;
 import edu.hnuc.we.service.ILostAndFoundService;
 
 /**
@@ -92,8 +93,170 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 
 	@Override
 	public List<LostAndFound> searchInfo(String keyWord) {
-		return lostAndFoundDao.searchInfo(keyWord);
+		List<LostAndFound> lafList = lostAndFoundDao.searchInfo(keyWord);
+		for(LostAndFound laf : lafList) {
+			String con = laf.getLaf_detail();
+			if(con.length() > 40) {
+				laf.setLaf_mainDetail(con.substring(0,40));
+			} else {
+				laf.setLaf_mainDetail(con);
+			}
+		}
+		return lafList;
 	}
 	
+	@Override
+	public List<LostAndFound> searchDoingInfo(String keyWord) {
+		List<LostAndFound> lafList = lostAndFoundDao.searchDoingInfo(keyWord);
+		for(LostAndFound laf : lafList) {
+			String con = laf.getLaf_detail();
+			if(con.length() > 40) {
+				laf.setLaf_mainDetail(con.substring(0,40));
+			} else {
+				laf.setLaf_mainDetail(con);
+			}
+		}
+		return lafList;
+	}
+
+
+	@Override
+	public List<LostAndFound> searchToCheckInfo(String keyWord) {
+		List<LostAndFound> lafList = lostAndFoundDao.searchToCheckInfo(keyWord);
+		for(LostAndFound laf : lafList) {
+			String con = laf.getLaf_detail();
+			if(con.length() > 40) {
+				laf.setLaf_mainDetail(con.substring(0,40));
+			} else {
+				laf.setLaf_mainDetail(con);
+			}
+		}
+		return lafList;
+	}
+
+
+	@Override
+	public List<LostAndFound> searchTimeOutInfo(String keyWord) {
+		List<LostAndFound> lafList = lostAndFoundDao.searchTimeOutInfo(keyWord);
+		for(LostAndFound laf : lafList) {
+			String con = laf.getLaf_detail();
+			if(con.length() > 40) {
+				laf.setLaf_mainDetail(con.substring(0,40));
+			} else {
+				laf.setLaf_mainDetail(con);
+			}
+		}
+		return lafList;
+	}
+
+
+	@Override
+	public List<LostAndFound> searchSucInfo(String keyWord) {
+		List<LostAndFound> lafList = lostAndFoundDao.searchSucInfo(keyWord);
+		for(LostAndFound laf : lafList) {
+			String con = laf.getLaf_detail();
+			if(con.length() > 40) {
+				laf.setLaf_mainDetail(con.substring(0,40));
+			} else {
+				laf.setLaf_mainDetail(con);
+			}
+		}
+		return lafList;
+	}
+
+
+	@Override
+	public PageBean<LostAndFound> getLimitAllInfo(PageBean<LostAndFound> lafPage) {
+		lafPage = lostAndFoundDao.getLimitAllInfo(lafPage);
+		for(LostAndFound laf : lafPage.getPageData()) {
+			String con = laf.getLaf_detail();
+			if(con.length() > 40) {
+				laf.setLaf_mainDetail(con.substring(0,40));
+			} else {
+				laf.setLaf_mainDetail(con);
+			}
+		}
+		return lafPage;
+	}
+
+
+	@Override
+	public PageBean<LostAndFound> getLimitToCheckInfo(PageBean<LostAndFound> lafPage) {
+		lafPage = lostAndFoundDao.getLimitToCheckInfo(lafPage);
+		for(LostAndFound laf : lafPage.getPageData()) {
+			String con = laf.getLaf_detail();
+			if(con.length() > 40) {
+				laf.setLaf_mainDetail(con.substring(0,40));
+			} else {
+				laf.setLaf_mainDetail(con);
+			}
+		}
+		return lafPage;
+	}
+
+
+	@Override
+	public PageBean<LostAndFound> getLimitAllValidInfo(PageBean<LostAndFound> lafPage) {
+		lafPage = lostAndFoundDao.getLimitAllValidInfo(lafPage);
+		for(LostAndFound laf : lafPage.getPageData()) {
+			String con = laf.getLaf_detail();
+			if(con.length() > 40) {
+				laf.setLaf_mainDetail(con.substring(0,40));
+			} else {
+				laf.setLaf_mainDetail(con);
+			}
+		}
+		return lafPage; 
+	}
+
+
+	@Override
+	public PageBean<LostAndFound> getLimitAllTimeOutInfo(
+			PageBean<LostAndFound> lafPage) {
+		
+		lafPage = lostAndFoundDao.getLimitAllTimeOutInfo(lafPage);
+		for(LostAndFound laf : lafPage.getPageData()) {
+			String con = laf.getLaf_detail();
+			if(con.length() > 40) {
+				laf.setLaf_mainDetail(con.substring(0,40));
+			} else {
+				laf.setLaf_mainDetail(con);
+			}
+		}
+		return lafPage; 
+	}
+
+
+	@Override
+	public PageBean<LostAndFound> getLimitAllDoingInfo(
+			PageBean<LostAndFound> lafPage) {
+		lafPage = lostAndFoundDao.getLimitAllDoingInfo(lafPage);
+		for(LostAndFound laf : lafPage.getPageData()) {
+			String con = laf.getLaf_detail();
+			if(con.length() > 40) {
+				laf.setLaf_mainDetail(con.substring(0,40));
+			} else {
+				laf.setLaf_mainDetail(con);
+			}
+		}
+		return lafPage; 
+	}
+
+
+	@Override
+	public PageBean<LostAndFound> getLimitSucInfo(PageBean<LostAndFound> lafPage) {
+		lafPage = lostAndFoundDao.getLimitSucInfo(lafPage);
+		for(LostAndFound laf : lafPage.getPageData()) {
+			String con = laf.getLaf_detail();
+			if(con.length() > 40) {
+				laf.setLaf_mainDetail(con.substring(0,40));
+			} else {
+				laf.setLaf_mainDetail(con);
+			}
+		}
+		return lafPage;
+	}
+
+
 	
 }
