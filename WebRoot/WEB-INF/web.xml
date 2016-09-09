@@ -4,19 +4,21 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>we4hnuc</display-name>
-	
-  	<!-- 
+	<!-- 
 	<filter>
-		<filter-name>OpenSessionInView</filter-name>
-		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<filter-name>EncodingFilter</filter-name>
+		<filter-class>edu.hnuc.we.filters.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
 	</filter>
-	
 	<filter-mapping>
-		<filter-name>OpenSessionInView</filter-name>
-		<url-pattern>*.hnuc</url-pattern>
+		<filter-name>EncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	 -->
-	
+ 	-->
+
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -26,23 +28,22 @@
 		<filter-name>struts2</filter-name>
 		<url-pattern>*.hnuc</url-pattern>
 	</filter-mapping>
-	
-	
+
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
-	
-		
+
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 	<session-config>
-   		<session-timeout>30</session-timeout>
+		<session-timeout>30</session-timeout>
 	</session-config>
-	
+
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -55,13 +56,13 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	
+
 	<filter-mapping>
 		<filter-name>characterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	
+
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>index.html</welcome-file>
@@ -77,7 +78,7 @@
 		<error-code>500</error-code>
 		<location>/WEB-INF/error/500.html</location>
 	</error-page>
-	
+
 
 </web-app>
 

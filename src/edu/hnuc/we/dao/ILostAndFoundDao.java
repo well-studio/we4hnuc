@@ -12,11 +12,6 @@ import edu.hnuc.we.entity.PageBean;
  */
 public interface ILostAndFoundDao {
 	
-	/**
-	 * 获取所有的失物招领信息(管理员)
-	 * @return
-	 */
-	List<LostAndFound> getAllInfo();
 	
 	/**
 	 * 获取所有的招领信息(管理员)
@@ -60,11 +55,6 @@ public interface ILostAndFoundDao {
 	 */
 	boolean delInfoById(Integer id);
 	
-	/**
-	 * 获取所有有效的的失物招领信息
-	 * @return
-	 */
-	List<LostAndFound> getAllValidInfo();
 	
 	/**
 	 * 获取所有有效的招领信息
@@ -78,41 +68,49 @@ public interface ILostAndFoundDao {
 	 */
 	List<LostAndFound> getFoundValidInfo();
 	
+
 	/**
 	 * 根据关键词搜索失物招领信息
 	 * @param id
 	 * @return
 	 */
-	List<LostAndFound> searchInfo(String keyWord);
+	PageBean<LostAndFound> searchInfo(PageBean<LostAndFound> lafPage, String keyWord);
+	
+	/**
+	 * 根据关键词搜索失物招领信息
+	 * @param id
+	 * @return
+	 */
+	PageBean<LostAndFound> searchValidInfo(PageBean<LostAndFound> lafPage, String keyWord);
+	
 	
 	/**
 	 * 根据关键词搜索正在进行的失物招领信息
 	 * @param id
 	 * @return
 	 */
-	List<LostAndFound> searchDoingInfo(String keyWord);
+	PageBean<LostAndFound> searchDoingInfo(PageBean<LostAndFound> lafPage, String keyWord);
 	
 	/**
 	 * 根据关键词搜索待审核的失物招领信息
 	 * @param id
 	 * @return
 	 */
-	List<LostAndFound> searchToCheckInfo(String keyWord);
+	PageBean<LostAndFound> searchToCheckInfo(PageBean<LostAndFound> lafPage, String keyWord);
 	
 	/**
 	 * 根据关键词搜索失效了的失物招领信息
 	 * @param id
 	 * @return
 	 */
-	List<LostAndFound> searchTimeOutInfo(String keyWord);
+	PageBean<LostAndFound> searchTimeOutInfo(PageBean<LostAndFound> lafPage, String keyWord);
 	
 	/**
 	 * 根据关键词搜索成功的失物招领信息
 	 * @param id
 	 * @return
 	 */
-	List<LostAndFound> searchSucInfo(String keyWord);
-	
+	PageBean<LostAndFound> searchSucInfo(PageBean<LostAndFound> lafPage, String keyWord);
 	
 	/**
 	 * 根据id查询一个失物招领信息

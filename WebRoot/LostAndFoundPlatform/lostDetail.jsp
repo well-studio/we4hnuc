@@ -27,6 +27,22 @@
 						寻物启示
 					</c:if>
 				</h2>
+				<center style="color:red;">
+				(
+					<c:if test="${laf.laf_stat == 1}">
+						正在寻找
+					</c:if>
+					<c:if test="${laf.laf_stat == 6}">
+						物归原主
+					</c:if>
+					<c:if test="${laf.laf_stat == 3}">
+						待审核
+					</c:if>
+					<c:if test="${laf.laf_stat == 2}">
+						已过期
+					</c:if>
+				)
+				</center>
 				<p class="weui_media_desc" style="text-align: center;">${laf.laf_pubtime}
 					by ${laf.laf_name}</p>
 			</div>
@@ -40,7 +56,7 @@
 						style="width:20px;margin-right:5px;display:block">
 				</div>
 				<div class="weui_cell_bd weui_cell_primary">
-					<p>手机号码</p>
+					<p>发布人电话</p>
 				</div>
 				<div class="weui_cell_ft">${laf.laf_phone}</div>
 			</div>
@@ -50,7 +66,7 @@
 						style="width:20px;margin-right:5px;display:block">
 				</div>
 				<div class="weui_cell_bd weui_cell_primary">
-					<p>QQ</p>
+					<p>发布人QQ</p>
 				</div>
 				<div class="weui_cell_ft">${laf.laf_qq}</div>
 			</div>
@@ -60,10 +76,42 @@
 						style="width:20px;margin-right:5px;display:block">
 				</div>
 				<div class="weui_cell_bd weui_cell_primary">
-					<p>微信</p>
+					<p>发布人微信</p>
 				</div>
 				<div class="weui_cell_ft">${laf.laf_wechat}</div>
 			</div>
+			<c:if test="${laf.laf_stat == 6}">
+			<div class="weui_cell">
+				<div class="weui_cell_hd">
+					<img src="./imgs/human.png" alt=""
+						style="width:20px;margin-right:5px;display:block">
+				</div>
+				<div class="weui_cell_bd weui_cell_primary">
+					<p>领取人姓名</p>
+				</div>
+				<div class="weui_cell_ft">${laf.laf_sucName}</div>
+			</div>
+			<div class="weui_cell">
+				<div class="weui_cell_hd">
+					<img src="./imgs/phone.png" alt=""
+						style="width:20px;margin-right:5px;display:block">
+				</div>
+				<div class="weui_cell_bd weui_cell_primary">
+					<p>领取人电话</p>
+				</div>
+				<div class="weui_cell_ft">${laf.laf_sucPhone}</div>
+			</div>
+			<div class="weui_cell">
+				<div class="weui_cell_hd">
+					<img src="./imgs/time.png" alt=""
+						style="width:20px;margin-right:5px;display:block">
+				</div>
+				<div class="weui_cell_bd weui_cell_primary">
+					<p>认领时间</p>
+				</div>
+				<div class="weui_cell_ft">${laf.laf_suctime}</div>
+			</div>
+			</c:if>
 
 			<div class="weui_media_box weui_media_text">
 				<h4 class="weui_media_title"
@@ -85,12 +133,15 @@
 		<%----------------------------------------------------------------------------------------%>
 		<div class="weui_tabbar"
 			style="position:fixed;bottom:0;margin-top: 100px;">
+			<%--
 			<a href="laf_getAllValidInfo.hnuc" class="weui_tabbar_item">
+			--%>
+			<a href="javascript:window.history.go(-1);" class="weui_tabbar_item">
 				<div class="weui_tabbar_icon">
 					<img src="https://weui.github.io/weui/images/icon_nav_panel.png"
 						alt="">
 				</div>
-				<p class="weui_tabbar_label">首页</p>
+				<p class="weui_tabbar_label">返回首页</p>
 			</a>
 			<a href="javascript:;" class="weui_tabbar_item">
 				<div class="weui_tabbar_icon">

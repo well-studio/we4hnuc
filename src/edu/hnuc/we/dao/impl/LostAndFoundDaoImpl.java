@@ -22,7 +22,6 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	private static Session session;
 
 	SessionFactory sessionFactory;
-
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -42,7 +41,7 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	public PageBean<LostAndFound> getLimitAllInfo(PageBean<LostAndFound> lafPage) {
 		String hql = "from LostAndFound as laf order by laf.laf_pubtime";
 //		String sql = "select count(*) as t from lostandfound";
-		Integer totalCount = getAllInfo().size();
+		Integer totalCount = getAllInfo("").size();
 		lafPage.setTotalCount(totalCount);
 		lafPage.setTotalPage(lafPage.getTotalPage());
 		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
@@ -59,7 +58,7 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 */
 	public PageBean<LostAndFound>  getLimitToCheckInfo(PageBean<LostAndFound> lafPage) {
 		String hql = "from LostAndFound as laf where laf.laf_stat = 3";
-		Integer totalCount = getAllToCheckInfo().size();
+		Integer totalCount = getAllToCheckInfo("").size();
 		lafPage.setTotalCount(totalCount);
 		lafPage.setTotalPage(lafPage.getTotalPage());
 		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
@@ -76,7 +75,7 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 */
 	public PageBean<LostAndFound>  getLimitSucInfo(PageBean<LostAndFound> lafPage) {
 		String hql = "from LostAndFound as laf where laf.laf_stat = 6";
-		Integer totalCount = getAllSucInfo().size();
+		Integer totalCount = getAllSucInfo("").size();
 		lafPage.setTotalCount(totalCount);
 		lafPage.setTotalPage(lafPage.getTotalPage());
 		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
@@ -94,7 +93,7 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 */
 	public PageBean<LostAndFound> getLimitAllValidInfo(PageBean<LostAndFound> lafPage){
 		String hql = "from LostAndFound as laf where (laf.laf_stat = 1 or laf.laf_stat = 6) order by laf.laf_pubtime desc";
-		Integer totalCount = getAllValidInfo().size();
+		Integer totalCount = getAllValidInfo("").size();
 		lafPage.setTotalCount(totalCount);
 		lafPage.setTotalPage(lafPage.getTotalPage());
 		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
@@ -113,7 +112,7 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 */
 	public PageBean<LostAndFound> getLimitAllDoingInfo(PageBean<LostAndFound> lafPage){
 		String hql = "from LostAndFound as laf where (laf.laf_stat = 1) order by laf.laf_pubtime desc";
-		Integer totalCount = getAllDoingInfo().size();
+		Integer totalCount = getAllDoingInfo("").size();
 		lafPage.setTotalCount(totalCount);
 		lafPage.setTotalPage(lafPage.getTotalPage());
 		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
@@ -127,7 +126,7 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	public PageBean<LostAndFound> getLimitAllTimeOutInfo(
 			PageBean<LostAndFound> lafPage) {
 		String hql = "from LostAndFound as laf where (laf.laf_stat = 2) order by laf.laf_pubtime desc";
-		Integer totalCount = getAllTimeOutInfo().size();
+		Integer totalCount = getAllTimeOutInfo("").size();
 		lafPage.setTotalCount(totalCount);
 		lafPage.setTotalPage(lafPage.getTotalPage());
 		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
@@ -146,48 +145,88 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 * @param KeyWord
 	 * @return
 	 */
-	public List<LostAndFound> searchInfo(String keyWord) {
+	public PageBean<LostAndFound> searchInfo(PageBean<LostAndFound> lafPage, String keyWord) {
 		String hql = "from LostAndFound as laf where laf.laf_detail like ?";
-		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql,"%"+keyWord+"%");
-		return lists;
+		Integer totalCount = getAllInfo(keyWord).size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		List<LostAndFound> lists = getLimitSearchInfo(hql,"%"+keyWord+"%", (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount());
+		lafPage.setPageData(lists);
+		return lafPage;
 	}
 	
 	@Override
-	public List<LostAndFound> searchDoingInfo(String keyWord) {
+	public PageBean<LostAndFound>  searchValidInfo(PageBean<LostAndFound> lafPage, String keyWord) {
+		String hql = "from LostAndFound as laf where (laf.laf_stat = 1 or laf.laf_stat = 6) and laf.laf_detail like ?";
+		Integer totalCount = getAllValidInfo(keyWord).size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		List<LostAndFound> lists = getLimitSearchInfo(hql,"%"+keyWord+"%", (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount());
+		lafPage.setPageData(lists);
+		return lafPage;
+	}
+
+	
+	@Override
+	public PageBean<LostAndFound> searchDoingInfo(PageBean<LostAndFound> lafPage, String keyWord) {
 		String hql = "from LostAndFound as laf where laf.laf_stat = 1 and laf.laf_detail like ?";
-		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql,"%"+keyWord+"%");
-		return lists;
+		Integer totalCount = getAllDoingInfo(keyWord).size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		List<LostAndFound> lists = getLimitSearchInfo(hql,"%"+keyWord+"%", (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount());
+		lafPage.setPageData(lists);
+		return lafPage;
 	}
 
 	@Override
-	public List<LostAndFound> searchToCheckInfo(String keyWord) {
+	public PageBean<LostAndFound> searchToCheckInfo(PageBean<LostAndFound> lafPage, String keyWord) {
 		String hql = "from LostAndFound as laf where laf.laf_stat = 3 and laf.laf_detail like ?";
-		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql,"%"+keyWord+"%");
-		return lists;
+		Integer totalCount = getAllToCheckInfo(keyWord).size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		List<LostAndFound> lists = getLimitSearchInfo(hql,"%"+keyWord+"%", (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount());
+		lafPage.setPageData(lists);
+		return lafPage;
 	}
 
 	@Override
-	public List<LostAndFound> searchTimeOutInfo(String keyWord) {
+	public PageBean<LostAndFound> searchTimeOutInfo(PageBean<LostAndFound> lafPage, String keyWord) {
 		String hql = "from LostAndFound as laf where laf.laf_stat = 2 and laf.laf_detail like ?";
-		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql,"%"+keyWord+"%");
-		return lists;
+		Integer totalCount = getAllTimeOutInfo(keyWord).size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		List<LostAndFound> lists = getLimitSearchInfo(hql,"%"+keyWord+"%", (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount());
+		lafPage.setPageData(lists);
+		return lafPage;
 	}
 
 	@Override
-	public List<LostAndFound> searchSucInfo(String keyWord) {
+	public PageBean<LostAndFound> searchSucInfo(PageBean<LostAndFound> lafPage, String keyWord) {
 		String hql = "from LostAndFound as laf where laf.laf_stat = 6 and laf.laf_detail like ?";
-		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql,"%"+keyWord+"%");
-		return lists;
+		Integer totalCount = getAllSucInfo(keyWord).size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		List<LostAndFound> lists = getLimitSearchInfo(hql,"%"+keyWord+"%", (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount());
+		lafPage.setPageData(lists);
+		return lafPage;
 	}
 
 	
@@ -345,8 +384,31 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 		}
 		return lists;
 	}
+	
+	/**
+	 * 从start位置获取length条信息
+	 * @param start,length,hql
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<LostAndFound> getLimitSearchInfo(String hql,String keyWord, Integer start, Integer length) {
+		//String hql1 = "from LostAndFound as laf where (laf.laf_stat = 1 or laf.laf_stat = 6) order by laf.laf_pubtime desc";
+		List<LostAndFound> lists = null;
+		Query query;
+		Transaction tr = null;
+		try{
+			session = getSession();
+			tr = session.beginTransaction();
+			query = session.createQuery(hql).setString(0, keyWord).setFirstResult(start-1)
+					.setMaxResults(length);
+			lists = query.list();
+			tr.commit();
+		}catch(Exception e){
+			return null;
+		}
+		return lists;
+	}
 
-	@Override
 	/**
 	 * 获取所有的需要审核的信息(管理员)
 	 * @return
@@ -359,30 +421,15 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 		return lists;
 	}
 
-
-	@Override
 	/**
 	 * 获取所有有效的的失物招领信息
 	 * @return
 	 */
-	public List<LostAndFound> getAllValidInfo() {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 1 order by laf.laf_pubtime";
+	public List<LostAndFound> getAllValidInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where (laf.laf_stat=1 or laf.laf_stat=6) and laf.laf_detail like ?";
 		Operation op = new Operation(getSession());
 		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
-		return lists;
-	}
-	
-	@Override
-	/**
-	 * 根据发布时间获取所有的失物招领信息(管理员)
-	 * @return
-	 */
-	public List<LostAndFound> getAllInfo() {
-		String hql = "from LostAndFound as laf order by laf.laf_pubtime";
-		Operation op = new Operation(getSession());
-		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
+		List<LostAndFound> lists = op.hqlQuery(hql, "%"+keyWord+"%");
 		return lists;
 	}
 	
@@ -390,11 +437,11 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 * 根据发布时间获取所有的失物招领信息(管理员)
 	 * @return
 	 */
-	public List<LostAndFound> getAllDoingInfo() {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 1 order by laf.laf_pubtime";
+	public List<LostAndFound> getAllInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where laf.laf_detail like ?";
 		Operation op = new Operation(getSession());
 		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
+		List<LostAndFound> lists = op.hqlQuery(hql, "%"+keyWord+"%");
 		return lists;
 	}
 	
@@ -402,11 +449,11 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 * 根据发布时间获取所有的失物招领信息(管理员)
 	 * @return
 	 */
-	public List<LostAndFound> getAllTimeOutInfo() {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 2";
+	public List<LostAndFound> getAllDoingInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 1 and laf.laf_detail like ?";
 		Operation op = new Operation(getSession());
 		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
+		List<LostAndFound> lists = op.hqlQuery(hql, "%"+keyWord+"%");
 		return lists;
 	}
 	
@@ -414,21 +461,34 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 * 根据发布时间获取所有的失物招领信息(管理员)
 	 * @return
 	 */
-	public List<LostAndFound> getAllToCheckInfo() {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 3";
+	public List<LostAndFound> getAllTimeOutInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 2 and laf.laf_detail like ?";
 		Operation op = new Operation(getSession());
 		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
+		List<LostAndFound> lists = op.hqlQuery(hql, "%"+keyWord+"%");
 		return lists;
 	}
 	
-	public List<LostAndFound> getAllSucInfo() {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 6";
+	/**
+	 * 根据发布时间获取所有的失物招领信息(管理员)
+	 * @return
+	 */
+	public List<LostAndFound> getAllToCheckInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 3 and laf.laf_detail like ?";
 		Operation op = new Operation(getSession());
 		@SuppressWarnings("unchecked")
-		List<LostAndFound> lists = op.hqlQuery(hql);
+		List<LostAndFound> lists = op.hqlQuery(hql, "%"+keyWord+"%");
 		return lists;
 	}
+	
+	public List<LostAndFound> getAllSucInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where laf.laf_stat = 6 and laf.laf_detail like ?";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql, "%"+keyWord+"%");
+		return lists;
+	}
+
 
 
 }

@@ -21,7 +21,7 @@ String path = request.getContextPath();
 		<!-- Begin page -->
 		<header class="am-topbar am-topbar-fixed-top">
 			<div class="am-topbar-left am-hide-sm-only">
-                <a href="index.html" class="logo"><span>LostAndFound</span><i class="zmdi zmdi-layers"></i></a>
+                <a href="javascript:window.location.reload();" class="logo"><span>LostAndFound</span><i class="zmdi zmdi-layers"></i></a>
             </div>
 
 			<div class="contain">

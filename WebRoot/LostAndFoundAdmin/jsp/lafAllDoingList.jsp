@@ -1,7 +1,7 @@
 <%@ page language="java"
 	import="java.util.*,edu.hnuc.we.entity.PageBean,edu.hnuc.we.entity.LostAndFound"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <head>
@@ -45,7 +45,7 @@
 		<div class="contain">
 			<ul class="am-nav am-navbar-nav am-navbar-left">
 
-				<li><h4 class="page-title">失物招领ing</h4></li>
+				<li><h4 class="page-title">正在寻主</h4></li>
 			</ul>
 
 			<ul class="am-nav am-navbar-nav am-navbar-right">
@@ -66,9 +66,9 @@
 	<jsp:include page="../common/leftBar.jsp"></jsp:include>
 
 
-		<!--	<div class="am-g">-->
-		<!-- ============================================================== -->
-<!-- Start right Content here -->
+	<!--	<div class="am-g">-->
+	<!-- ============================================================== -->
+	<!-- Start right Content here -->
 	<div class="content-page">
 		<!-- Start content -->
 		<div class="content">
@@ -94,14 +94,14 @@
 						</div>
 					</div>
 					<div class="am-u-sm-12 am-u-md-3">
-					<form action="laf_searchDoingInfo.hnuc" method="post">
-						<div class="am-input-group am-input-group-sm">
-							<input type="text" name="keyWord" class="am-form-field"> <span
-								class="am-input-group-btn">
-								<button class="am-btn am-btn-default" type="submit">搜索</button>
-							</span>
-						</div>
-					</form>
+						<form action="laf_searchDoingInfo.hnuc" method="get">
+							<div class="am-input-group am-input-group-sm">
+								<input type="text" name="keyWord" class="am-form-field">
+								<span class="am-input-group-btn">
+									<button class="am-btn am-btn-default" type="submit">搜索</button>
+								</span>
+							</div>
+						</form>
 					</div>
 				</div>
 				<!-- Row end -->
@@ -129,11 +129,9 @@
 										<tr>
 											<td><input type="checkbox" /></td>
 											<td>${laf.laf_id}</td>
-											<td>
-											<a href="${pageContext.request.contextPath }/laf_getInfoById.hnuc?lafId=${laf.laf_id }" target="_blank">
-												${laf.laf_mainDetail }
-											</a>
-											</td>
+											<td><a
+												href="${pageContext.request.contextPath }/laf_getInfoById.hnuc?lafId=${laf.laf_id }"
+												target="_blank"> ${laf.laf_mainDetail } </a></td>
 											<td><c:if test="${laf.laf_type == 0}">
 												招领启示
 											</c:if> <c:if test="${laf.laf_type == 1}">
@@ -145,14 +143,12 @@
 											<td>
 												<div class="am-btn-toolbar">
 													<div class="am-btn-group am-btn-group-xs">
-														<a
-															href="${pageContext.request.contextPath }/index.jsp">
-														<button
-															class="am-btn am-btn-default am-btn-xs am-text-secondary">
-															<span class="am-icon-pencil-square-o"></span> 编辑
-														</button>
-														</a>
-														<a
+														<a href="${pageContext.request.contextPath }/index.jsp">
+															<button
+																class="am-btn am-btn-default am-btn-xs am-text-secondary">
+																<span class="am-icon-pencil-square-o"></span> 编辑
+															</button>
+														</a> <a
 															href="${pageContext.request.contextPath }/laf_getInfoById.hnuc?lafId=${laf.laf_id }"
 															target="_blank">
 															<button
@@ -174,42 +170,68 @@
 								</tbody>
 							</table>
 							<div>
-							<c:if test="${empty soso}">
 								<ul data-am-widget="pagination"
 									class="am-pagination am-pagination-select">
 
-									<li class="am-pagination-prev "><a
-										href="laf_getAllDoingInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
-										class="">上一页</a></li>
+									<li class="am-pagination-prev "><c:if
+											test="${!empty keyWord }">
+											<a
+												href="laf_searchDoingInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}&keyWord=${keyWord}"
+												class="">上一页</a>
+										</c:if> <c:if test="${empty keyWord }">
+											<a
+												href="laf_getAllDoingInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
+												class="">上一页</a>
+										</c:if></li>
 
 									<li class="am-pagination-select"><select
 										onchange="mbar(this)">
-											<% 
-									          	PageBean<LostAndFound> list = (PageBean<LostAndFound>)request.getAttribute("lafPage");
-												for(int i = 1 ; i <= list.getTotalPage(); i++){
+											<%
+												PageBean<LostAndFound> list = (PageBean<LostAndFound>) request
+														.getAttribute("lafPage");
+												for (int i = 1; i <= list.getTotalPage(); i++) {
 													request.setAttribute("i", i);
-												%>
-											<option
-												value="laf_getAllDoingInfoAdmin.hnuc?lafPage.currentPage=${i}"
-												class=""
-												<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
-												<%=i %>
-											</option>
-											<% 
+											%>
+											<c:if test="${!empty keyWord }">
+												<option
+													value="laf_searchDoingInfo.hnuc?lafPage.currentPage=${i}&keyWord=${keyWord}"
+													class=""
+													<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
+													<%=i%>
+												</option>
+											</c:if>
+											<c:if test="${empty keyWord }">
+												<option
+													value="laf_getAllDoingInfoAdmin.hnuc?lafPage.currentPage=${i}"
+													class=""
+													<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
+													<%=i%>
+												</option>
+											</c:if>
+											<%
 												}
-											  %>
+											%>
 									</select></li>
 
-									<li class="am-pagination-next "><a
-										href="laf_getAllDoingInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
-										class="">下一页</a></li>
+									<li class="am-pagination-next "><c:if
+											test="${!empty keyWord }">
+											<a
+												href="laf_searchDoingInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}&keyWord=${keyWord}"
+												class="">下一页</a>
+										</c:if> <c:if test="${empty keyWord }">
+											<a
+												href="laf_getAllDoingInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
+												class="">下一页</a>
+										</c:if></li>
 
 								</ul>
-							</c:if>
 							</div>
 							<hr />
-							<c:if test="${! empty soso}">
-							  	<p style="text-align: center;">共搜索到 <span style="color: red;"> ${fn:length(lafPage.pageData) }</span>  条记录</p>
+							<c:if test="${!empty keyWord }">
+								<p style="text-align: center;">
+									搜索：<span style="color: red;"> ${keyWord } </span>,共搜索到 <span
+										style="color: red;"> ${lafPage.totalCount }</span> 条记录
+								</p>
 							</c:if>
 						</form>
 					</div>
@@ -225,8 +247,7 @@
 	<!-- navbar -->
 	<a href="admin-offcanvas"
 		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
-		data-am-offcanvas="{target: '#admin-offcanvas'}">
-		<!--<i class="fa fa-bars" aria-hidden="true"></i>-->
+		data-am-offcanvas="{target: '#admin-offcanvas'}"> <!--<i class="fa fa-bars" aria-hidden="true"></i>-->
 	</a>
 
 	<script type="text/javascript"

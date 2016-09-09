@@ -17,11 +17,20 @@
         <property name="laf_laftime" type="timestamp">
             <column name="laf_laftime" />
         </property>
+        <property name="laf_sucName" type="java.lang.String">
+            <column name="laf_sucName" />
+        </property>
+       	<property name="laf_sucStuId" type="java.lang.String">
+            <column name="laf_sucStuId" />
+        </property>
+        <property name="laf_sucPhone" type="java.lang.String">
+            <column name="laf_sucPhone" />
+        </property>
         <property name="laf_pubtime" type="timestamp">
             <column name="laf_pubtime" />
         </property>
-        <property name="laf_suc" type="timestamp">
-            <column name="laf_suc" />
+        <property name="laf_suctime" type="timestamp">
+            <column name="laf_suctime" />
         </property>
         <property name="laf_name" type="java.lang.String">
             <column name="laf_name"/>

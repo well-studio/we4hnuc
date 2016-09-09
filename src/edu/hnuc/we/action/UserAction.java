@@ -45,19 +45,24 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		User user2 = userService.login(user);
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		if(user2 == null) {
-			return "";
+			valueMap.put("info", "登入失败!");
+			return "valueMap";
 		}
 		if(user2.getUsr_stuId().equals("000000000")) {
-			session.put("admin", "user2");
+			session.remove("admin");
+			session.remove("user");
+			session.put("admin", user2);
 		} else {
-			session.put("user", "user2");
+			session.remove("admin");
+			session.remove("user");
+			session.put("user", user2);
 		}
-		return "";
+		valueMap.put("info", "登入成功!");
+		return "valueMap";
 	}
 	
-	
 	/**
-	 * 注销
+	 * 注销  设置session的时间
 	 * @return
 	 */
 	public String loginOut() {
@@ -70,7 +75,35 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 			session.remove("user");
 		}
 		
-		return "";
+		return "index";
+	}
+	
+	
+	/**
+	 * 获取成绩
+	 * @return
+	 */
+	public String getMyGrade() {
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		if(session.get("user") != null || session.get("admin") != null) {
+			
+			return "";
+		}
+		return "error";
+	}
+	
+	
+	/**
+	 * 获取课表
+	 * @return
+	 */
+	public String getMyTimeTable() {
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		if(session.get("user") != null || session.get("admin") != null) {
+			
+			return "";
+		}
+		return "error";
 	}
 	
 }

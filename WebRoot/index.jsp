@@ -1,6 +1,11 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,edu.hnuc.we.entity.User" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
+	User user = (User)session.getAttribute("admin");
+	if(user == null) {
+		user = (User)session.getAttribute("user");
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -34,19 +39,43 @@
 		</ul>
 	</div>
 	<div class="weui_grids" id="cont">
-		<a href="javascript:layer.msg('亲，还在开发中哦!')" class="weui_grid">
+		<a
+		<c:if test="${empty user}">
+			<c:if test="${empty admin}">
+			href="javascript:layer.msg('请先登录!'),window.location='${pageContext.request.contextPath }/login.jsp'"
+			</c:if>
+		</c:if>
+		<c:if test="${!empty user}">
+		href="user_getMyGrade.hnuc"
+		</c:if>
+		<c:if test="${!empty admin}">
+		href="user_getMyGrade.hnuc"
+		</c:if>
+		class="weui_grid">
 			<div class="weui_grid_icon">
 				<i class="fa fa-mortar-board" aria-hidden="true"></i>
 			</div>
 			<p class="weui_grid_label">查询成绩</p> 
-		</a> 
-		<a href="javascript:layer.msg('亲，还在开发中哦!')" class="weui_grid">
+		</a>
+		<a
+		<c:if test="${empty user}">
+			<c:if test="${empty admin}">
+			href="javascript:layer.msg('请先登录!'),window.location='${pageContext.request.contextPath }/login.jsp'"
+			</c:if>
+		</c:if>
+		<c:if test="${!empty user}">
+		href="user_getMyTimeTable.hnuc"
+		</c:if>
+		<c:if test="${!empty admin}">
+		href="user_getMyTimeTalbe.hnuc"
+		</c:if>
+		class="weui_grid">
 			<div class="weui_grid_icon">
 				<i class="fa fa-list-alt" aria-hidden="true"></i>
 			</div>
 			<p class="weui_grid_label">查询课表</p>
 		</a> 
-		<a href="javascript:layer.msg('亲，还在开发中哦!')" class="weui_grid">
+		<a href="laf_getAllValidInfo.hnuc" class="weui_grid">
 			<div class="weui_grid_icon">
 				<i class="fa fa-american-sign-language-interpreting"  aria-hidden="true"></i>
 			</div>

@@ -14,6 +14,9 @@
 			<result name="error" type="redirectAction">
 				notFound
 			</result>
+			<result name="index" type="redirectAction">
+				index.jsp
+			</result>
 		</global-results>
 		<!-- 捕获异常 -->
 		<global-exception-mappings>
@@ -21,7 +24,7 @@
 				result="error" />
 		</global-exception-mappings>
 		
-		<!-- 转发 -->
+		<!-- 转发 
 		<action name="lafdetail" method="getInfoById" class="edu.hnuc.we.action.LostAndFoundAction">
 			<result name="lostAndFoundDetail">
 				/LostAndFoundPlatform/lostDetail.jsp
@@ -39,7 +42,7 @@
 				/LostAndFoundPlatform/search.jsp
 			</result>
 		</action>
-		
+		-->
 		<!-- json数据 -->
 		<action name="laf_*" method="{1}" class="edu.hnuc.we.action.LostAndFoundAction">
 			<result name="lostAndFound" type="dispatcher">
@@ -62,6 +65,13 @@
 			</result>
 			<result name="allToCheckList" type="dispatcher">
 				/LostAndFoundAdmin/jsp/lafAllToCheckList.jsp
+			</result>
+		</action>
+		
+		
+		<action name="user_*" method="{1}" class="edu.hnuc.we.action.UserAction">
+			<result name="lostAndFound" type="dispatcher">
+				/LostAndFoundPlatform/lostAndFound.jsp
 			</result>
 		</action>
 		

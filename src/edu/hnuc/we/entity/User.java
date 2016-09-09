@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class User {
 	
-	String usr_id; // id
+	Integer usr_id; // id
 	String usr_stuId; // 学号
 	String usr_name; // 学生真实姓名
 	String usr_pwd; // 密码
@@ -18,7 +18,7 @@ public class User {
 	
 	public User() {}
 
-	public User(String usr_id, String usr_stuId, String usr_name,
+	public User(Integer usr_id, String usr_stuId, String usr_name,
 			String usr_pwd, Integer isAdmin, List<LostAndFound> lafList) {
 		super();
 		this.usr_id = usr_id;
@@ -29,11 +29,11 @@ public class User {
 		this.lafList = lafList;
 	}
 
-	public String getUsr_id() {
+	public Integer getUsr_id() {
 		return usr_id;
 	}
 
-	public void setUsr_id(String usr_id) {
+	public void setUsr_id(Integer usr_id) {
 		this.usr_id = usr_id;
 	}
 

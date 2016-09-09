@@ -45,7 +45,7 @@
 		<div class="contain">
 			<ul class="am-nav am-navbar-nav am-navbar-left">
 
-				<li><h4 class="page-title">失物招领ing</h4></li>
+				<li><h4 class="page-title">失效启示</h4></li>
 			</ul>
 
 			<ul class="am-nav am-navbar-nav am-navbar-right">
@@ -94,7 +94,7 @@
 						</div>
 					</div>
 					<div class="am-u-sm-12 am-u-md-3">
-					<form action="laf_searchTimeOutInfo.hnuc" method="post">
+					<form action="laf_searchTimeOutInfo.hnuc" method="get">
 						<div class="am-input-group am-input-group-sm">
 							<input type="text" name="keyWord" class="am-form-field"> <span
 								class="am-input-group-btn">
@@ -168,42 +168,68 @@
 								</tbody>
 							</table>
 							<div>
-							<c:if test="${empty soso}">
 								<ul data-am-widget="pagination"
 									class="am-pagination am-pagination-select">
 
-									<li class="am-pagination-prev "><a
-										href="laf_getAllTimeOutInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
-										class="">上一页</a></li>
+									<li class="am-pagination-prev "><c:if
+											test="${!empty keyWord }">
+											<a
+												href="laf_searchTimeOutInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}&keyWord=${keyWord}"
+												class="">上一页</a>
+										</c:if> <c:if test="${empty keyWord }">
+											<a
+												href="laf_getAllTimeOutInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
+												class="">上一页</a>
+										</c:if></li>
 
 									<li class="am-pagination-select"><select
 										onchange="mbar(this)">
-											<% 
-									          	PageBean<LostAndFound> list = (PageBean<LostAndFound>)request.getAttribute("lafPage");
-												for(int i = 1 ; i <= list.getTotalPage(); i++){
+											<%
+												PageBean<LostAndFound> list = (PageBean<LostAndFound>) request
+														.getAttribute("lafPage");
+												for (int i = 1; i <= list.getTotalPage(); i++) {
 													request.setAttribute("i", i);
-												%>
-											<option
-												value="laf_getAllTimeOutInfoAdmin.hnuc?lafPage.currentPage=${i}"
-												class=""
-												<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
-												<%=i %>
-											</option>
-											<% 
+											%>
+											<c:if test="${!empty keyWord }">
+												<option
+													value="laf_searchTimeOutInfo.hnuc?lafPage.currentPage=${i}&keyWord=${keyWord}"
+													class=""
+													<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
+													<%=i%>
+												</option>
+											</c:if>
+											<c:if test="${empty keyWord }">
+												<option
+													value="laf_getAllTimeOutInfoAdmin.hnuc?lafPage.currentPage=${i}"
+													class=""
+													<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
+													<%=i%>
+												</option>
+											</c:if>
+											<%
 												}
-											  %>
+											%>
 									</select></li>
 
-									<li class="am-pagination-next "><a
-										href="laf_getAllTimeOutInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
-										class="">下一页</a></li>
+									<li class="am-pagination-next "><c:if
+											test="${!empty keyWord }">
+											<a
+												href="laf_searchTimeOutInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}&keyWord=${keyWord}"
+												class="">下一页</a>
+										</c:if> <c:if test="${empty keyWord }">
+											<a
+												href="laf_getAllTimeOutInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
+												class="">下一页</a>
+										</c:if></li>
 
 								</ul>
-							</c:if>
 							</div>
 							<hr />
-							<c:if test="${! empty soso}">
-							  	<p style="text-align: center;">共搜索到 <span style="color: red;"> ${fn:length(lafPage.pageData) }</span>  条记录</p>
+							<c:if test="${!empty keyWord }">
+								<p style="text-align: center;">
+									搜索：<span style="color: red;"> ${keyWord } </span>,共搜索到 <span
+										style="color: red;"> ${lafPage.totalCount }</span> 条记录
+								</p>
 							</c:if>
 						</form>
 					</div>

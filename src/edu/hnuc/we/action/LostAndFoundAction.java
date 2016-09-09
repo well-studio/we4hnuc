@@ -1,7 +1,6 @@
 package edu.hnuc.we.action;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -61,21 +60,6 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	}
 	public void setLafPage(PageBean<LostAndFound> lafPage) {
 		this.lafPage = lafPage;
-	}
-	
-	/**
-	 * 获取所有的失物招领信息(管理员)
-	 * @return
-	 */
-	public String getAllInfo() {
-//		valueMap.put("Info", lostAndFoundService.getAllInfo());
-		// CHECK是否是管理员
-		
-		List<LostAndFound> lafAllList = lostAndFoundService.getAllInfo();
-		Map<String, Object> request = ActionContext.getContext().getContextMap();
-		request.put("lafAllList", lafAllList);
-		
-		return "lostAndFound";
 	}
 	
 	/**
@@ -150,13 +134,13 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String getAllValidInfo() {
-//		valueMap.put("Info", lostAndFoundService.getAllValidInfo());
-		
-//		System.out.println(lafPage.getCurrentPage());
 		
 		lafPage = lostAndFoundService.getLimitAllValidInfo(lafPage);
 //		lafPage.setPageData(lostAndFoundService.getAllInfo());
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
+//		Map<String, Object> session = ActionContext.getContext().getSession();
+//		session.remove("soso");
+		request.remove("keyWord");
 		request.put("lafPage", lafPage);
 		return "lostAndFound";
 	}
@@ -170,6 +154,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		lafPage = lostAndFoundService.getLimitAllDoingInfo(lafPage);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
+		request.remove("keyWord");
 		return "allDoingList";
 	}
 	
@@ -181,6 +166,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		lafPage = lostAndFoundService.getLimitAllTimeOutInfo(lafPage);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
+		request.remove("keyWord");
 		return "allTimeOutList";
 	}
 	
@@ -192,6 +178,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		lafPage = lostAndFoundService.getLimitToCheckInfo(lafPage);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
+		request.remove("keyWord");
 		return "allToCheckList";
 	}
 	
@@ -203,6 +190,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		lafPage = lostAndFoundService.getLimitSucInfo(lafPage);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
+		request.remove("keyWord");
 		return "allSucList";
 	}
 	
@@ -214,6 +202,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		lafPage = lostAndFoundService.getLimitAllValidInfo(lafPage);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
+		request.remove("keyWord");
 		return "allValidList";
 	}
 	
@@ -257,17 +246,29 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		if(keyWord == null) {
-			keyWord = "";
-		}
-		List<LostAndFound> lafList = lostAndFoundService.searchInfo(keyWord);
+		handleKeyWord(keyWord);
+		lafPage = lostAndFoundService.searchInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
-		lafPage.setPageData(lafList);
 		request.put("lafPage", lafPage);
-		request.put("soso", "soso");
+		request.put("keyWord", keyWord);
 		return "allDoingList";
 	}
 	
+	
+	/**
+	 * 根据关键词搜索有效的失物招领信息(用户)
+	 * @param id
+	 * @return
+	 */
+	public String searchValidInfo() {
+//		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
+		handleKeyWord(keyWord);
+		lafPage = lostAndFoundService.searchValidInfo(lafPage, keyWord);
+		Map<String, Object> request = ActionContext.getContext().getContextMap();
+		request.put("lafPage", lafPage);
+		request.put("keyWord", keyWord);
+		return "lostAndFound";
+	}
 	
 	/**
 	 * 根据关键词搜索正在进行的失物招领信息
@@ -276,14 +277,11 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchDoingInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		if(keyWord == null) {
-			keyWord = "";
-		}
-		List<LostAndFound> lafList = lostAndFoundService.searchDoingInfo(keyWord);
+		handleKeyWord(keyWord);
+		lafPage = lostAndFoundService.searchDoingInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
-		lafPage.setPageData(lafList);
 		request.put("lafPage", lafPage);
-		request.put("soso", "soso");
+		request.put("keyWord", keyWord);
 		return "allDoingList";
 	}
 	
@@ -295,15 +293,12 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchSucInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		if(keyWord == null) {
-			keyWord = "";
-		}
-		List<LostAndFound> lafList = lostAndFoundService.searchSucInfo(keyWord);
+		handleKeyWord(keyWord);
+		lafPage = lostAndFoundService.searchSucInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
-		lafPage.setPageData(lafList);
 		request.put("lafPage", lafPage);
-		request.put("soso", "soso");
-		return "allDoingList";
+		request.put("keyWord", keyWord);
+		return "allSucList";
 	}
 	
 	
@@ -314,15 +309,12 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchTimeOutInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		if(keyWord == null) {
-			keyWord = "";
-		}
-		List<LostAndFound> lafList = lostAndFoundService.searchTimeOutInfo(keyWord);
+		handleKeyWord(keyWord);
+		lafPage = lostAndFoundService.searchTimeOutInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
-		lafPage.setPageData(lafList);
 		request.put("lafPage", lafPage);
-		request.put("soso", "soso");
-		return "allDoingList";
+		request.put("keyWord", keyWord);
+		return "allTimeOutList";
 	}
 	
 	
@@ -333,15 +325,24 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchToCheckInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
+		handleKeyWord(keyWord);
+		lafPage = lostAndFoundService.searchToCheckInfo(lafPage, keyWord);
+		Map<String, Object> request = ActionContext.getContext().getContextMap();
+		request.put("lafPage", lafPage);
+		request.put("keyWord", keyWord);
+		return "allToCheckList";
+	}
+	
+	public void handleKeyWord(String keyWord) {
 		if(keyWord == null) {
 			keyWord = "";
 		}
-		List<LostAndFound> lafList = lostAndFoundService.searchToCheckInfo(keyWord);
-		Map<String, Object> request = ActionContext.getContext().getContextMap();
-		lafPage.setPageData(lafList);
-		request.put("lafPage", lafPage);
-		request.put("soso", "soso");
-		return "allDoingList";
+		try {
+			keyWord = new String(keyWord.getBytes("ISO-8859-1"),"UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.keyWord = keyWord;
 	}
 	
 	/**

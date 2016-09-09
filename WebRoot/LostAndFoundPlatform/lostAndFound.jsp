@@ -1,7 +1,10 @@
-<%@ page language="java" import="java.util.*,edu.hnuc.we.entity.PageBean,edu.hnuc.we.entity.LostAndFound" pageEncoding="UTF-8"%>
+<%@ page language="java"
+	import="java.util.*,edu.hnuc.we.entity.PageBean,edu.hnuc.we.entity.LostAndFound"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
-String path = request.getContextPath();
+	String path = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -10,15 +13,15 @@ String path = request.getContextPath();
 <title>湖商失物招领首页</title>
 <%@include file="../WEB-INF/common/LostAndFoundPlatform/head.jsp"%>
 
-<link rel='stylesheet prefetch' href='<%=path %>/css/lostandfound.css'>
+<link rel='stylesheet prefetch' href='<%=path%>/css/lostandfound.css'>
 
 <script type="text/javascript">
-function mbar(sobj) {
-    var docurl =sobj.options[sobj.selectedIndex].value;
-    if (docurl != "") {
-       window.location = docurl;
-    }
-    }
+	function mbar(sobj) {
+		var docurl = sobj.options[sobj.selectedIndex].value;
+		if (docurl != "") {
+			window.location = docurl;
+		}
+	}
 </script>
 </head>
 
@@ -38,93 +41,124 @@ function mbar(sobj) {
 				<div class="weui_tab_bd_item" style="display: none;">
 					<div class="padding">
 						<div class="weui_search_bar" id="search_bar">
-							<form class="weui_search_outer" action="">
+							<form class="weui_search_outer" action="laf_searchValidInfo.hnuc"
+								method="get">
 								<div class="weui_search_inner">
-									<i class="weui_icon_search"></i> 
-									<input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required=""> 
-									<a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+									<i class="weui_icon_search"></i> <input type="search"
+										name="keyWord" class="weui_search_input" id="search_input"
+										placeholder="搜索" required=""> <a href="javascript:"
+										class="weui_icon_clear" id="search_clear"></a>
 								</div>
 								<label for="search_input" class="weui_search_text"
 									id="search_text"> <i class="weui_icon_search"></i> <span>搜索</span>
 								</label>
 							</form>
-							<a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+							<a href="javascript:" class="weui_search_cancel"
+								id="search_cancel">取消</a>
 						</div>
 						<div class="weui_panel_hd" style="text-align: center;">寻物 招领
-							列表
-						</div>
+							列表</div>
 						<hr />
 					</div>
 
 					<div class="weui_panel_bd">
-						
 						<c:forEach items="${lafPage.pageData}" var="laf">
-						<a href="laf_getInfoById.hnuc?lafId=${laf.laf_id}">
-							<div class="weui_media_box weui_media_text">
-								<h4 class="weui_media_title"
-									style="text-align: center;color: green;">
-								<c:if test="${laf.laf_type == 0}">
+							<a href="laf_getInfoById.hnuc?lafId=${laf.laf_id}">
+								<div class="weui_media_box weui_media_text">
+									<h4 class="weui_media_title"
+										style="text-align: center;color: green;">
+										<c:if test="${laf.laf_type == 0}">
 									招领启示
 								</c:if>
-								<c:if test="${laf.laf_type == 1}">
+										<c:if test="${laf.laf_type == 1}">
 									寻物启示
 								</c:if>
-								</h4>
-								<p class="weui_media_desc">
-								${laf.laf_mainDetail}
-								</p>
+									</h4>
+									<p class="weui_media_desc">${laf.laf_mainDetail}</p>
 
-								<p class="weui_media_desc" style="text-align: right;">
-									<a href="lostDetail.jsp"> <span style="color:#6699CC;">详情
-											></span> </a>
-								</p>
-								<ul class="weui_media_info">
-									<li class="weui_media_info_meta">${laf.laf_name}</li>
-									<li class="weui_media_info_meta">${laf.laf_pubtime}</li>
-									<li class="weui_media_info_meta weui_media_info_meta_extra"><span
-										style="color:#FF6666;">
-										<c:if test="${laf.laf_stat == 1}">
-											启示ing
+									<p class="weui_media_desc" style="text-align: right;">
+										<a href="lostDetail.jsp"> <span style="color:#6699CC;">详情</span>
+										</a>
+									</p>
+									<ul class="weui_media_info">
+										<li class="weui_media_info_meta">${laf.laf_name}</li>
+										<li class="weui_media_info_meta">${laf.laf_pubtime}</li>
+										<li class="weui_media_info_meta weui_media_info_meta_extra"><span
+											style="color:#FF6666;"> <c:if
+													test="${laf.laf_stat == 1}">
+											正在寻找
+										</c:if> <c:if test="${laf.laf_stat == 6}">
+											物归原主
 										</c:if>
-										<c:if test="${laf.laf_stat == 6}">
-											启示成功
-										</c:if>
-										</span>
-									</li>
-								</ul>
-							</div> 
-						</a>
+										</span></li>
+									</ul>
+								</div>
+							</a>
 						</c:forEach>
-						 <ul data-am-widget="pagination"
-					      class="am-pagination am-pagination-select"
-					      >
-					
-					      <li class="am-pagination-prev ">
-					        <a href="laf_getAllValidInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}" class="">上一页</a>
-					      </li>
-					
-					        <li class="am-pagination-select">
-					          <select onchange="mbar(this)" >
-					           <% 
-					          	PageBean<LostAndFound> list = (PageBean<LostAndFound>)request.getAttribute("lafPage");
-								for(int i = 1 ; i <= list.getTotalPage(); i++){
-									request.setAttribute("i", i);
-								%>
-								  <option value="laf_getAllValidInfo.hnuc?lafPage.currentPage=${i}" class="" <c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
-								  <%=i %>
-					              </option>
-								<% 
-								}
-							  %>
-					          </select>
-					        </li>
-					
-					      <li class="am-pagination-next ">
-					        <a href="laf_getAllValidInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}" class="">下一页</a>
-					      </li>
-					
-					  </ul>
-				</div>
+
+						<c:if test="${!empty keyWord }">
+							<p style="text-align: center;">
+								搜索：<span style="color: red;"> ${keyWord } </span>,共搜索到 <span
+									style="color: red;"> ${lafPage.totalCount }</span> 条记录
+							</p>
+						</c:if>
+						<ul data-am-widget="pagination"
+							class="am-pagination am-pagination-select">
+
+							<li class="am-pagination-prev "><c:if
+									test="${!empty keyWord }">
+									<a
+										href="laf_searchValidInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}&keyWord=${keyWord}"
+										class="">上一页</a>
+								</c:if> <c:if test="${empty keyWord }">
+									<a
+										href="laf_getAllValidInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
+										class="">上一页</a>
+								</c:if></li>
+
+							<li class="am-pagination-select"><select
+								onchange="mbar(this)">
+									<%
+										PageBean<LostAndFound> list = (PageBean<LostAndFound>) request
+												.getAttribute("lafPage");
+										for (int i = 1; i <= list.getTotalPage(); i++) {
+											request.setAttribute("i", i);
+									%>
+									<c:if test="${!empty keyWord }">
+										<option
+											value="laf_searchValidInfo.hnuc?lafPage.currentPage=${i}&keyWord=${keyWord}"
+											class=""
+											<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
+											<%=i%>
+										</option>
+									</c:if>
+									<c:if test="${empty keyWord }">
+										<option
+											value="laf_getAllValidInfo.hnuc?lafPage.currentPage=${i}"
+											class=""
+											<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
+											<%=i%>
+										</option>
+									</c:if>
+									<%
+										}
+									%>
+							</select></li>
+
+							<li class="am-pagination-next "><c:if
+									test="${!empty keyWord }">
+									<a
+										href="laf_searchValidInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}&keyWord=${keyWord}"
+										class="">下一页</a>
+								</c:if> <c:if test="${empty keyWord }">
+									<a
+										href="laf_getAllValidInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
+										class="">下一页</a>
+								</c:if></li>
+
+						</ul>
+						<%-- --%>
+					</div>
 				</div>
 
 
@@ -143,14 +177,16 @@ function mbar(sobj) {
 									<div class="weui_cell_ft">
 										<input type="radio" class="weui_check" name="radio1" id="x11"
 											checked="checked"> <span class="weui_icon_checked"></span>
-									</div> </label> <label class="weui_cell weui_check_label" for="x12">
+									</div>
+								</label> <label class="weui_cell weui_check_label" for="x12">
 									<div class="weui_cell_bd weui_cell_primary">
 										<p>我要发布寻物信息</p>
 									</div>
 									<div class="weui_cell_ft">
 										<input type="radio" name="radio1" class="weui_check" id="x12">
 										<span class="weui_icon_checked"></span>
-									</div> </label>
+									</div>
+								</label>
 							</div>
 							<%-- 时间 --%>
 							<div class="weui_cell">
@@ -281,29 +317,30 @@ function mbar(sobj) {
 
 				</div>
 			</div>
-			
+
 			<%----------------------------------------------------------------------------------------%>
-			<%@ include file="../WEB-INF/common/LostAndFoundPlatform/footer.jsp"%> 
+			<%@ include file="../WEB-INF/common/LostAndFoundPlatform/footer.jsp"%>
 			<div class="weui_tabbar">
-				<a href="javascript:;" class="weui_tabbar_item">
+				<a href="laf_getAllValidInfo.hnuc" class="weui_tabbar_item">
 					<div class="weui_tabbar_icon">
 						<img src="https://weui.github.io/weui/images/icon_nav_button.png"
 							alt="">
 					</div>
-					<p class="weui_tabbar_label">失物信息</p> </a> <a href="javascript:;"
-					class="weui_tabbar_item">
+					<p class="weui_tabbar_label">失物信息</p>
+				</a> <a href="javascript:;" class="weui_tabbar_item">
 					<div class="weui_tabbar_icon">
 						<img src="https://weui.github.io/weui/images/icon_nav_msg.png"
 							alt="">
 					</div>
-					<p class="weui_tabbar_label">发布信息</p> </a>
+					<p class="weui_tabbar_label">发布信息</p>
+				</a>
 			</div>
 
 
 		</div>
 	</div>
-	<script type="text/javascript" src="<%=path %>/js/index.js"></script>
-	
+	<script type="text/javascript" src="<%=path%>/js/index.js"></script>
+
 </body>
 </html>
 

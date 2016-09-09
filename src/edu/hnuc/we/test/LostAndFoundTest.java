@@ -1,5 +1,6 @@
 package edu.hnuc.we.test;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -24,9 +25,16 @@ public class LostAndFoundTest {
 		lad = context.getBean(LostAndFoundDaoImpl.class);
 	}
 	
-	@Test //true
-	public void getAllInfoTest() {
-		System.out.println(lad.getAllInfo().size());
+	@Test
+	public void testE() {
+		String keyWord = "";
+		try {
+			keyWord = java.net.URLDecoder.decode("æµè¯", "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		System.out.println(keyWord);
+		
 	}
 
 	@Test //true
@@ -63,12 +71,7 @@ public class LostAndFoundTest {
 	public void delInfoByIdTest() {
 		System.out.println(lad.delInfoById(2));
 	}
-	
-	@Test //true
-	public void getAllValidInfoTest() {
-		System.out.println(lad.getAllValidInfo().size());
-	}
-	
+
 	@Test //true
 	public void getLostValidInfoTest() {
 		System.out.println(lad.getLostValidInfo().size());
@@ -100,11 +103,6 @@ public class LostAndFoundTest {
 	@Test //true
 	public void letInfoBeSucTest() {
 		System.out.println(lad.letInfoBeSuc(1));
-	}
-	
-	@Test //true
-	public void searchInfoTest() {
-		System.out.println(lad.searchInfo("啦"));
 	}
 	
 	@Test //true
