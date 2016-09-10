@@ -117,7 +117,7 @@ public interface ILostAndFoundDao {
 	 * @param id
 	 * @return
 	 */
-	LostAndFound getInfoById(Integer id);
+	LostAndFound getInfoById(Integer id, boolean isAdmin);
 	
 	/**
 	 * 发布一条新的信息(默认待审核状态)

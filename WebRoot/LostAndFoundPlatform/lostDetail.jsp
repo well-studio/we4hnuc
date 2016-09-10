@@ -27,6 +27,10 @@
 						寻物启示
 					</c:if>
 				</h2>
+				<c:if test="${empty laf.laf_name }">
+						<center style="font-size:1.5em;">这条失物招领信息尚未诞生ヾ(o◕∀◕)ﾉヾ</center>
+				</c:if>
+				<c:if test="${!empty laf.laf_name }">
 				<center style="color:red;">
 				(
 					<c:if test="${laf.laf_stat == 1}">
@@ -45,6 +49,7 @@
 				</center>
 				<p class="weui_media_desc" style="text-align: center;">${laf.laf_pubtime}
 					by ${laf.laf_name}</p>
+				</c:if>
 			</div>
 		</div>
 		<hr />

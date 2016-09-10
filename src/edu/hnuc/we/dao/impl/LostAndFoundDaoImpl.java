@@ -285,8 +285,13 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 * @param id
 	 * @return
 	 */
-	public LostAndFound getInfoById(Integer id) {
-		String hql = "from LostAndFound as laf where laf.laf_id = ?";
+	public LostAndFound getInfoById(Integer id, boolean isAdmin) {
+		String hql = "";
+		if(isAdmin) {
+			hql = "from LostAndFound as laf where laf.laf_id = ?";
+		} else {
+			hql = "from LostAndFound as laf where laf.laf_id = ? and (laf.laf_stat = 1 or laf.laf_stat = 6)";
+		}
 		Operation op = new Operation(getSession());
 		@SuppressWarnings("unchecked")
 		List<LostAndFound> lists = op.hqlQuery(hql,id);

@@ -4,11 +4,11 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title></title>	
-		<link rel="stylesheet" href="../assets/css/core.css" />
-		<link rel="stylesheet" href="../assets/css/menu.css" />
-		<link rel="stylesheet" href="../assets/css/amazeui.css" />
-		<link rel="stylesheet" href="../assets/css/component.css" />
-		<link rel="stylesheet" href="../assets/css/page/form.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/LostAndFoundAdmin/assets/css/core.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/LostAndFoundAdmin/assets/css/menu.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/LostAndFoundAdmin/assets/css/amazeui.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/LostAndFoundAdmin/assets/css/component.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/LostAndFoundAdmin/assets/css/page/form.css" />
 	</head>
 	<body>
 		<div class="account-pages">

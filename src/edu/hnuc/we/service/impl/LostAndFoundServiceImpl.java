@@ -67,8 +67,8 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 	}
 
 	@Override
-	public LostAndFound getInfoById(Integer id) {
-		return lostAndFoundDao.getInfoById(id);
+	public LostAndFound getInfoById(Integer id, boolean isAdmin) {
+		return lostAndFoundDao.getInfoById(id, isAdmin);
 	}
 
 	@Override

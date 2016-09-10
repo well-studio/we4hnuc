@@ -74,7 +74,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		} else {
 			session.remove("user");
 		}
-		
 		return "index";
 	}
 	

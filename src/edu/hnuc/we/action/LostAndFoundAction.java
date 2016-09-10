@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import edu.hnuc.we.entity.LostAndFound;
 import edu.hnuc.we.entity.PageBean;
+import edu.hnuc.we.entity.User;
 import edu.hnuc.we.service.ILostAndFoundService;
 
 
@@ -90,6 +91,17 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		return "valueMap";
 	}
 	
+	
+	/**
+	 * 跳转到首页
+	 * @return
+	 */
+	public String index() {
+		// 获取信息
+		
+		return "indexPage";
+	}
+	
 	/**
 	 * 通过审核(管理员)
 	 * @return
@@ -118,14 +130,21 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	}
 	
 	/**
+	 * 跳转到后台管理页面
+	 * @return
+	 */
+	public String goToManage() {
+		
+		return "managePage";
+	}
+	
+	/**
 	 * 根据id删除info(管理员)
 	 * @return
 	 */
 	public String delInfoById() {
-		LostAndFound laf = lostAndFoundService.getInfoById(lafId);
-		Map<String, Object> request = ActionContext.getContext().getContextMap();
-		request.put("laf", laf);
-		
+//		boolean res = lostAndFoundService.delInfoById(lafId);
+//		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		return "detail";
 	}
 	
@@ -232,7 +251,13 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	public String getInfoById() {
 //		valueMap.put("Info", lostAndFoundService.getInfoById(lafId));
 		
-		LostAndFound laf = lostAndFoundService.getInfoById(lafId);
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		User admin = (User) session.get("admin");
+		boolean isAdmin = false;
+		if(admin != null) {
+			isAdmin = true;
+		}
+		LostAndFound laf = lostAndFoundService.getInfoById(lafId, isAdmin);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("laf", laf);
 		

@@ -124,7 +124,16 @@
 			<p class="weui_grid_label">待定</p> 
 		</a>
 	</div>
-	
+	<c:if test="${!empty admin }">
+	<center>
+	<a href="laf_goToManage.hnuc">
+	<button type="button" class="am-btn am-btn-primary am-radius" style="width: 100px;height:44px;margin-top: 10px;">后台管理</button>
+	</a>
+	<a href="user_loginOut.hnuc">
+	<button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;height:44px;margin-top: 10px;">注销</button>
+	</a>
+	</center>
+	</c:if>
 	<%@ include file="./WEB-INF/common/LostAndFoundPlatform/footer.jsp"%> 
 	<script src='<%=path %>/plugins/AmazeUI-2.7.1/assets/js/amazeui.min.js'></script>
 

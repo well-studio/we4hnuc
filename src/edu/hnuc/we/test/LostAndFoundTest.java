@@ -85,7 +85,7 @@ public class LostAndFoundTest {
 
 	@Test //true
 	public void getInfoByIdTest() {
-		System.out.println(lad.getInfoById(10).toString());
+		System.out.println(lad.getInfoById(10, true).toString());
 	}
 	
 	@Test //true

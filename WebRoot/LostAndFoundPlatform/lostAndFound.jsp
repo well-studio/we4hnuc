@@ -160,11 +160,12 @@
 						<%-- --%>
 					</div>
 				</div>
-
+				<div class="weui_tab_bd_item" style="display: none;"></div>
 
 				<%---------------------------------------------------------------------%>
 				<div class="weui_tab_bd_item" style="display: none;">
-					<div class="weui_cells_title">失物信息填写</div>
+					<div class="weui_cells_title" style="text-align: center;font-size:1.5em;padding-top: 10px;;margin:0;">失物相关信息填写</div>
+					<p style="text-align: center;padding: 0;margin:0;">(请尽量提供准确信息)</p>
 					<form id="form" action="#">
 						<div class="weui_cells weui_cells_form">
 							<%--选择类型  --%>
@@ -321,18 +322,24 @@
 			<%----------------------------------------------------------------------------------------%>
 			<%@ include file="../WEB-INF/common/LostAndFoundPlatform/footer.jsp"%>
 			<div class="weui_tabbar">
-				<a href="laf_getAllValidInfo.hnuc" class="weui_tabbar_item">
+				<a href="laf_index.hnuc" class="weui_tabbar_item">
 					<div class="weui_tabbar_icon">
-						<img src="https://weui.github.io/weui/images/icon_nav_button.png"
+						<img src="${pageContext.request.contextPath }/imgs/goBack.png"
 							alt="">
 					</div>
-					<p class="weui_tabbar_label">失物信息</p>
+					<p class="weui_tabbar_label">微主页</p>
+				</a> <a href="laf_getAllValidInfo.hnuc" class="weui_tabbar_item">
+					<div class="weui_tabbar_icon">
+						<img src="${pageContext.request.contextPath }/imgs/love.png"
+							alt="">
+					</div>
+					<p class="weui_tabbar_label" style="color: rgb(237,79,79);">失物列表</p>
 				</a> <a href="javascript:;" class="weui_tabbar_item">
 					<div class="weui_tabbar_icon">
-						<img src="https://weui.github.io/weui/images/icon_nav_msg.png"
+						<img src="${pageContext.request.contextPath }/imgs/release.png"
 							alt="">
 					</div>
-					<p class="weui_tabbar_label">发布信息</p>
+					<p class="weui_tabbar_label" style="color: rgb(110,178,277);">发布信息</p>
 				</a>
 			</div>
 
