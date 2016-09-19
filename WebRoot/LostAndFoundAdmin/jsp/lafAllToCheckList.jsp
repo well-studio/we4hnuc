@@ -188,13 +188,17 @@
 
 									<li class="am-pagination-prev "><c:if
 											test="${!empty keyWord }">
+											<c:if test="${1 lt lafPage.currentPage }">
 											<a
 												href="laf_searchToCheckInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}&keyWord=${keyWord}"
 												class="">上一页</a>
+											</c:if>
 										</c:if> <c:if test="${empty keyWord }">
+											<c:if test="${1 lt lafPage.currentPage }">
 											<a
 												href="laf_getAllToCheckInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
 												class="">上一页</a>
+											</c:if>
 										</c:if></li>
 
 									<li class="am-pagination-select"><select
@@ -210,7 +214,7 @@
 													value="laf_searchToCheckInfo.hnuc?lafPage.currentPage=${i}&keyWord=${keyWord}"
 													class=""
 													<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
-													<%=i%>
+													<%=i%>/${lafPage.totalPage }
 												</option>
 											</c:if>
 											<c:if test="${empty keyWord }">
@@ -218,7 +222,7 @@
 													value="laf_getAllToCheckInfoAdmin.hnuc?lafPage.currentPage=${i}"
 													class=""
 													<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
-													<%=i%>
+													<%=i%>/${lafPage.totalPage }
 												</option>
 											</c:if>
 											<%
@@ -228,13 +232,17 @@
 
 									<li class="am-pagination-next "><c:if
 											test="${!empty keyWord }">
+											<c:if test="${lafPage.totalPage gt lafPage.currentPage }">
 											<a
 												href="laf_searchToCheckInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}&keyWord=${keyWord}"
 												class="">下一页</a>
+											</c:if>
 										</c:if> <c:if test="${empty keyWord }">
+											<c:if test="${lafPage.totalPage gt lafPage.currentPage }">
 											<a
 												href="laf_getAllToCheckInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
 												class="">下一页</a>
+											</c:if>
 										</c:if></li>
 
 								</ul>

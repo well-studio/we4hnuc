@@ -96,135 +96,63 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 
 	@Override
 	public PageBean<LostAndFound> searchInfo(PageBean<LostAndFound> lafPage, String keyWord) {
-		PageBean<LostAndFound> lafPage2 = lostAndFoundDao.searchInfo(lafPage, keyWord);
-		for(LostAndFound laf : lafPage2.getPageData()) {
-			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
-			} else {
-				laf.setLaf_mainDetail(con);
-			}
-		}
-		return lafPage2;
+		lafPage = handleMainDetail(lostAndFoundDao.searchInfo(lafPage, keyWord));
+		return lafPage;
 	}
 	
 
 	@Override
 	public PageBean<LostAndFound> searchValidInfo(PageBean<LostAndFound> lafPage, String keyWord) {
-		PageBean<LostAndFound> lafPage2 = lostAndFoundDao.searchValidInfo(lafPage, keyWord);
-		for(LostAndFound laf : lafPage2.getPageData()) {
-			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
-			} else {
-				laf.setLaf_mainDetail(con);
-			}
-		}
-		return lafPage2;
+		lafPage = handleMainDetail(lostAndFoundDao.searchValidInfo(lafPage, keyWord));
+		return lafPage;
 	}
 
 	
 	@Override
 	public PageBean<LostAndFound> searchDoingInfo(PageBean<LostAndFound> lafPage, String keyWord) {
-		PageBean<LostAndFound> lafPage2 = lostAndFoundDao.searchDoingInfo(lafPage, keyWord);
-		for(LostAndFound laf : lafPage2.getPageData()) {
-			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
-			} else {
-				laf.setLaf_mainDetail(con);
-			}
-		}
-		return lafPage2;
+		lafPage = handleMainDetail(lostAndFoundDao.searchDoingInfo(lafPage, keyWord));
+		return lafPage;
 	}
 
 
 	@Override
 	public PageBean<LostAndFound> searchToCheckInfo(PageBean<LostAndFound> lafPage, String keyWord) {
-		PageBean<LostAndFound> lafPage2 = lostAndFoundDao.searchToCheckInfo(lafPage, keyWord);
-		for(LostAndFound laf : lafPage2.getPageData()) {
-			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
-			} else {
-				laf.setLaf_mainDetail(con);
-			}
-		}
-		return lafPage2;
+		lafPage = handleMainDetail(lostAndFoundDao.searchToCheckInfo(lafPage, keyWord));
+		return lafPage;
 	}
 
 
 	@Override
 	public PageBean<LostAndFound> searchTimeOutInfo(PageBean<LostAndFound> lafPage, String keyWord) {
-		PageBean<LostAndFound> lafPage2 = lostAndFoundDao.searchTimeOutInfo(lafPage, keyWord);
-		for(LostAndFound laf : lafPage2.getPageData()) {
-			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
-			} else {
-				laf.setLaf_mainDetail(con);
-			}
-		}
-		return lafPage2;
+		lafPage = handleMainDetail(lostAndFoundDao.searchTimeOutInfo(lafPage, keyWord));
+		return lafPage;
 	}
 
 
 	@Override
 	public PageBean<LostAndFound> searchSucInfo(PageBean<LostAndFound> lafPage, String keyWord) {
-		PageBean<LostAndFound> lafPage2 = lostAndFoundDao.searchSucInfo(lafPage, keyWord);
-		for(LostAndFound laf : lafPage2.getPageData()) {
-			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
-			} else {
-				laf.setLaf_mainDetail(con);
-			}
-		}
-		return lafPage2;
+		lafPage = handleMainDetail(lostAndFoundDao.searchSucInfo(lafPage, keyWord));
+		return lafPage;
 	}
 
 
 	@Override
 	public PageBean<LostAndFound> getLimitAllInfo(PageBean<LostAndFound> lafPage) {
-		lafPage = lostAndFoundDao.getLimitAllInfo(lafPage);
-		for(LostAndFound laf : lafPage.getPageData()) {
-			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
-			} else {
-				laf.setLaf_mainDetail(con);
-			}
-		}
+		lafPage = handleMainDetail(lostAndFoundDao.getLimitAllInfo(lafPage));
 		return lafPage;
 	}
 
 
 	@Override
 	public PageBean<LostAndFound> getLimitToCheckInfo(PageBean<LostAndFound> lafPage) {
-		lafPage = lostAndFoundDao.getLimitToCheckInfo(lafPage);
-		for(LostAndFound laf : lafPage.getPageData()) {
-			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
-			} else {
-				laf.setLaf_mainDetail(con);
-			}
-		}
+		lafPage = handleMainDetail(lostAndFoundDao.getLimitToCheckInfo(lafPage));
 		return lafPage;
 	}
 
 
 	@Override
 	public PageBean<LostAndFound> getLimitAllValidInfo(PageBean<LostAndFound> lafPage) {
-		lafPage = lostAndFoundDao.getLimitAllValidInfo(lafPage);
-		for(LostAndFound laf : lafPage.getPageData()) {
-			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
-			} else {
-				laf.setLaf_mainDetail(con);
-			}
-		}
+		lafPage = handleMainDetail(lostAndFoundDao.getLimitAllValidInfo(lafPage));
 		return lafPage; 
 	}
 
@@ -232,16 +160,7 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 	@Override
 	public PageBean<LostAndFound> getLimitAllTimeOutInfo(
 			PageBean<LostAndFound> lafPage) {
-		
-		lafPage = lostAndFoundDao.getLimitAllTimeOutInfo(lafPage);
-		for(LostAndFound laf : lafPage.getPageData()) {
-			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
-			} else {
-				laf.setLaf_mainDetail(con);
-			}
-		}
+		lafPage = handleMainDetail(lostAndFoundDao.getLimitAllTimeOutInfo(lafPage));
 		return lafPage; 
 	}
 
@@ -249,22 +168,39 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 	@Override
 	public PageBean<LostAndFound> getLimitAllDoingInfo(
 			PageBean<LostAndFound> lafPage) {
-		lafPage = lostAndFoundDao.getLimitAllDoingInfo(lafPage);
-		for(LostAndFound laf : lafPage.getPageData()) {
-			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
-			} else {
-				laf.setLaf_mainDetail(con);
-			}
-		}
+		lafPage = handleMainDetail(lostAndFoundDao.getLimitAllDoingInfo(lafPage));
 		return lafPage; 
 	}
 
 
 	@Override
 	public PageBean<LostAndFound> getLimitSucInfo(PageBean<LostAndFound> lafPage) {
-		lafPage = lostAndFoundDao.getLimitSucInfo(lafPage);
+		lafPage = handleMainDetail(lostAndFoundDao.getLimitSucInfo(lafPage));
+		return lafPage;
+	}
+
+
+	@Override
+	public PageBean<LostAndFound> getLimitLostInfo(
+			PageBean<LostAndFound> lafPage) {
+		lafPage = handleMainDetail(lostAndFoundDao.getLimitLostInfo(lafPage));
+		return lafPage;
+	}
+
+
+	@Override
+	public PageBean<LostAndFound> getLimitFindInfo(
+			PageBean<LostAndFound> lafPage) {
+		lafPage = handleMainDetail(lostAndFoundDao.getLimitFindInfo(lafPage));
+		return lafPage;
+	}
+	
+	/**
+	 * 处理概要
+	 * @param lafPage
+	 * @return
+	 */
+	public PageBean<LostAndFound> handleMainDetail(PageBean<LostAndFound> lafPage) {
 		for(LostAndFound laf : lafPage.getPageData()) {
 			String con = laf.getLaf_detail();
 			if(con.length() > 40) {
@@ -275,7 +211,6 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 		}
 		return lafPage;
 	}
-
 
 	
 }

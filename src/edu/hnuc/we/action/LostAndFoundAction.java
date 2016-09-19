@@ -159,11 +159,12 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 //		Map<String, Object> session = ActionContext.getContext().getSession();
 //		session.remove("soso");
+		request.remove("lostMark");
+		request.remove("findMark");
 		request.remove("keyWord");
 		request.put("lafPage", lafPage);
 		return "lostAndFound";
 	}
-	
 	
 	/**
 	 * 分页获取所有正在进行的的失物招领信息(管理员)
@@ -243,6 +244,44 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		return "valueMap";
 	}
 	
+	
+	/**
+	 * 分页获取所有有效的的招领信息(用户)
+	 * @return
+	 */
+	public String getAllLostInfo() {
+		
+		lafPage = lostAndFoundService.getLimitLostInfo(lafPage);
+//		lafPage.setPageData(lostAndFoundService.getAllInfo());
+		Map<String, Object> request = ActionContext.getContext().getContextMap();
+//		Map<String, Object> session = ActionContext.getContext().getSession();
+//		session.remove("soso");
+		request.remove("keyWord");
+		request.remove("findMark");
+		request.put("lafPage", lafPage);
+		request.put("lostMark", "lostMark");
+		return "lostAndFound";
+	}
+	
+	/**
+	 * 分页获取所有有效的的寻物信息(用户)
+	 * @return
+	 */
+	public String getAllFindInfo() {
+		
+		lafPage = lostAndFoundService.getLimitFindInfo(lafPage);
+//		lafPage.setPageData(lostAndFoundService.getAllInfo());
+		Map<String, Object> request = ActionContext.getContext().getContextMap();
+//		Map<String, Object> session = ActionContext.getContext().getSession();
+//		session.remove("soso");
+		request.remove("keyWord");
+		request.remove("lostMark");
+		request.put("lafPage", lafPage);
+		request.put("findMark", "findMark");
+		return "lostAndFound";
+	}
+	
+	
 	/**
 	 * 根据id查询一个失物招领信息
 	 * @param id
@@ -290,6 +329,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchValidInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
+		request.remove("lostMark");
+		request.remove("findMark");
 		request.put("lafPage", lafPage);
 		request.put("keyWord", keyWord);
 		return "lostAndFound";

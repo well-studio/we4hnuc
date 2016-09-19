@@ -46,10 +46,10 @@
 			</c:if>
 		</c:if>
 		<c:if test="${!empty user}">
-		href="user_getMyGrade.hnuc"
+		 onclick="showGradeTableterm()";
 		</c:if>
 		<c:if test="${!empty admin}">
-		href="user_getMyGrade.hnuc"
+		onclick="showGradeTableterm()";
 		</c:if>
 		class="weui_grid">
 			<div class="weui_grid_icon">
@@ -64,10 +64,10 @@
 			</c:if>
 		</c:if>
 		<c:if test="${!empty user}">
-		href="user_getMyTimeTable.hnuc"
+		 onclick="showTimeTableterm()";
 		</c:if>
 		<c:if test="${!empty admin}">
-		href="user_getMyTimeTalbe.hnuc"
+		 onclick="showTimeTableterm()";
 		</c:if>
 		class="weui_grid">
 			<div class="weui_grid_icon">
@@ -136,7 +136,33 @@
 	</c:if>
 	<%@ include file="./WEB-INF/common/LostAndFoundPlatform/footer.jsp"%> 
 	<script src='<%=path %>/plugins/AmazeUI-2.7.1/assets/js/amazeui.min.js'></script>
-
+	<script type="text/javascript">
+		function showTimeTableterm(){
+			layer.open({
+  			type: 2,
+  			area: ['100%', '100%'],
+			fix: false, //不固定
+			maxmin: true,
+  			content: '<%=path%>/jwgl/timeTableTerm.jsp'
+			});
+		}
+		
+		function showGradeTableterm(){
+			layer.open({
+  			type: 2,
+  			area: ['100%', '100%'],
+			fix: false, //不固定
+			maxmin: true,
+  			content: '<%=path%>/jwgl/gradeTerm.jsp'
+			});
+		}
+		
+		function loadding(){ 
+			layer.load(1, {
+  				shade: [0.1,'#fff'] //0.1透明度的白色背景
+			});
+		}
+	</script>
 
 </body>
 </html>

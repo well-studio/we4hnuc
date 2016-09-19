@@ -17,7 +17,7 @@
 			<result name="index" type="redirectAction">
 				laf_index.hnuc
 			</result>
-			<result name="indexPage" type="redirect">
+			<result name="indexPage" type="dispatcher">
 				index.jsp
 			</result>
 		</global-results>
@@ -77,6 +77,12 @@
 		<action name="user_*" method="{1}" class="edu.hnuc.we.action.UserAction">
 			<result name="lostAndFound" type="dispatcher">
 				/LostAndFoundPlatform/lostAndFound.jsp
+			</result>
+			<result name="courseTable" type="dispatcher">
+				/jwgl/courseTable.jsp
+			</result>
+			<result name="gradeTable" type="dispatcher">
+				/jwgl/gradeTable.jsp
 			</result>
 		</action>
 		

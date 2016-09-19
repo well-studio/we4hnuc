@@ -33,7 +33,8 @@ public class ValidateUtil {
 	 */
 	public static boolean isValidPass(String str) {
 		boolean flag = false;
-		Pattern p = Pattern.compile("\\w{1,}");
+		// 只要是非空白字符就行
+		Pattern p = Pattern.compile("[^\\s]{1,}");
 		if (str != null) {
 			Matcher match = p.matcher(str);
 			flag = match.matches();

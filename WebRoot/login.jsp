@@ -11,6 +11,7 @@ String path = request.getContextPath();
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#formSubmitBtn").click(function() {
+			var btn = $('#formSubmitBtn');
 			var url = "${pageContext.request.contextPath}/user_login.hnuc?time="+new Date().getTime();
 			var stuId = $("#stuId").val();
 			if(stuId == "") {
@@ -22,16 +23,19 @@ String path = request.getContextPath();
 				return ;
 			}
 			var psw = $("#psw").val();
-			if(!psw.match("^\\w{1,}$")) {
+			if(!psw.match("^[^\\s]{1,}$")) {
 				layer.msg("密码不能为空");
 				return ;
 			}
+			// var load = layer.msg(2, {time: 10*1000});
+			var load = layer.load(2, {time: 100*1000});
 			var sendData = {
 				"usr_stuId" : stuId,
 				"usr_pwd"	: psw
 			};
 	
 			$.post(url,sendData,function(backData,textStatus,ajax) {
+				layer.close(load);
 				var data = eval("("+backData+")");
 				layer.msg(data.info);
 				if(data.info == "登入成功!") {

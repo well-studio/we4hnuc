@@ -56,9 +56,14 @@
 							<a href="javascript:" class="weui_search_cancel"
 								id="search_cancel">取消</a>
 						</div>
-						<div class="weui_panel_hd" style="text-align: center;">寻物 招领
-							列表</div>
-						<hr />
+						<div class="" style="margin-top:10px;text-align: center;">
+						<a href="laf_getAllLostInfo.hnuc">
+						<button type="button" class="am-btn am-btn-success am-round">招领列表</button>
+						</a>
+						<a href="laf_getAllFindInfo.hnuc">
+						<button type="button" class="am-btn am-btn-success am-round">寻物列表</button>
+						</a>
+						</div>
 					</div>
 
 					<div class="weui_panel_bd">
@@ -107,14 +112,44 @@
 
 							<li class="am-pagination-prev "><c:if
 									test="${!empty keyWord }">
+									<c:if test="${lafPage.currentPage gt 1 }">
 									<a
 										href="laf_searchValidInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}&keyWord=${keyWord}"
 										class="">上一页</a>
-								</c:if> <c:if test="${empty keyWord }">
+									</c:if>
+								</c:if>
+								<c:if test="${empty keyWord}">
+									<c:if test="${empty lostMark}">
+									<c:if test="${empty findMark}">
+									<c:if test="${lafPage.currentPage gt 1 }">
+									
 									<a
 										href="laf_getAllValidInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
 										class="">上一页</a>
-								</c:if></li>
+									</c:if>
+									</c:if>
+									</c:if>
+								</c:if>
+								
+								<c:if test="${!empty lostMark}">
+								
+									<c:if test="${lafPage.currentPage gt 1 }">
+									<a
+										href="laf_getAllLostInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
+										class="">上一页</a>
+									</c:if>
+								</c:if>
+								
+								<c:if test="${!empty findMark}">
+								
+									<c:if test="${lafPage.currentPage gt 1 }">
+									<a
+										href="laf_getAllFindInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
+										class="">上一页</a>
+									</c:if>
+								</c:if>
+								
+							</li>
 
 							<li class="am-pagination-select"><select
 								onchange="mbar(this)">
@@ -129,15 +164,37 @@
 											value="laf_searchValidInfo.hnuc?lafPage.currentPage=${i}&keyWord=${keyWord}"
 											class=""
 											<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
-											<%=i%>
+											<%=i%>/${lafPage.totalPage }
 										</option>
 									</c:if>
 									<c:if test="${empty keyWord }">
+									<c:if test="${empty lostMark}">
+									<c:if test="${empty findMark}">
 										<option
 											value="laf_getAllValidInfo.hnuc?lafPage.currentPage=${i}"
 											class=""
 											<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
-											<%=i%>
+											<%=i%>/${lafPage.totalPage }
+										</option>
+									</c:if>
+									</c:if>
+									</c:if>
+									
+									<c:if test="${!empty lostMark}">
+										<option
+											value="laf_getAllLostInfo.hnuc?lafPage.currentPage=${i}"
+											class=""
+											<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
+											<%=i%>/${lafPage.totalPage }
+										</option>
+									</c:if>
+									
+									<c:if test="${!empty findMark}">
+										<option
+											value="laf_getAllFindInfo.hnuc?lafPage.currentPage=${i}"
+											class=""
+											<c:if test="${i == lafPage.currentPage}">selected="selected"</c:if>>
+											<%=i%>/${lafPage.totalPage }
 										</option>
 									</c:if>
 									<%
@@ -146,15 +203,41 @@
 							</select></li>
 
 							<li class="am-pagination-next "><c:if
-									test="${!empty keyWord }">
+									test="${!empty keyWord}">
+									<c:if test="${lafPage.totalPage gt lafPage.currentPage }">
 									<a
 										href="laf_searchValidInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}&keyWord=${keyWord}"
 										class="">下一页</a>
+									</c:if>
 								</c:if> <c:if test="${empty keyWord }">
+									<c:if test="${empty lostMark}">
+									<c:if test="${empty findMark}">
+									<c:if test="${lafPage.totalPage gt lafPage.currentPage }">
 									<a
 										href="laf_getAllValidInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
 										class="">下一页</a>
-								</c:if></li>
+									</c:if>
+									</c:if>
+									</c:if>
+
+								<c:if test="${!empty lostMark}">
+									<c:if test="${lafPage.totalPage gt lafPage.currentPage }">
+									<a
+										href="laf_getAllLostInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
+										class="">下一页</a>
+									</c:if>
+								</c:if>
+								
+								<c:if test="${!empty findMark}">
+									<c:if test="${lafPage.totalPage gt lafPage.currentPage }">
+									<a
+										href="laf_getAllFindInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
+										class="">下一页</a>
+									</c:if>
+								</c:if>
+										
+								</c:if>
+							</li>
 
 						</ul>
 						<%-- --%>

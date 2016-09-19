@@ -136,6 +136,36 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 		return lafPage;
 	}
 	
+	@Override
+	public PageBean<LostAndFound> getLimitLostInfo(
+			PageBean<LostAndFound> lafPage) {
+		String hql = "from LostAndFound as laf where (laf.laf_stat = 1 or laf.laf_stat = 6) and laf.laf_type = 0 order by laf.laf_pubtime desc";
+		Integer totalCount = getAllLostInfo("").size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		lafPage.setPageData(getLimitInfo(hql, (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount()));
+		return lafPage;
+	}
+
+	@Override
+	public PageBean<LostAndFound> getLimitFindInfo(
+			PageBean<LostAndFound> lafPage) {
+		String hql = "from LostAndFound as laf where (laf.laf_stat = 1 or laf.laf_stat = 6) and laf.laf_type = 1 order by laf.laf_pubtime desc";
+		Integer totalCount = getAllFindInfo("").size();
+		lafPage.setTotalCount(totalCount);
+		lafPage.setTotalPage(lafPage.getTotalPage());
+		if(lafPage.getCurrentPage() > lafPage.getTotalPage()) {
+			lafPage.setCurrentPage(lafPage.getTotalPage());
+		}
+		lafPage.setPageData(getLimitInfo(hql, (lafPage.getCurrentPage()-1)*lafPage.getPageCount()+1 , lafPage.getPageCount()));
+		return lafPage;
+	}
+
+
+	
 	
 	/*------------分页获取end-------------*/
 	
@@ -494,6 +524,22 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 		return lists;
 	}
 
-
+	public List<LostAndFound> getAllLostInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where (laf.laf_stat = 1 or laf.laf_stat = 6) and laf.laf_type = 0";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql);
+		return lists;
+	}
+	
+	
+	public List<LostAndFound> getAllFindInfo(String keyWord) {
+		String hql = "from LostAndFound as laf where (laf.laf_stat = 1 or laf.laf_stat = 6) and laf.laf_type = 1";
+		Operation op = new Operation(getSession());
+		@SuppressWarnings("unchecked")
+		List<LostAndFound> lists = op.hqlQuery(hql);
+		return lists;
+	}
+	
 
 }

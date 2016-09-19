@@ -8,6 +8,9 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import edu.hnuc.we.entity.User;
+import edu.hnuc.we.jwgl.GetCourse;
+import edu.hnuc.we.jwgl.GetGrade;
+import edu.hnuc.we.jwgl.GetStuCookie;
 import edu.hnuc.we.service.IUserService;
 
 /**
@@ -36,6 +39,13 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		return user;
 	}
 	
+	private String term;
+	public String getTerm() {
+		return term;
+	}
+	public void setTerm(String term) {
+		this.term = term;
+	}
 	/**
 	 * 登录
 	 * @return
@@ -45,19 +55,22 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		User user2 = userService.login(user);
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		if(user2 == null) {
-			valueMap.put("info", "登入失败!");
+			valueMap.put("info", "登入失败!,注意：失败超过10次将封锁你的账号");
 			return "valueMap";
 		}
-		if(user2.getUsr_stuId().equals("000000000")) {
-			session.remove("admin");
-			session.remove("user");
-			session.put("admin", user2);
-		} else {
-			session.remove("admin");
-			session.remove("user");
-			session.put("user", user2);
-		}
+//		if(user2.getUsr_stuId().equals("000000000")) {
+//			session.remove("admin");
+//			session.remove("user");
+//			session.put("admin", user2);
+//		} else {
+//			session.remove("admin");
+//			session.remove("user");
+//			session.put("user", user2);
+//		}
 		valueMap.put("info", "登入成功!");
+		session.put("user", user2);
+		//System.out.println(user2.toString());
+		session.put("cookie", GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd()));
 		return "valueMap";
 	}
 	
@@ -83,10 +96,14 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	 * @return
 	 */
 	public String getMyGrade() {
+		if("".equals(term)||term==null) return "error";
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		if(session.get("user") != null || session.get("admin") != null) {
-			
-			return "";
+		User nowuser = (User)session.get("user");
+//		Admin admin = (Admin)session.get("admin");
+		if(nowuser!= null) {
+			String cookie = (String) session.get("cookie");
+			session.put("grade", GetGrade.getGrade(nowuser.getUsr_stuId(), term, cookie));
+			return "gradeTable";
 		}
 		return "error";
 	}
@@ -97,10 +114,16 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	 * @return
 	 */
 	public String getMyTimeTable() {
+		//System.out.println(term);
+		if("".equals(term)||term==null) return "error";
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		if(session.get("user") != null || session.get("admin") != null) {
-			
-			return "";
+		User nowuser = (User)session.get("user");
+//		Admin admin = (Admin)session.get("admin");
+		if(nowuser!= null) {
+			//System.out.println(user.toString());
+			String cookie = (String) session.get("cookie");
+			session.put("course", GetCourse.getcourse(nowuser.getUsr_stuId(), term, cookie));
+			return "courseTable";
 		}
 		return "error";
 	}

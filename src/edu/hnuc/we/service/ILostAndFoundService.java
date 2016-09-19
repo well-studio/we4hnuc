@@ -176,4 +176,18 @@ public interface ILostAndFoundService {
 	 */
 	PageBean<LostAndFound> getLimitSucInfo(PageBean<LostAndFound> lafPage);
 	
+	/**
+	 * 分页获取所有的招领信息
+	 * @param lafPage
+	 * @return
+	 */
+	PageBean<LostAndFound> getLimitLostInfo(PageBean<LostAndFound> lafPage);
+	
+	/**
+	 * 分页获取所有的寻物信息
+	 * @param lafPage
+	 * @return
+	 */
+	PageBean<LostAndFound> getLimitFindInfo(PageBean<LostAndFound> lafPage);
+	
 }

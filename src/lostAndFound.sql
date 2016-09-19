@@ -29,5 +29,12 @@ create table user (
 );
 
 
+-- 自定义配置表
+create table adminConfig (
+	conf_id int primary key auto_increment, -- id
+	conf_key varchar(50), -- key
+	conf_value varchar(250) -- value
+);
+
 
 
