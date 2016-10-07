@@ -57,12 +57,6 @@ public class Operation {
 				return false;
 			}
 			return false;
-		} finally {
-			try {
-				close();
-			} catch (Exception e2) {
-				return false;
-			}
 		}
 	}
 	
@@ -84,13 +78,16 @@ public class Operation {
 				return false;
 			}
 			return false;
-		} finally {
+		} 
+		/* 需要关闭么
+		 * finally {
 			try {
 				close();
 			} catch (Exception e2) {
 				return false;
 			}
 		}
+		 */
 	}
 
 	// hql查询对象

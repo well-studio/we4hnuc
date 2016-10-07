@@ -16,4 +16,11 @@ public interface IUserDao {
 	 */
 	public User login(User user);
 	
+	/**
+	 * 管理员登录
+	 * @param user
+	 * @return
+	 */
+	public User adminLogin(User user);
+	
 }

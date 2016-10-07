@@ -1,6 +1,10 @@
 package edu.hnuc.we.dao.impl;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+
+import javax.ejb.FinderException;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -27,7 +31,12 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	}
 
 	private Session getSession() {
-		return sessionFactory.getCurrentSession();
+		Session s = sessionFactory.getCurrentSession();
+		if(s != null) {
+			return s;
+		} else {
+			return sessionFactory.openSession();
+		}
 	}
 
 	/*------------获取信息start-------------*/
@@ -390,10 +399,20 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 * 认领成功 or 寻物成功
 	 * @return
 	 */
-	public boolean letInfoBeSuc(Integer id) {
-		String sql = "UPDATE `lostandfound` SET `laf_stat`='6' WHERE (`laf_id`= ?)";
+	public boolean letInfoBeSuc(Integer id,String sucName,String sucPhone) {
+//		String sql = "UPDATE `lostandfound` SET `laf_stat`='6' WHERE (`laf_id`= ?)";
 		Operation op = new Operation(getSession());
-		return op.sqlExecute(sql,id);
+		LostAndFound laf = getInfoById(id, false);
+		laf.setLaf_suctime(new Timestamp(new Date().getTime())); // update sucTime
+		laf.setLaf_stat(6); // suc
+		if(sucName != null) {
+			laf.setLaf_sucName(sucName);
+		}
+		if(sucPhone != null) {
+			laf.setLaf_sucPhone(sucPhone);
+		}
+		
+		return op.update(laf);
 	}
 	
 	/**
@@ -540,6 +559,12 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 		List<LostAndFound> lists = op.hqlQuery(hql);
 		return lists;
 	}
-	
+
+	@Override
+	public boolean letInfoRelive(Integer id) {
+		String sql = "UPDATE `lostandfound` SET `laf_stat`='1' WHERE (`laf_id`= ?)";
+		Operation op = new Operation(getSession());
+		return op.sqlExecute(sql,id);
+	}
 
 }

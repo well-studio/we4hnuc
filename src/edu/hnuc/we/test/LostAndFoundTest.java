@@ -11,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import edu.hnuc.we.dao.impl.LostAndFoundDaoImpl;
 import edu.hnuc.we.entity.LostAndFound;
 import edu.hnuc.we.entity.PageBean;
+import edu.hnuc.we.util.ValidateUtil;
 
 /**
  * @author xxmodd 失物招领持久层测试
@@ -102,7 +103,7 @@ public class LostAndFoundTest {
 	
 	@Test //true
 	public void letInfoBeSucTest() {
-		System.out.println(lad.letInfoBeSuc(1));
+		System.out.println(lad.letInfoBeSuc(1,null,null));
 	}
 	
 	@Test //true
@@ -120,5 +121,11 @@ public class LostAndFoundTest {
 		System.out.println(lad.getLimitAllValidInfo(new PageBean<LostAndFound>()).getPageData().size());
 	}
 	
+	@Test //true
+	public void testReg() {
+		System.out.println(ValidateUtil.isValidDetail("对方三"));
+	}
+	
+
 	
 }

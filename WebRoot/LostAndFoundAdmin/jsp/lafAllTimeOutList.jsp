@@ -1,7 +1,7 @@
 <%@ page language="java"
 	import="java.util.*,edu.hnuc.we.entity.PageBean,edu.hnuc.we.entity.LostAndFound"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <head>
@@ -38,7 +38,7 @@
 	<!-- Begin page -->
 	<header class="am-topbar am-topbar-fixed-top">
 		<div class="am-topbar-left am-hide-sm-only">
-			<a href="index.html" class="logo"><span>LostAndFound</span><i
+			<a href="index.html" class="logo"><span>后台管理中心</span><i
 				class="zmdi zmdi-layers"></i></a>
 		</div>
 
@@ -66,9 +66,9 @@
 	<jsp:include page="../common/leftBar.jsp"></jsp:include>
 
 
-		<!--	<div class="am-g">-->
-		<!-- ============================================================== -->
-<!-- Start right Content here -->
+	<!--	<div class="am-g">-->
+	<!-- ============================================================== -->
+	<!-- Start right Content here -->
 	<div class="content-page">
 		<!-- Start content -->
 		<div class="content">
@@ -78,6 +78,7 @@
 					<div class="am-u-sm-12 am-u-md-6">
 						<div class="am-btn-toolbar">
 							<div class="am-btn-group am-btn-group-xs">
+								<%--
 								<button type="button" class="am-btn am-btn-default">
 									<span class="am-icon-plus"></span> 新增
 								</button>
@@ -90,18 +91,19 @@
 								<button type="button" class="am-btn am-btn-default">
 									<span class="am-icon-trash-o"></span> 删除
 								</button>
+							--%>
 							</div>
 						</div>
 					</div>
 					<div class="am-u-sm-12 am-u-md-3">
-					<form action="laf_searchTimeOutInfo.hnuc" method="get">
-						<div class="am-input-group am-input-group-sm">
-							<input type="text" name="keyWord" class="am-form-field"> <span
-								class="am-input-group-btn">
-								<button class="am-btn am-btn-default" type="submit">搜索</button>
-							</span>
-						</div>
-					</form>
+						<form action="laf_searchTimeOutInfo.hnuc" method="get">
+							<div class="am-input-group am-input-group-sm">
+								<input type="text" name="keyWord" class="am-form-field">
+								<span class="am-input-group-btn">
+									<button class="am-btn am-btn-default" type="submit">搜索</button>
+								</span>
+							</div>
+						</form>
 					</div>
 				</div>
 				<!-- Row end -->
@@ -129,11 +131,9 @@
 										<tr>
 											<td><input type="checkbox" /></td>
 											<td>${laf.laf_id}</td>
-											<td>
-											<a href="${pageContext.request.contextPath }/laf_getInfoById.hnuc?lafId=${laf.laf_id }" target="_blank">
-												${laf.laf_mainDetail }
-											</a>
-											</td>
+											<td><a
+												href="${pageContext.request.contextPath }/laf_getInfoById.hnuc?lafId=${laf.laf_id }"
+												target="_blank"> ${laf.laf_mainDetail } </a></td>
 											<td><c:if test="${laf.laf_type == 0}">
 												招领启示
 											</c:if> <c:if test="${laf.laf_type == 1}">
@@ -145,21 +145,20 @@
 											<td>
 												<div class="am-btn-toolbar">
 													<div class="am-btn-group am-btn-group-xs">
-														<a
-															href="${pageContext.request.contextPath }/laf_getInfoById.hnuc?lafId=${laf.laf_id }"
-															target="_blank">
-															<button
-																class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
-																<span class="am-icon-copy"></span> 详情
-															</button>
-														</a>
-														<a
-															href="${pageContext.request.contextPath }/index.jsp">
+														<button
+															class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
+															<a
+																href="${pageContext.request.contextPath }/laf_getInfoById.hnuc?lafId=${laf.laf_id }"
+																target="_blank"> <span class="am-icon-copy"></span>
+																详情
+															</a>
+														</button>
 														<button
 															class="am-btn am-btn-default am-btn-xs am-text-secondary">
-															<span class="am-icon-pencil-square-o"></span> 重新发布
+															<a href="${pageContext.request.contextPath }/laf_letInfoRelive.hnuc?lafId=${laf.laf_id }">
+																<span class="am-icon-pencil-square-o"></span> 重新发布
+															</a>
 														</button>
-														</a>
 													</div>
 												</div>
 											</td>
@@ -174,15 +173,15 @@
 									<li class="am-pagination-prev "><c:if
 											test="${!empty keyWord }">
 											<c:if test="${1 lt lafPage.currentPage }">
-											<a
-												href="laf_searchTimeOutInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}&keyWord=${keyWord}"
-												class="">上一页</a>
+												<a
+													href="laf_searchTimeOutInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}&keyWord=${keyWord}"
+													class="">上一页</a>
 											</c:if>
 										</c:if> <c:if test="${empty keyWord }">
 											<c:if test="${1 lt lafPage.currentPage }">
-											<a
-												href="laf_getAllTimeOutInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
-												class="">上一页</a>
+												<a
+													href="laf_getAllTimeOutInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
+													class="">上一页</a>
 											</c:if>
 										</c:if></li>
 
@@ -218,15 +217,15 @@
 									<li class="am-pagination-next "><c:if
 											test="${!empty keyWord }">
 											<c:if test="${lafPage.totalPage gt lafPage.currentPage }">
-											<a
-												href="laf_searchTimeOutInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}&keyWord=${keyWord}"
-												class="">下一页</a>
+												<a
+													href="laf_searchTimeOutInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}&keyWord=${keyWord}"
+													class="">下一页</a>
 											</c:if>
 										</c:if> <c:if test="${empty keyWord }">
 											<c:if test="${lafPage.totalPage gt lafPage.currentPage }">
-											<a
-												href="laf_getAllTimeOutInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
-												class="">下一页</a>
+												<a
+													href="laf_getAllTimeOutInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
+													class="">下一页</a>
 											</c:if>
 										</c:if></li>
 
@@ -253,8 +252,7 @@
 	<!-- navbar -->
 	<a href="admin-offcanvas"
 		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
-		data-am-offcanvas="{target: '#admin-offcanvas'}">
-		<!--<i class="fa fa-bars" aria-hidden="true"></i>-->
+		data-am-offcanvas="{target: '#admin-offcanvas'}"> <!--<i class="fa fa-bars" aria-hidden="true"></i>-->
 	</a>
 
 	<script type="text/javascript"

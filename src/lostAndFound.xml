@@ -62,6 +62,9 @@
 			<result name="allSucList" type="dispatcher">
 				/LostAndFoundAdmin/jsp/lafAllSucList.jsp
 			</result>
+			<result name="gotoGetInfo" type="dispatcher">
+				/LostAndFoundPlatform/getInfo.jsp
+			</result>
 			<result name="allTimeOutList" type="dispatcher">
 				/LostAndFoundAdmin/jsp/lafAllTimeOutList.jsp
 			</result>
@@ -70,6 +73,15 @@
 			</result>
 			<result name="managePage" type="redirect">
 				/LostAndFoundAdmin/jsp/index.jsp
+			</result>
+			<result name="refreshCheck" type="redirectAction">
+				laf_getAllToCheckInfoAdmin.hnuc
+			</result>
+			<result name="refreshTimeOut" type="redirectAction">
+				laf_getAllTimeOutInfoAdmin.hnuc
+			</result>
+			<result name="refreshDoing" type="redirectAction">
+				laf_getAllDoingInfoAdmin.hnuc
 			</result>
 		</action>
 		

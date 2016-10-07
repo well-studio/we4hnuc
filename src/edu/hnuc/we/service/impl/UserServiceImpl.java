@@ -26,4 +26,10 @@ public class UserServiceImpl implements IUserService{
 		return null;
 	}
 
+	@Override
+	public User adminLogin(User user) {
+		
+		return userDao.adminLogin(user);
+	}
+
 }

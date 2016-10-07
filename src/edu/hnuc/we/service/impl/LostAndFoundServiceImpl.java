@@ -89,8 +89,9 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 	}
 
 	@Override
-	public boolean letInfoBeSuc(Integer id) {
-		return lostAndFoundDao.letInfoBeSuc(id);
+	public boolean letInfoBeSuc(Integer id,String sucName,String sucPhone) {
+		
+		return lostAndFoundDao.letInfoBeSuc(id,sucName, sucPhone);
 	}
 
 
@@ -210,6 +211,13 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 			}
 		}
 		return lafPage;
+	}
+
+
+	@Override
+	public boolean letInfoRelive(Integer id) {
+		
+		return lostAndFoundDao.letInfoRelive(id);
 	}
 
 	

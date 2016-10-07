@@ -38,7 +38,7 @@
 	<!-- Begin page -->
 	<header class="am-topbar am-topbar-fixed-top">
 		<div class="am-topbar-left am-hide-sm-only">
-			<a href="index.html" class="logo"><span>LostAndFound</span><i
+			<a href="index.html" class="logo"><span>后台管理中心</span><i
 				class="zmdi zmdi-layers"></i></a>
 		</div>
 
@@ -74,10 +74,12 @@
 		<div class="content">
 			<div class="card-box">
 				<!-- Row start -->
+
 				<div class="am-g">
 					<div class="am-u-sm-12 am-u-md-6">
 						<div class="am-btn-toolbar">
 							<div class="am-btn-group am-btn-group-xs">
+								<%--
 								<button type="button" class="am-btn am-btn-default">
 									<span class="am-icon-plus"></span> 新增
 								</button>
@@ -90,9 +92,11 @@
 								<button type="button" class="am-btn am-btn-default">
 									<span class="am-icon-trash-o"></span> 删除
 								</button>
+							 --%>
 							</div>
 						</div>
 					</div>
+
 					<div class="am-u-sm-12 am-u-md-3">
 						<form action="laf_searchDoingInfo.hnuc" method="get">
 							<div class="am-input-group am-input-group-sm">
@@ -104,6 +108,7 @@
 						</form>
 					</div>
 				</div>
+
 				<!-- Row end -->
 
 				<!-- Row start -->
@@ -143,19 +148,26 @@
 											<td>
 												<div class="am-btn-toolbar">
 													<div class="am-btn-group am-btn-group-xs">
-														<a href="${pageContext.request.contextPath }/index.jsp">
-															<button
-																class="am-btn am-btn-default am-btn-xs am-text-secondary">
+														<button
+															class="am-btn am-btn-default am-btn-xs am-text-secondary">
+															<a href="${pageContext.request.contextPath }/index.jsp">
 																<span class="am-icon-pencil-square-o"></span> 编辑
-															</button>
-														</a> <a
-															href="${pageContext.request.contextPath }/laf_getInfoById.hnuc?lafId=${laf.laf_id }"
-															target="_blank">
-															<button
-																class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
-																<span class="am-icon-copy"></span> 详情
-															</button>
-														</a>
+															</a>
+														</button>
+														<button
+															class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
+															<a
+																href="${pageContext.request.contextPath }/laf_getInfoById.hnuc?lafId=${laf.laf_id }"
+																target="_blank"> <span class="am-icon-copy"></span> 详情
+															</a>
+														</button>
+														<button
+															class="am-btn am-btn-default am-btn-xs am-text-secondary">
+															<a
+																href="${pageContext.request.contextPath }/laf_letInfoBeTimeOut.hnuc?lafId=${laf.laf_id }">
+																<span class="am-icon-pencil-square-o"></span> 失效
+															</a>
+														</button>
 														<%-- 
 														<button
 															class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
@@ -176,15 +188,15 @@
 									<li class="am-pagination-prev "><c:if
 											test="${!empty keyWord }">
 											<c:if test="${1 lt lafPage.currentPage }">
-											<a
-												href="laf_searchDoingInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}&keyWord=${keyWord}"
-												class="">上一页</a>
+												<a
+													href="laf_searchDoingInfo.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}&keyWord=${keyWord}"
+													class="">上一页</a>
 											</c:if>
 										</c:if> <c:if test="${empty keyWord }">
 											<c:if test="${1 lt lafPage.currentPage }">
-											<a
-												href="laf_getAllDoingInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
-												class="">上一页</a>
+												<a
+													href="laf_getAllDoingInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage - 1}"
+													class="">上一页</a>
 											</c:if>
 										</c:if></li>
 
@@ -220,15 +232,15 @@
 									<li class="am-pagination-next "><c:if
 											test="${!empty keyWord }">
 											<c:if test="${lafPage.totalPage gt lafPage.currentPage }">
-											<a
-												href="laf_searchDoingInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}&keyWord=${keyWord}"
-												class="">下一页</a>
+												<a
+													href="laf_searchDoingInfo.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}&keyWord=${keyWord}"
+													class="">下一页</a>
 											</c:if>
 										</c:if> <c:if test="${empty keyWord }">
 											<c:if test="${lafPage.totalPage gt lafPage.currentPage }">
-											<a
-												href="laf_getAllDoingInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
-												class="">下一页</a>
+												<a
+													href="laf_getAllDoingInfoAdmin.hnuc?lafPage.currentPage=${lafPage.currentPage + 1}"
+													class="">下一页</a>
 											</c:if>
 										</c:if></li>
 

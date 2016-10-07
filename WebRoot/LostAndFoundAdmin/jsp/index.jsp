@@ -21,7 +21,7 @@ String path = request.getContextPath();
 		<!-- Begin page -->
 		<header class="am-topbar am-topbar-fixed-top">
 			<div class="am-topbar-left am-hide-sm-only">
-                <a href="javascript:window.location.reload();" class="logo"><span>LostAndFound</span><i class="zmdi zmdi-layers"></i></a>
+                <a href="javascript:window.location.reload();" class="logo"><span>后台管理中心</span><i class="zmdi zmdi-layers"></i></a>
             </div>
 
 			<div class="contain">
@@ -30,15 +30,6 @@ String path = request.getContextPath();
 					<li><h4 class="page-title">欢迎光临~</h4></li>
 				</ul>
 
-				<ul class="am-nav am-navbar-nav am-navbar-right">
-					<li class="inform"><i class="am-icon-bell-o" aria-hidden="true"></i></li>
-					<li class="hidden-xs am-hide-sm-only">
-                        <form role="search" class="app-search">
-                            <input type="text" placeholder="Search..." class="form-control">
-                            <a href=""><img src="assets/img/search.png"></a>
-                        </form>
-                    </li>
-				</ul>
 			</div>
 		</header>
 		<!-- end page -->

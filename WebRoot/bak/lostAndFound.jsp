@@ -517,7 +517,7 @@
 			// 图片最大宽度  
 			var maxWidth = 1000;
 			// 最大上传图片数量  
-			var maxCount = 1;
+			var maxCount = 3;
 			$('.js_file')
 					.on(
 							'change',

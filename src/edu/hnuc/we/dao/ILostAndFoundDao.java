@@ -38,6 +38,12 @@ public interface ILostAndFoundDao {
 	boolean letInfoBeTrue(Integer id);
 	
 	/**
+	 * 复活一条信息
+	 * @return
+	 */
+	boolean letInfoRelive(Integer id);
+	
+	/**
 	 * 审核失败 - 直接删除么?(管理员)
 	 * @return
 	 */
@@ -129,7 +135,7 @@ public interface ILostAndFoundDao {
 	 * 认领成功 or 寻物成功
 	 * @return
 	 */
-	boolean letInfoBeSuc(Integer id);
+	boolean letInfoBeSuc(Integer id,String sucName,String sucPhone);
 	
 	/**
 	 * 分页查询所有信息(管理员)

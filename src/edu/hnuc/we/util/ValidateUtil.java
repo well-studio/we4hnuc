@@ -109,7 +109,9 @@ public class ValidateUtil {
 	 */
 	public static boolean isValidDetail(String str) {
 		boolean flag = false;
-		Pattern p = Pattern.compile("^[\\w]{5,300}$");
+		// 匹配任意字符和换行
+//		Pattern p = Pattern.compile("^[.\\n]{5,300}$");
+		Pattern p = Pattern.compile("^[\\d\\D]{5,300}$");
 		if (str != null) {
 			Matcher match = p.matcher(str);
 			flag = match.matches();

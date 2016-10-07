@@ -31,14 +31,17 @@ public class UserDaoImpl implements IUserDao{
 			return user;
 		}
 		return null;
-		/*
+
+	}
+	
+	@Override
+	public User adminLogin(User user) {
 		String hql = "from User as u where u.usr_stuId = ? and u.usr_pwd = ?";
 		Operation op = new Operation(getSession());
 		@SuppressWarnings("unchecked")
 		List<User> userList = op.hqlQuery(hql, user.getUsr_stuId(), user.getUsr_pwd());
 		if(userList.size()==0) return null;
 		return userList.get(0);
-		*/
 	}
 
 }

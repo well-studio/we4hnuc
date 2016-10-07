@@ -1,7 +1,14 @@
 package edu.hnuc.we.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -62,7 +69,28 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	public void setLafPage(PageBean<LostAndFound> lafPage) {
 		this.lafPage = lafPage;
 	}
+	private File[] images;
+	private String[] imagesFileName;
+	private String[] imagesContentType;
 	
+	public File[] getImages() {
+		return images;
+	}
+	public void setImages(File[] images) {
+		this.images = images;
+	}
+	public String[] getImagesFileName() {
+		return imagesFileName;
+	}
+	public void setImagesFileName(String[] imagesFileName) {
+		this.imagesFileName = imagesFileName;
+	}
+	public String[] getImagesContentType() {
+		return imagesContentType;
+	}
+	public void setImagesContentType(String[] imagesContentType) {
+		this.imagesContentType = imagesContentType;
+	}
 	/**
 	 * 获取所有的招领信息(管理员)
 	 * @return
@@ -107,8 +135,11 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String letInfoBeTrue() {
-		valueMap.put("Msg", lostAndFoundService.letInfoBeTrue(lafId));
-		return "valueMap";
+//		valueMap.put("Msg", lostAndFoundService.letInfoBeTrue(lafId));
+		
+		lostAndFoundService.letInfoBeTrue(lafId);
+		
+		return "refreshCheck";
 	}
 	
 	/**
@@ -116,8 +147,9 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String letInfoBeFalse() {
-		valueMap.put("Msg", lostAndFoundService.letInfoBeFalse(lafId));
-		return "valueMap";
+		lostAndFoundService.letInfoBeFalse(lafId);
+		
+		return "refreshDoing";
 	}
 	
 	/**
@@ -125,8 +157,8 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String letInfoBeTimeOut() {
-		valueMap.put("Msg", lostAndFoundService.letInfoBeTimeOut(lafId));
-		return "valueMap";
+		lostAndFoundService.letInfoBeTimeOut(lafId);
+		return "refreshDoing";
 	}
 	
 	/**
@@ -143,9 +175,10 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String delInfoById() {
-//		boolean res = lostAndFoundService.delInfoById(lafId);
+		@SuppressWarnings("unused")
+		boolean res = lostAndFoundService.delInfoById(lafId);
 //		Map<String, Object> request = ActionContext.getContext().getContextMap();
-		return "detail";
+		return "refreshCheck";
 	}
 	
 	/**
@@ -416,8 +449,54 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String releaseInfo() {
-		valueMap.put("Msg", lostAndFoundService.releaseInfo(lostAndFound));
-		return "valueMap";
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		User user = (User) session.get("user");
+		if(user != null) {
+			savePic(); // 保存图片
+			lostAndFound.setLaf_pic("/upload/lafImgs/" + imagesFileName[0]);
+			boolean res = lostAndFoundService.releaseInfo(lostAndFound);
+			if(res) {
+				return "index";
+			} else {
+				return "index";
+			}
+		}
+		return "index";
+	}
+	
+	/**
+	 * 保存上传的图片
+	 */
+	public void savePic() {
+		String picPath = ServletActionContext.getServletContext().getRealPath(File.separator) + "/upload/lafImgs/";
+		picPath += imagesFileName[0];
+		FileOutputStream fot = null;
+		FileInputStream fit = null;
+		try {
+			fit = new FileInputStream(images[0]);
+			fot = new FileOutputStream(picPath);
+			byte[] b = new byte[1024];
+			while(fit.read(b) != -1) {
+				fot.write(b);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(fit != null) {
+				try {
+					fit.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if(fot != null) {
+				try {
+					fot.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
 	/**
@@ -425,8 +504,48 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String letInfoBeSuc() {
-		valueMap.put("Msg", lostAndFoundService.letInfoBeSuc(lafId));
-		return "valueMap";
+		lostAndFoundService.letInfoBeSuc(lafId,sucName,sucPhone);
+		return "index";
+	}
+	
+	/**
+	 * 复活一条信息
+	 * @return
+	 */
+	public String letInfoRelive() {
+		
+		lostAndFoundService.letInfoRelive(lafId);
+		
+		return "refreshTimeOut";
+	}
+	
+	/**
+	 * 复活一条信息
+	 * @return
+	 */
+	public String gotoGetInfo() {
+		Map<String, Object> req = ActionContext.getContext().getApplication();
+		req.put("lafId", lafId);
+		
+		return "gotoGetInfo";
+	}
+	
+	
+	
+	
+	private String sucName;
+	private String sucPhone;
+	public String getSucName() {
+		return sucName;
+	}
+	public void setSucName(String sucName) {
+		this.sucName = sucName;
+	}
+	public String getSucPhone() {
+		return sucPhone;
+	}
+	public void setSucPhone(String sucPhone) {
+		this.sucPhone = sucPhone;
 	}
 	
 }

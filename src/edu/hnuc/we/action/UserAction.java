@@ -73,6 +73,28 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		session.put("cookie", GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd()));
 		return "valueMap";
 	}
+	/**
+	 * 管理员登录
+	 * @return
+	 */
+	public String adminLogin() {
+		
+		String adminAct = user.getUsr_stuId();
+		
+		if(adminAct == null || !adminAct.equals("000000000")) {
+			valueMap.put("info", "只有管理员才能登录哦!");
+			return "valueMap";
+		}
+		user = userService.adminLogin(user);
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		if(user == null) {
+			valueMap.put("info", "登入失败，请检查帐号密码的正确性!");
+			return "valueMap";
+		}
+		valueMap.put("info", "欢迎您管理员!");
+		session.put("admin", user);
+		return "valueMap";
+	}
 	
 	/**
 	 * 注销  设置session的时间

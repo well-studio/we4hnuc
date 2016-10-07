@@ -127,7 +127,13 @@ public interface ILostAndFoundService {
 	 * 认领成功 or 寻物成功
 	 * @return
 	 */
-	boolean letInfoBeSuc(Integer id);
+	boolean letInfoBeSuc(Integer id,String sucName,String sucPhone);
+	
+	/**
+	 * 复活一条信息
+	 * @return
+	 */
+	boolean letInfoRelive(Integer id);
 	
 	/**
 	 * 分页查询所有信息(管理员)
