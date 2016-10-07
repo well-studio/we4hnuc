@@ -94,7 +94,7 @@ public class ValidateUtil {
 	 */
 	public static boolean isValidWeChat(String str) {
 		boolean flag = false;
-		Pattern p = Pattern.compile("^[\\w]{1,20}$");
+		Pattern p = Pattern.compile("^[\\w\\W]{1,20}$");
 		if (str != null) {
 			Matcher match = p.matcher(str);
 			flag = match.matches();
@@ -111,7 +111,7 @@ public class ValidateUtil {
 		boolean flag = false;
 		// 匹配任意字符和换行
 //		Pattern p = Pattern.compile("^[.\\n]{5,300}$");
-		Pattern p = Pattern.compile("^[\\d\\D]{5,300}$");
+		Pattern p = Pattern.compile("^[\\d\\D]{15,500}$");
 		if (str != null) {
 			Matcher match = p.matcher(str);
 			flag = match.matches();

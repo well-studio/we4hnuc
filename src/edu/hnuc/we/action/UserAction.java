@@ -68,9 +68,14 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 //			session.put("user", user2);
 //		}
 		valueMap.put("info", "登入成功!");
+		session.put("cookie", GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd()));
+		
+		String cookie = (String) session.get("cookie");
+		user2.setUsr_name(GetCourse.getStuName(user2.getUsr_stuId(), term, cookie));
+		
 		session.put("user", user2);
 		//System.out.println(user2.toString());
-		session.put("cookie", GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd()));
+		
 		return "valueMap";
 	}
 	/**

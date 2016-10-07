@@ -51,7 +51,7 @@ String path = request.getContextPath();
 <body>
  
 	<h2><p><center>请完善领取人姓名和电话 谢谢合作</center></p></h2>
-	<form action="laf_letInfoBeSuc.hnuc?" method="get">
+	<form action="laf_letInfoBeSuc.hnuc" method="get">
 	<div class="weui_cells weui_cells_form login-form">
 		<input name="lafId" id="lafId" value="${lafId }" type="hidden">
 		<div class="weui_cell">

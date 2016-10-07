@@ -55,6 +55,12 @@ public interface ILostAndFoundService {
 	boolean delInfoById(Integer id);
 	
 	/**
+	 * 编辑更新信息(管理员)
+	 * @return
+	 */
+	boolean updateInfo(LostAndFound laf);
+	
+	/**
 	 * 获取所有有效的招领信息
 	 * @return
 	 */

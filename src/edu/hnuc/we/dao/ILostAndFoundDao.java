@@ -44,6 +44,12 @@ public interface ILostAndFoundDao {
 	boolean letInfoRelive(Integer id);
 	
 	/**
+	 * 编辑更新信息(管理员)
+	 * @return
+	 */
+	boolean updateInfo(LostAndFound laf);
+	
+	/**
 	 * 审核失败 - 直接删除么?(管理员)
 	 * @return
 	 */

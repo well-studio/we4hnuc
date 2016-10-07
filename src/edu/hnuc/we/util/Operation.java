@@ -40,7 +40,7 @@ public class Operation {
 	}
 
 	// 修改对象,对象信息必须完整
-	public static boolean update(Object obj) {
+	public boolean update(Object obj) {
 		Transaction tr = null;
 		try {
 //			session = HibernateSessionFactory.getCurrentSession();
@@ -61,7 +61,7 @@ public class Operation {
 	}
 	
 	// 删除对象，对象只需要传入主键信息
-	public static boolean delete(Object obj) {
+	public boolean delete(Object obj) {
 		Transaction tr = null;
 		try {
 //			session = HibernateSessionFactory.getCurrentSession();

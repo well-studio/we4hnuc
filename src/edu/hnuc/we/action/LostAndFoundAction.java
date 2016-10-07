@@ -5,8 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.ejb.FinderException;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -182,6 +185,32 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	}
 	
 	/**
+	 * 跳转至编辑事物招领信息(管理员)
+	 * @return
+	 */
+	public String editInfo() {
+		
+		LostAndFound laf = lostAndFoundService.getInfoById(lafId, true);
+		Map<String, Object> request = ActionContext.getContext().getContextMap();
+		request.put("laf", laf);
+		
+		return "editInfo";
+	}
+	
+	/**
+	 * 编辑事物招领信息(管理员)
+	 * @return
+	 */
+	public String updateInfo() {
+		lostAndFoundService.updateInfo(lostAndFound);
+//		Map<String, Object> request = ActionContext.getContext().getContextMap();
+//		request.put("laf", laf);
+		lafId = lostAndFound.getLaf_id();
+		return getInfoById();
+	}
+	
+	
+	/**
 	 * 分页获取所有有效的的失物招领信息(用户)
 	 * @return
 	 */
@@ -343,7 +372,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -359,7 +388,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchValidInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchValidInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.remove("lostMark");
@@ -376,7 +405,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchDoingInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchDoingInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -392,7 +421,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchSucInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchSucInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -408,7 +437,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchTimeOutInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchTimeOutInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -424,7 +453,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchToCheckInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchToCheckInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -451,17 +480,25 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	public String releaseInfo() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("user");
-		if(user != null) {
-			savePic(); // 保存图片
-			lostAndFound.setLaf_pic("/upload/lafImgs/" + imagesFileName[0]);
+		User admin = (User) session.get("admin");
+		if(user != null || admin != null) {
+			if(images != null && images.length > 0) {
+				Long tsmp = new Date().getTime();
+				imagesFileName[0] = tsmp + " " + imagesFileName[0];
+				savePic(); // 保存图片
+				lostAndFound.setLaf_pic("/upload/lafImgs/" + imagesFileName[0]);
+			}
 			boolean res = lostAndFoundService.releaseInfo(lostAndFound);
 			if(res) {
-				return "index";
+				session.put("info", "恭喜提交成功<br>请等待审核通过~ヽ(=^･ω･^=)丿");
 			} else {
-				return "index";
+				session.put("info", "发布失败<br>请稍后再试~ヾ(Ő∀Ő๑)ﾉ");
 			}
+		} else {
+			session.put("info", "登录后方可发布ヽ(=^･ω･^=)丿");
 		}
-		return "index";
+		
+		return "reToIndex";
 	}
 	
 	/**
@@ -504,8 +541,14 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String letInfoBeSuc() {
-		lostAndFoundService.letInfoBeSuc(lafId,sucName,sucPhone);
-		return "index";
+		boolean res = lostAndFoundService.letInfoBeSuc(lafId,sucName,sucPhone);
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		if(res) {
+			session.put("info", "认领成功 恭喜恭喜ヽ(=^･ω･^=)丿");
+		} else {
+			session.put("info", "认领失败 请稍后再试ヾ(×× ) ﾂ");
+		}
+		return "reToIndex";
 	}
 	
 	/**

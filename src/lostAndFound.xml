@@ -83,6 +83,12 @@
 			<result name="refreshDoing" type="redirectAction">
 				laf_getAllDoingInfoAdmin.hnuc
 			</result>
+			<result name="editInfo" type="dispatcher">
+				/LostAndFoundAdmin/jsp/editInfo.jsp
+			</result>
+			<result name="reToIndex" type="redirectAction">
+				laf_getAllValidInfo.hnuc
+			</result>
 		</action>
 		
 		

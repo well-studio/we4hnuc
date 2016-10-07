@@ -37,3 +37,12 @@
 session close()的问题
 
 org.hibernate.SessionException: Session is closed! 在 letInfoBeSuc时候
+
+LostAndFound laf = getInfoById(id, false);
+Operation op = new Operation(getSession()); // 此语句要放在后面
+
+10、
+验证码到底做么
+
+
+		

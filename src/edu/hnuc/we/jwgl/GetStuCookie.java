@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
+import edu.hnuc.we.entity.User;
+
 public class GetStuCookie {
 
 	public static void main(String[] args) {

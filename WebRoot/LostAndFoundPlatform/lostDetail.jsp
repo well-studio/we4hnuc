@@ -96,6 +96,7 @@ $(document).ready(function(){
 				<div class="weui_cell_ft">${laf.laf_wechat}</div>
 			</div>
 			<c:if test="${laf.laf_stat == 6}">
+				<c:if test="${laf.laf_type == 0 }">
 				<div class="weui_cell">
 					<div class="weui_cell_hd">
 						<img src="./imgs/human.png" alt=""
@@ -116,6 +117,7 @@ $(document).ready(function(){
 					</div>
 					<div class="weui_cell_ft">${laf.laf_sucPhone}</div>
 				</div>
+				</c:if>
 				<div class="weui_cell">
 					<div class="weui_cell_hd">
 						<img src="./imgs/time.png" alt=""
@@ -127,7 +129,6 @@ $(document).ready(function(){
 					<div class="weui_cell_ft">${laf.laf_suctime}</div>
 				</div>
 			</c:if>
-
 			<div class="weui_media_box weui_media_text"
 				style="margin-bottom: 66px;">
 				<h4 class="weui_media_title"

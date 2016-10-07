@@ -277,7 +277,7 @@
 										<p>我要发布招领信息</p>
 									</div>
 									<div class="weui_cell_ft">
-										<input type="radio" style="display:none" class="weui_check" name="laf_type"
+										<input type="radio" class="weui_check" name="laf_type"
 											id="x11" value="0" checked="checked"> <span
 											class="weui_icon_checked"></span>
 									</div>
@@ -286,12 +286,12 @@
 										<p>我要发布寻物信息</p>
 									</div>
 									<div class="weui_cell_ft">
-										<input type="radio" style="display:none" name="laf_type" class="weui_check"
+										<input type="radio" name="laf_type" class="weui_check"
 											id="x12" value="1"> <span class="weui_icon_checked"></span>
 									</div>
 								</label>
 							</div>
-							<%-- 时间 
+							<%-- 时间 --%>
 							<div class="weui_cell">
 								<div class="weui_cell_hd">
 									<label for="" class="weui_label">时间</label>
@@ -302,7 +302,6 @@
 										placeholder="">
 								</div>
 							</div>
-							--%>
 							<%--联系人姓名  --%>
 							<div class="weui_cell">
 								<div class="weui_cell_hd">
@@ -324,7 +323,7 @@
 								</div>
 								<div class="weui_cell_bd weui_cell_primary">
 									<input name="laf_phone" class="weui_input" type="tel" required
-										pattern="^(1)\d{10}$"
+										pattern="^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$"
 										maxlength="11" placeholder="输入您的手机号" emptyTips="请输入手机号"
 										notMatchTips="请输入正确的手机号">
 								</div>
@@ -339,7 +338,7 @@
 								</div>
 								<div class="weui_cell_bd weui_cell_primary">
 									<input name="laf_qq" class="weui_input" type="number" required
-										pattern="^[1-9][0-9]{4,14}$" maxlength="11" placeholder="输入您的QQ"
+										pattern="[1-9][0-9]{4,14}" maxlength="11" placeholder="输入您的QQ"
 										emptyTips="请输入QQ" notMatchTips="请输入正确的QQ">
 								</div>
 								<div class="weui_cell_ft">
@@ -367,7 +366,7 @@
 								</div>
 								<div class="weui_cell_bd weui_cell_primary">
 									<input name="laf_wechat" class="weui_input" type="tel" required
-										pattern="^[\w\W]{1,20}$" maxlength="20" placeholder="输入您的微信号"
+										pattern="[\w]{1,20}" maxlength="20" placeholder="输入您的微信号"
 										emptyTips="请输入微信号" notMatchTips="请输入正确的微信号">
 								</div>
 								<div class="weui_cell_ft">
@@ -379,7 +378,7 @@
 							<div class="weui_cells weui_cells_form">
 								<div class="weui_cell">
 									<div class="weui_cell_bd weui_cell_primary">
-										<textarea name="laf_detail" class="weui_textarea" required pattern="^[\w\W]{15,300}$"
+										<textarea name="laf_detail" class="weui_textarea"
 											placeholder="请输入相关信息描述" rows="5"></textarea>
 										<div class="weui_textarea_counter">
 											<span>0</span>/300
@@ -387,7 +386,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<%--文件上传 --%>
 							<div class="weui_cells weui_cells_form">
 								<div class="weui_cell">
@@ -412,7 +411,7 @@
 								</div>
 							</div>
 
-							<%-- 验证码 
+							<%-- 验证码 --%>
 							<div class="weui_cell weui_vcode">
 								<div class="weui_cell_hd">
 									<label class="weui_label">验证码</label>
@@ -426,7 +425,6 @@
 										src="http://weui.github.io/weui/images/vcode.jpg">
 								</div>
 							</div>
-							--%>
 						</div>
 
 
@@ -435,11 +433,11 @@
 							<a id="formSubmitBtn" href="javascript:;"
 								class="weui_btn weui_btn_primary"></a>
 						-->
-							<c:if test="${!empty user || !empty admin}">
+							<c:if test="${!empty user}">
 								<button id="formSubmitBtn" class="weui_btn weui_btn_primary"
 									type="submit">信息属实 确认提交</button>
 							</c:if>
-							<c:if test="${empty user && empty admin}">
+							<c:if test="${empty user}">
 								<button class="weui_btn weui_btn_primary">请先登录 再进行信息发布
 								</button>
 								<center>
@@ -519,7 +517,7 @@
 			// 图片最大宽度  
 			var maxWidth = 1000;
 			// 最大上传图片数量  
-			var maxCount = 1;
+			var maxCount = 3;
 			$('.js_file')
 					.on(
 							'change',

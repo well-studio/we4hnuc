@@ -116,7 +116,6 @@
 								class="am-table am-table-striped am-table-hover table-main">
 								<thead>
 									<tr>
-										<th class="table-check"><input type="checkbox" /></th>
 										<th class="table-id">ID</th>
 										<th class="table-title">Detail</th>
 										<th class="table-type">类别</th>
@@ -129,7 +128,6 @@
 								<tbody>
 									<c:forEach items="${lafPage.pageData }" var="laf">
 										<tr>
-											<td><input type="checkbox" /></td>
 											<td>${laf.laf_id}</td>
 											<td><a
 												href="${pageContext.request.contextPath }/laf_getInfoById.hnuc?lafId=${laf.laf_id }"
@@ -166,7 +164,8 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<div>
+							<hr />
+							<div style="margin-bottom: 40px;">
 								<ul data-am-widget="pagination"
 									class="am-pagination am-pagination-select">
 
@@ -186,7 +185,7 @@
 										</c:if></li>
 
 									<li class="am-pagination-select"><select
-										onchange="mbar(this)">
+										onchange="mbar(this)" style="padding-top: 0;">
 											<%
 												PageBean<LostAndFound> list = (PageBean<LostAndFound>) request
 														.getAttribute("lafPage");
@@ -231,13 +230,15 @@
 
 								</ul>
 							</div>
-							<hr />
+							
+							<div style="margin-top: 20px;">
 							<c:if test="${!empty keyWord }">
 								<p style="text-align: center;">
 									搜索：<span style="color: red;"> ${keyWord } </span>,共搜索到 <span
 										style="color: red;"> ${lafPage.totalCount }</span> 条记录
 								</p>
 							</c:if>
+							</div>
 						</form>
 					</div>
 

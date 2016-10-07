@@ -220,5 +220,12 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 		return lostAndFoundDao.letInfoRelive(id);
 	}
 
+
+	@Override
+	public boolean updateInfo(LostAndFound laf) {
+		
+		return lostAndFoundDao.updateInfo(laf);
+	}
+
 	
 }

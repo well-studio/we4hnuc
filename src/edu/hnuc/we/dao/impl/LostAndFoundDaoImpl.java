@@ -391,18 +391,21 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 */
 	public boolean releaseInfo(LostAndFound laf) {
 		Operation op = new Operation(getSession());
+		laf.setLaf_laftime(null);
+		laf.setLaf_suctime(null);
 		return op.add(laf);
 	}
 
 	@Override
+	
 	/**
 	 * 认领成功 or 寻物成功
 	 * @return
 	 */
 	public boolean letInfoBeSuc(Integer id,String sucName,String sucPhone) {
 //		String sql = "UPDATE `lostandfound` SET `laf_stat`='6' WHERE (`laf_id`= ?)";
-		Operation op = new Operation(getSession());
 		LostAndFound laf = getInfoById(id, false);
+		Operation op = new Operation(getSession());
 		laf.setLaf_suctime(new Timestamp(new Date().getTime())); // update sucTime
 		laf.setLaf_stat(6); // suc
 		if(sucName != null) {
@@ -414,6 +417,14 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 		
 		return op.update(laf);
 	}
+	
+
+	@Override
+	public boolean updateInfo(LostAndFound laf) {
+		Operation op = new Operation(getSession());
+		return op.update(laf);
+	}
+
 	
 	/**
 	 * 从start位置获取length条信息
