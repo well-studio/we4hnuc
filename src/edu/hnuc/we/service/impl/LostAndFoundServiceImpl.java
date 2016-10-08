@@ -204,8 +204,8 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 	public PageBean<LostAndFound> handleMainDetail(PageBean<LostAndFound> lafPage) {
 		for(LostAndFound laf : lafPage.getPageData()) {
 			String con = laf.getLaf_detail();
-			if(con.length() > 40) {
-				laf.setLaf_mainDetail(con.substring(0,40));
+			if(con.length() > 50) {
+				laf.setLaf_mainDetail(con.substring(0,50)+"......");
 			} else {
 				laf.setLaf_mainDetail(con);
 			}

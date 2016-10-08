@@ -74,6 +74,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		user2.setUsr_name(GetCourse.getStuName(user2.getUsr_stuId(), term, cookie));
 		
 		session.put("user", user2);
+		session.remove("admin");
 		//System.out.println(user2.toString());
 		
 		return "valueMap";
@@ -98,6 +99,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		}
 		valueMap.put("info", "欢迎您管理员!");
 		session.put("admin", user);
+		session.remove("user");
 		return "valueMap";
 	}
 	

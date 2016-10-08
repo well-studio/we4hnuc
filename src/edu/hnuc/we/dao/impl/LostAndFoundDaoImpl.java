@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.FinderException;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -66,7 +65,7 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	 * @return
 	 */
 	public PageBean<LostAndFound>  getLimitToCheckInfo(PageBean<LostAndFound> lafPage) {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 3";
+		String hql = "from LostAndFound as laf where laf.laf_stat = 3 order by laf.laf_pubtime desc";
 		Integer totalCount = getAllToCheckInfo("").size();
 		lafPage.setTotalCount(totalCount);
 		lafPage.setTotalPage(lafPage.getTotalPage());
@@ -79,11 +78,11 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	
 	@Override
 	/**
-	 * 获取所有的需要审核的信息(管理员)
+	 * 获取所有的成功信息(管理员)
 	 * @return
 	 */
 	public PageBean<LostAndFound>  getLimitSucInfo(PageBean<LostAndFound> lafPage) {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 6";
+		String hql = "from LostAndFound as laf where laf.laf_stat = 6 order by laf.laf_pubtime desc";
 		Integer totalCount = getAllSucInfo("").size();
 		lafPage.setTotalCount(totalCount);
 		lafPage.setTotalPage(lafPage.getTotalPage());
@@ -547,7 +546,7 @@ public class LostAndFoundDaoImpl implements ILostAndFoundDao {
 	}
 	
 	public List<LostAndFound> getAllSucInfo(String keyWord) {
-		String hql = "from LostAndFound as laf where laf.laf_stat = 6 and laf.laf_detail like ?";
+		String hql = "from LostAndFound as laf where laf.laf_stat = 6 and laf.laf_detail like ? ";
 		Operation op = new Operation(getSession());
 		@SuppressWarnings("unchecked")
 		List<LostAndFound> lists = op.hqlQuery(hql, "%"+keyWord+"%");

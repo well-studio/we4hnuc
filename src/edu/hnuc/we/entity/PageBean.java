@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class PageBean<T> {
 	private int currentPage = 1;
-	private int pageCount = 6;
+	private int pageCount = 10;
 	private int totalCount;
 	private int totalPage;
 	private List<T> pageData;

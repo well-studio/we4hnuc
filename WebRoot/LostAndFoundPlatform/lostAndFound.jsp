@@ -27,7 +27,7 @@
 </script>
 </head>
 
-<body translate="no">
+<body translate="no" style="max-width: 100%;width: 100%;">
 
 	<div class="container">
 		<div class="weui_tab">
@@ -58,56 +58,84 @@
 							<a href="javascript:" class="weui_search_cancel"
 								id="search_cancel">取消</a>
 						</div>
-						<div class="" style="margin-top:10px;text-align: center;">
+						<div class="" style="margin-top:10px;text-align: center;width: 100%;">
 							<a href="laf_getAllLostInfo.hnuc">
-								<button type="button" class="am-btn am-btn-success am-round">招领列表</button>
-							</a> <a href="laf_getAllFindInfo.hnuc">
-								<button type="button" class="am-btn am-btn-success am-round">寻物列表</button>
+								<button type="button" style="width: auto;" class="am-btn am-btn-success am-round">招领列表</button>
+							</a> 
+							<a href="laf_getAllFindInfo.hnuc">
+								<button type="button" style="width: auto;" class="am-btn am-btn-success am-round">寻物列表</button>
 							</a>
 						</div>
 					</div>
 
 					<div class="weui_panel_bd">
+						<c:if test="${empty lafPage.pageData && empty keyWord}">
+							<div style="text-align: center;margin-top: 100px;">
+							<span style="font-size: 2em;">
+							暂时还没有人发布失物信息 <br><br> 赶快抢个沙发吧ヾ|≧_≦|〃
+							</span>
+							</div>
+						</c:if>
 						<c:forEach items="${lafPage.pageData}" var="laf">
 							<a href="laf_getInfoById.hnuc?lafId=${laf.laf_id}">
 								<div class="weui_media_box weui_media_text">
-									<h4 class="weui_media_title"
+									<h3 class="weui_media_title"
 										style="text-align: center;color: green;">
 										<c:if test="${laf.laf_type == 0}">
-									招领启示
+									招领启示 <i class="fa fa-bullhorn" aria-hidden="true"></i>
 								</c:if>
 										<c:if test="${laf.laf_type == 1}">
-									寻物启示
+									寻物启示 <i class="fa fa-search-plus" aria-hidden="true"></i>
 								</c:if>
-									</h4>
-									<p class="weui_media_desc">${laf.laf_mainDetail}</p>
+									</h3>
+									<p class="weui_media_desc" style="margin-bottom: 10px;">${laf.laf_mainDetail}</p>
 
-									<p class="weui_media_desc" style="text-align: right;">
-										<a href="lostDetail.jsp"> <span style="color:#6699CC;">详情</span>
+									<p class="weui_media_desc" style="text-align: right;margin-top: 30px;">
+										<a href="laf_getInfoById.hnuc?lafId=${laf.laf_id}"> <span style="color:#6699CC;"> 
+										<span style="color: #6699CC;font-size: 1.1em;padding-right:10px;">详情>> </span>
+										<%--<img alt="" src="${pageContext.request.contextPath }/imgs/rightRow.png"> --%>
 										</a>
 									</p>
-									<ul class="weui_media_info">
+									<div style="text-align:center;">
+									<ul class="weui_media_info" style="color: #6699CC;margin-left: 0;padding-left: 0;">
 										<li class="weui_media_info_meta">${laf.laf_name}</li>
 										<li class="weui_media_info_meta">${laf.laf_pubtime}</li>
-										<li class="weui_media_info_meta weui_media_info_meta_extra"><span
-											style="color:#FF6666;"> <c:if
-													test="${laf.laf_stat == 1}">
+										<li class="weui_media_info_meta"><span
+											style="color:#FF3333;">
+										<c:if test="${laf.laf_stat == 1}">
 											正在寻找
 										</c:if> <c:if test="${laf.laf_stat == 6}">
 											物归原主
 										</c:if>
 										</span></li>
 									</ul>
+									</div>
 								</div>
 							</a>
 						</c:forEach>
-
-						<c:if test="${!empty keyWord }">
+						<hr>
+						<c:if test="${!empty keyWord}">
+							<c:if test="${!empty lafPage.pageData }">
 							<p style="text-align: center;">
-								搜索：<span style="color: red;"> ${keyWord } </span>,共搜索到 <span
-									style="color: red;"> ${lafPage.totalCount }</span> 条记录
+								搜索 : <span style="color: red;"> ${keyWord } </span> , 共检索到 <span
+									style="color: red;"> ${lafPage.totalCount }</span> 条相关记录
 							</p>
+							</c:if>
+							<c:if test="${empty lafPage.pageData }">
+							<p style="text-align: center;">
+								<span style="font-size: 2em;">ヽ(°◇° )ノ</span><br> 没能找到与 <span style="color: red;"> "${keyWord }" </span> 相关的信息
+							</p>
+							</c:if>
 						</c:if>
+						
+						<c:if test="${empty lafPage.pageData }">
+							<div style="text-align: center;">
+							<a style="font-size: 1.3em;" href="laf_getAllValidInfo.hnuc">
+								<img alt="" src="${pageContext.request.contextPath }/imgs/return.png"> 传送回家
+							</a>
+							</div>
+						</c:if>
+						<c:if test="${!empty lafPage.pageData }">
 						<div style="margin-bottom: 50px;">
 							<ul data-am-widget="pagination"
 								class="am-pagination am-pagination-select">
@@ -235,6 +263,7 @@
 
 							</ul>
 						</div>
+						</c:if>
 						<%-- --%>
 					</div>
 				</div>
@@ -244,7 +273,12 @@
 				<div class="weui_tab_bd_item" style="display: none;">
 					<div class="weui_cells_title"
 						style="text-align: center;font-size:1.5em;padding-top: 10px;;margin:0;">失物相关信息填写</div>
+					<c:if test="${!empty user || !empty admin }">
 					<p style="text-align: center;padding: 0;margin:0;">(请尽量提供准确信息)</p>
+					</c:if>
+					<c:if test="${empty user && empty admin }">
+					<p style="text-align: center;padding: 0;margin:0;">(登录后方能发布信息  <a href="${pageContext.request.contextPath }/login.jsp">点我登录 </a>)</p>
+					</c:if>
 					<form id="form" onsubmit="return subCheckText();" action="laf_releaseInfo.hnuc" method="post"
 						enctype="multipart/form-data">
 						<div class="weui_cells weui_cells_form">
@@ -359,9 +393,10 @@
 								<div class="weui_cell">
 									<div class="weui_cell_bd weui_cell_primary">
 										<textarea name="laf_detail" class="weui_textarea" required
-											 placeholder="请输入相关信息描述" rows="7" onkeyup="checkContentLength();"></textarea>
+											 placeholder="请完善失物相关信息 
+											 例如：时间 地点 内容 照片 等等....." rows="7" onkeyup="checkContentLength();"></textarea>
 										<div class="weui_textarea_counter">
-											<span id="span">0/500</span>
+											<span id="span"><span style="color: #f00;">0</span>/500</span>
 										</div>
 									</div>
 								</div>
@@ -408,10 +443,6 @@
 							<c:if test="${empty user && empty admin}">
 								<button class="weui_btn weui_btn_primary" type="button">请先登录 再进行信息发布
 								</button>
-								<center>
-									<a href="${pageContext.request.contextPath }/login.jsp">
-										点我登录 </a>
-								</center>
 							</c:if>
 						</div>
 					</form>
@@ -426,19 +457,19 @@
 			<script src='<%=path %>/plugins/AmazeUI-2.7.1/assets/js/amazeui.min.js'></script>
 			<div class="weui_tabbar">
 				<a href="laf_index.hnuc" class="weui_tabbar_item">
-					<div class="weui_tabbar_icon">
+					<div class="weui_tabbar_icon" style="margin-top: 10px;">
 						<img src="${pageContext.request.contextPath }/imgs/goBack.png"
 							alt="">
 					</div>
 					<p class="weui_tabbar_label">微主页</p>
 				</a> <a href="laf_getAllValidInfo.hnuc" class="weui_tabbar_item">
-					<div class="weui_tabbar_icon">
+					<div class="weui_tabbar_icon" style="margin-top: 10px;">
 						<img src="${pageContext.request.contextPath }/imgs/love.png"
 							alt="">
 					</div>
 					<p class="weui_tabbar_label" style="color: rgb(237,79,79);">失物列表</p>
 				</a> <a href="javascript:;" class="weui_tabbar_item">
-					<div class="weui_tabbar_icon">
+					<div class="weui_tabbar_icon" style="margin-top: 10px;">
 						<img src="${pageContext.request.contextPath }/imgs/release.png"
 							alt="">
 					</div>
@@ -488,7 +519,10 @@
 			window.location = docurl;
 		}
 	}
-	/* AJAX提交
+	<%-- AJAX提交
+	window.onload = function(){
+		layer.msg("欢迎光顾 湖商失物招领 系统<br> 奉献爱心 ヾ(o◕∀◕)ﾉヾ");
+	}
 	$(document).ready(function(){
 		$("#formSubmitBtn").click(function() {
 			var btn = $('#formSubmitBtn');
@@ -510,7 +544,7 @@
 			});
 		});
 	});
-	 */
+	--%>
 </script>
 </html>
 

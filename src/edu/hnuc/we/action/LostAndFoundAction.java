@@ -2,14 +2,12 @@ package edu.hnuc.we.action;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.ejb.FinderException;
 
 import org.apache.struts2.ServletActionContext;
 
