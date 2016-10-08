@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+
+
+
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -19,6 +22,7 @@ import edu.hnuc.we.entity.LostAndFound;
 import edu.hnuc.we.entity.PageBean;
 import edu.hnuc.we.entity.User;
 import edu.hnuc.we.service.ILostAndFoundService;
+import edu.hnuc.we.util.ImageUtil;
 
 
 /**
@@ -93,7 +97,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		this.imagesContentType = imagesContentType;
 	}
 	/**
-	 * 获取所有的招领信息(管理员)
+	 * 获取所有的招领信息(管理员) out
 	 * @return
 	 */
 	public String getLostInfo() {
@@ -103,7 +107,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	
 	
 	/**
-	 * 获取所有的寻物信息(管理员)
+	 * 获取所有的寻物信息(管理员) out
 	 * @return
 	 */
 	public String getFoundInfo() {
@@ -112,7 +116,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	}
 	
 	/**
-	 * 获取所有的需要审核的信息(管理员)
+	 * 获取所有的需要审核的信息(管理员) out
 	 * @return
 	 */
 	public String getToCheckInfo() {
@@ -481,9 +485,19 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 		User admin = (User) session.get("admin");
 		if(user != null || admin != null) {
 			if(images != null && images.length > 0) {
+				long imgSize = images[0].length();
+				if(imgSize > 5242880) {
+					session.put("info", "上传的图片超过5M<br>请选择尺寸更小的图片上传!");
+					return "reToIndex";
+				}
 				Long tsmp = new Date().getTime();
 				imagesFileName[0] = tsmp + " " + imagesFileName[0];
-				savePic(); // 保存图片
+				String picPath = ServletActionContext.getServletContext().getRealPath(File.separator) + "/upload/lafImgs/"+imagesFileName[0];
+				if(imgSize <= 122880) {
+					savePic();
+				} else {
+					ImageUtil.zipImageFile(images[0], new File(picPath), 1000, 0, 0);
+				}
 				lostAndFound.setLaf_pic("/upload/lafImgs/" + imagesFileName[0]);
 			}
 			boolean res = lostAndFoundService.releaseInfo(lostAndFound);
@@ -539,8 +553,22 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * @return
 	 */
 	public String letInfoBeSuc() {
-		boolean res = lostAndFoundService.letInfoBeSuc(lafId,sucName,sucPhone);
 		Map<String, Object> session = ActionContext.getContext().getSession();
+		User user = (User) session.get("user");
+		LostAndFound laf = lostAndFoundService.getInfoById(lafId, false);
+		String laf_stuid = laf.getLaf_stuid();
+		
+		if(user == null) {
+			session.put("info", "认领失败 请不要攻击我们ヾ(×× ) ﾂ");
+			return "reToIndex";
+		}
+		if(!user.getUsr_stuId().equals(laf_stuid)) {
+			session.put("info", "认领失败 请登录正确帐号认领ヾ(×× ) ﾂ");
+			return "reToIndex";
+		}
+		
+		boolean res = lostAndFoundService.letInfoBeSuc(lafId,sucName,sucPhone);
+		
 		if(res) {
 			session.put("info", "认领成功 恭喜恭喜ヽ(=^･ω･^=)丿");
 		} else {
@@ -561,7 +589,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	}
 	
 	/**
-	 * 复活一条信息
+	 * 跳转
 	 * @return
 	 */
 	public String gotoGetInfo() {

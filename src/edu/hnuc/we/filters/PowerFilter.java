@@ -14,27 +14,15 @@ import javax.servlet.http.HttpSession;
 
 import edu.hnuc.we.entity.User;
 
-public class LoginFilter implements Filter {
+/**
+ * 安全权限检测
+ * @author Hallbow
+ *
+ */
+public class PowerFilter implements Filter {
 
 	public void destroy() {
 	}
-	/**
-	 * 登录且管理员才能访问的接口
-	 * letInfoBeTrue
-	 * letInfoBeFalse
-	 * letInfoBeTimeOut
-	 * goToManage
-	 * delInfoById
-	 * getAllTimeOutInfoAdmin
-	 * getAllToCheckInfoAdmin
-	 * searchTimeOutInfo
-	 * searchToCheckInfo
-	 * 
-	 * 登录才能访问的接口
-	 * releaseInfo
-	 * letInfoBeSuc
-	 * 
-	 */
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
@@ -42,48 +30,41 @@ public class LoginFilter implements Filter {
 		HttpServletResponse httpResp = (HttpServletResponse) response;
 		httpResp.setContentType("text/html");
 		httpResp.setCharacterEncoding("utf-8");
-		
 		HttpSession session = httpReq.getSession();
-		
 		String request_uri = httpReq.getRequestURI();
-		
 		String ctxPath = httpReq.getContextPath();
-//		System.out.println("ctxPath:" + ctxPath);
-		
 		String uri = request_uri.substring(ctxPath.length());
 		
 		User stuMsg = (User) session.getAttribute("user");
 		User admMsg = (User) session.getAttribute("admin");
-		System.out.println("请求路径:"+uri);
-		if( !uri.contains(".jsp") && (uri.contains("/ValidateImg") || uri.contains(".css") || uri.contains(".jpg") || uri.contains(".png") || uri.contains(".js") || uri.contains(".ico") )) {
-			chain.doFilter(request, response);
-			return ;
-		}
 		
-		if (uri.equals("/index.jsp") || uri.equals("/goindex.jsp") || uri.equals("/StuLogin")) {
+		if(admMsg != null) {
 			chain.doFilter(request, response);
-			return;
 		} else {
-			if( admMsg != null) {
-				System.out.println("这货是老司机!");
-				chain.doFilter(request, response);
-				return;
-			} else if( stuMsg == null) {
-				httpResp.sendRedirect("/studentManager/index.jsp");
-				return;
-			} else {
+			if(uri.contains("goToManage") || uri.contains("letInfoBeTrue")
+				|| uri.contains("letInfoBeFalse") || uri.contains("letInfoBeTimeOut")
+				|| uri.contains("editInfo") || uri.contains("gotoGetInfo")
+				|| uri.contains("getAllValidInfoAdmin") || uri.contains("getAllDoingInfoAdmin")
+				|| uri.contains("delInfoById") || uri.contains("getAllTimeOutInfoAdmin")
+				|| uri.contains("getAllToCheckInfoAdmin") || uri.contains("searchInfo")
+				|| uri.contains("searchTimeOutInfo") || uri.contains("searchToCheckInfo")
+				|| uri.contains("letInfoRelive") || uri.contains("updateInfo")) {
 				
-				if( !uri.equals("/register.jsp") && !uri.equals("/DelStu") && !uri.equals("/UpdateStuRe") 
-						&& !uri.equals("/UpdateStu") && !uri.equals("/StuReg")) {
+				return ;
+			} else {
+				if(stuMsg != null) {
 					chain.doFilter(request, response);
-					return;
 				} else {
-					System.out.println("没有权限!");
-					httpResp.sendRedirect("/studentManager/noPrim.jsp");
-					return;
+					if(uri.contains("releaseInfo") || uri.contains("letInfoBeSuc")) {
+						return ;
+					} else {
+						chain.doFilter(request, response);
+					}
 				}
+				
 			}
 		}
+		
 	}
 
 	@Override

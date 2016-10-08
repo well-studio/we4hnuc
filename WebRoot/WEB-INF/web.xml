@@ -18,7 +18,17 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
  	-->
-
+	
+	<filter>
+		<filter-name>PowerFilter</filter-name>
+		<filter-class>edu.hnuc.we.filters.PowerFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>PowerFilter</filter-name>
+		<url-pattern>*.hnuc</url-pattern>
+	</filter-mapping>
+	
+	
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -28,8 +38,7 @@
 		<filter-name>struts2</filter-name>
 		<url-pattern>*.hnuc</url-pattern>
 	</filter-mapping>
-
-
+	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>

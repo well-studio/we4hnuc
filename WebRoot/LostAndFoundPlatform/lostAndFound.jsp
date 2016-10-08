@@ -136,10 +136,11 @@
 							</div>
 						</c:if>
 						<c:if test="${!empty lafPage.pageData }">
-						<div style="margin-bottom: 50px;">
+						<div style="margin-bottom: 50px;
+						<c:if test="${lafPage.totalPage == 1 }">padding-bottom: 33px;</c:if>
+						">
 							<ul data-am-widget="pagination"
 								class="am-pagination am-pagination-select">
-
 								<li class="am-pagination-prev "><c:if
 										test="${!empty keyWord }">
 										<c:if test="${lafPage.currentPage gt 1 }">
@@ -393,8 +394,7 @@
 								<div class="weui_cell">
 									<div class="weui_cell_bd weui_cell_primary">
 										<textarea name="laf_detail" class="weui_textarea" required
-											 placeholder="请完善失物相关信息 
-											 例如：时间 地点 内容 照片 等等....." rows="7" onkeyup="checkContentLength();"></textarea>
+											 placeholder="请完善失物相关信息 例如：时间 地点 等等....." rows="7" onkeyup="checkContentLength();"></textarea>
 										<div class="weui_textarea_counter">
 											<span id="span"><span style="color: #f00;">0</span>/500</span>
 										</div>
