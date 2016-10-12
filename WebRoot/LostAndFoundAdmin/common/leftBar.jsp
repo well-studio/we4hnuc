@@ -42,9 +42,10 @@
 			<!-- End User -->
 
 			<ul class="am-list admin-sidebar-list">
-				<li><a
-					href="${pageContext.request.contextPath}/LostAndFoundAdmin/jsp/index.jsp"><span
-						class="am-icon-home"></span> 首页 </a></li>
+				<li>
+					<a href="${pageContext.request.contextPath}/admin/admin_getIndexInfo.hnuc">
+					<span class="am-icon-home"></span> 首页定制 </a>
+				</li>
 				<li class="admin-parent"><a class="am-cf"
 					data-am-collapse="{target: '#collapse-nav1'}"><span
 						class="am-icon-table"></span> 失物招领 <span
@@ -57,8 +58,17 @@
 						<li><a href="${pageContext.request.contextPath}/laf_getAllToCheckInfoAdmin.hnuc" class="am-cf"> 待审核 </span></a></li>
 						<li><a href="${pageContext.request.contextPath}/laf_getAllTimeOutInfoAdmin.hnuc"> 已失效</a></li>
 					</ul></li>
+				<li>
+					<a href="${pageContext.request.contextPath}/admin/admin_getAllImgNames.hnuc">
+					<span class="am-icon-file-image-o"></span> 图片管理 </a>
+				</li>
 			</ul>
+			
+			<div style="position: fixed;bottom: 50px;left:100px;">
+			<a target="_blank" href="${pageContext.request.contextPath }/LostAndFoundAdmin/jsp/changeAdmPsw.jsp">修改密码</a>
+			</div>
 		</div>
+		
 </div>
 <!-- sidebar end -->
 

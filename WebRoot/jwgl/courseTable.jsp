@@ -12,15 +12,17 @@
 <title>查询课表结果 | HNUC</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="description" content="查询课表结果">
+<%--
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+--%>
 <link rel='stylesheet prefetch'
 	href='<%=path%>/plugins/AmazeUI-2.7.1/assets/css/amazeui.min.css'>
 <style type="text/css">
 td  
 {  
  white-space: nowrap;  
-}  
+}
 </style>
 </head>
 <body>

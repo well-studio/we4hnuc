@@ -456,7 +456,7 @@
 			<script src='<%=path %>/plugins/weui/dist/weui.min.js'></script>
 			<script src='<%=path %>/plugins/AmazeUI-2.7.1/assets/js/amazeui.min.js'></script>
 			<div class="weui_tabbar">
-				<a href="laf_index.hnuc" class="weui_tabbar_item">
+				<a href="loadIndexInfo.hnuc" class="weui_tabbar_item">
 					<div class="weui_tabbar_icon" style="margin-top: 10px;">
 						<img src="${pageContext.request.contextPath }/imgs/goBack.png"
 							alt="">

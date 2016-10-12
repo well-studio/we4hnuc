@@ -496,7 +496,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 				if(imgSize <= 122880) {
 					savePic();
 				} else {
-					ImageUtil.zipImageFile(images[0], new File(picPath), 1000, 0, 0);
+					ImageUtil.zipImageFile(images[0], new File(picPath), 1000, 0);
 				}
 				lostAndFound.setLaf_pic("/upload/lafImgs/" + imagesFileName[0]);
 			}

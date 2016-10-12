@@ -4,7 +4,16 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-	<package name="base-default" namespace="/" extends="json-default">
+	<package name="lostAndFound-default" namespace="/" extends="json-default">
+		<!-- 注册拦截器,判断是否登入 -->
+		<interceptors>
+			<interceptor name="stuAuth"
+				class="edu.hnuc.we.interceptor.StuAuthInterceptor"></interceptor>
+			<interceptor-stack name="isStuLoginCheckStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="stuAuth"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
 		
 		<global-results>
 			<result name="valueMap" type="json">
@@ -15,10 +24,10 @@
 				notFound
 			</result>
 			<result name="index" type="redirectAction">
-				laf_index.hnuc
+				loadIndexInfo
 			</result>
 			<result name="indexPage" type="dispatcher">
-				index.jsp
+				loadIndexInfo
 			</result>
 		</global-results>
 		<!-- 捕获异常 -->
@@ -91,18 +100,30 @@
 			</result>
 		</action>
 		
-		
 		<action name="user_*" method="{1}" class="edu.hnuc.we.action.UserAction">
-			<result name="lostAndFound" type="dispatcher">
-				/LostAndFoundPlatform/lostAndFound.jsp
-			</result>
+			
+		</action>
+		
+		<action name="login">
+			<result>/login.jsp</result>
+		</action>
+		
+		<action name="stu_getMyTimeTable" method="getMyTimeTable" class="edu.hnuc.we.action.UserAction">
 			<result name="courseTable" type="dispatcher">
 				/jwgl/courseTable.jsp
 			</result>
+			<result name="reToLogin" type="redirectAction">login</result>
+			<interceptor-ref name="isStuLoginCheckStack"/>
+		</action>
+		
+		<action name="stu_getMyGrade"  method="getMyGrade" class="edu.hnuc.we.action.UserAction">
 			<result name="gradeTable" type="dispatcher">
 				/jwgl/gradeTable.jsp
 			</result>
+			<result name="reToLogin" type="redirectAction">login</result>
+			<interceptor-ref name="isStuLoginCheckStack"/>
 		</action>
+		
 		
 	</package>
 </struts>

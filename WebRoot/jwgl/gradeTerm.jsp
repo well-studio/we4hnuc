@@ -5,6 +5,7 @@ String path = request.getContextPath();
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<%----%>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <link rel='stylesheet prefetch' href='<%=path %>/plugins/AmazeUI-2.7.1/assets/css/amazeui.min.css'>
@@ -90,19 +91,19 @@ String path = request.getContextPath();
                         --%>
                     <!-- 这里需要动态获取 -->
                     
-                    <a href="<%=path%>/user_getMyGrade.hnuc?term=2013-2014-1" onclick="loadding()">2013-2014-1</a><br>
+                    <a href="<%=path%>/stu_getMyGrade.hnuc?term=2013-2014-1" onclick="loadding()">2013-2014-1</a><br>
 
-					<a href="<%=path%>/user_getMyGrade.hnuc?term=2013-2014-2" onclick="loadding()">2013-2014-2</a><br>
+					<a href="<%=path%>/stu_getMyGrade.hnuc?term=2013-2014-2" onclick="loadding()">2013-2014-2</a><br>
 
-					<a href="<%=path%>/user_getMyGrade.hnuc?term=2014-2015-1" onclick="loadding()">2014-2015-1</a><br>
+					<a href="<%=path%>/stu_getMyGrade.hnuc?term=2014-2015-1" onclick="loadding()">2014-2015-1</a><br>
 
-					<a href="<%=path%>/user_getMyGrade.hnuc?term=2014-2015-2" onclick="loadding()">2014-2015-2</a><br>
+					<a href="<%=path%>/stu_getMyGrade.hnuc?term=2014-2015-2" onclick="loadding()">2014-2015-2</a><br>
 
-					<a href="<%=path%>/user_getMyGrade.hnuc?term=2015-2016-1" onclick="loadding()">2015-2016-1</a><br>
+					<a href="<%=path%>/stu_getMyGrade.hnuc?term=2015-2016-1" onclick="loadding()">2015-2016-1</a><br>
 
-					<a href="<%=path%>/user_getMyGrade.hnuc?term=2015-2016-2" onclick="loadding()">2015-2016-2</a><br>
+					<a href="<%=path%>/stu_getMyGrade.hnuc?term=2015-2016-2" onclick="loadding()">2015-2016-2</a><br>
 
-					<a href="<%=path%>/user_getMyGrade.hnuc?term=2016-2017-1" onclick="loadding()">2016-2017-1</a><br>
+					<a href="<%=path%>/stu_getMyGrade.hnuc?term=2016-2017-1" onclick="loadding()">2016-2017-1</a><br>
 				</div>
 			</dd>
 		</dl>

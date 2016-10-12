@@ -23,5 +23,12 @@ public interface IUserService {
 	 */
 	public User adminLogin(User user);
 	
+	/**
+	 * 管理员修改密码
+	 * @param user
+	 * @return
+	 */
+	public boolean changeAdmPse(User user);
+	
 	
 }

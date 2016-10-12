@@ -19,5 +19,6 @@
 	</package>
 	
 	<include file="lostAndFound.xml"></include>
-
+	<include file="admin.xml"></include>
+	<include file="jwgl.xml"></include>
 </struts>

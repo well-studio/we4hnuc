@@ -17,7 +17,7 @@ public class User {
 	List<LostAndFound> lafList; // 与该学生相关的失物招领信息
 	
 	public User() {}
-
+	
 	public User(Integer usr_id, String usr_stuId, String usr_name,
 			String usr_pwd, Integer isAdmin, List<LostAndFound> lafList) {
 		super();

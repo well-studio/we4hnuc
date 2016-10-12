@@ -35,8 +35,8 @@
 					org.hibernate.dialect.MySQLDialect
 				</prop>
 				<!-- 配置是否在控制台输出 -->
-				<prop key="hibernate.show_sql">false</prop>
-				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.show_sql">true</prop><!-- 测试阶段为true -->
+				<prop key="hibernate.format_sql">true</prop><!-- 测试阶段为true -->
 				<prop key="hibernate.current_session_context_class">
                     thread
                 </prop>
@@ -58,7 +58,9 @@
 	<bean id="userDao" class="edu.hnuc.we.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	
+	<bean id="adminConfigDao" class="edu.hnuc.we.dao.impl.AdminConfigDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 
 	<!-- service层的bean管理 -->
 	<bean id="lostAndFoundService" class="edu.hnuc.we.service.impl.LostAndFoundServiceImpl">
@@ -66,6 +68,9 @@
 	</bean>
 	<bean id="userService" class="edu.hnuc.we.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<bean id="adminConfigService" class="edu.hnuc.we.service.impl.AdminConfigServiceImpl">
+		<property name="adminConfigDao" ref="adminConfigDao"></property>
 	</bean>
 
 	<!-- action层的bean管理 -->
@@ -77,7 +82,10 @@
 		scope="prototype">
 		<property name="userService" ref="userService"></property>
 	</bean>
+	<bean id="AdminConfigAction" class="edu.hnuc.we.action.AdminConfigAction"
+		scope="prototype">
+		<property name="adminConfigService" ref="adminConfigService"></property>
+	</bean>
 	
-
 
 </beans>

@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import edu.hnuc.we.entity.User;
 import edu.hnuc.we.jwgl.GetCourse;
 import edu.hnuc.we.jwgl.GetGrade;
+import edu.hnuc.we.jwgl.GetJwglStat;
 import edu.hnuc.we.jwgl.GetStuCookie;
 import edu.hnuc.we.service.IUserService;
 
@@ -52,21 +53,17 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	 */
 	public String login() {
 		
+		if(!GetJwglStat.getStat()) {
+			valueMap.put("info", "教务系统暂未开放!~<br>请稍后再试ヾ|≧_≦|〃");
+			return "valueMap";
+		}
+		
 		User user2 = userService.login(user);
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		if(user2 == null) {
-			valueMap.put("info", "登入失败!,注意：失败超过10次将封锁你的账号");
+			valueMap.put("info", "登入失败! 注意：失败超过10次将封锁你的账号");
 			return "valueMap";
 		}
-//		if(user2.getUsr_stuId().equals("000000000")) {
-//			session.remove("admin");
-//			session.remove("user");
-//			session.put("admin", user2);
-//		} else {
-//			session.remove("admin");
-//			session.remove("user");
-//			session.put("user", user2);
-//		}
 		valueMap.put("info", "登入成功!");
 		session.put("cookie", GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd()));
 		
@@ -75,7 +72,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		
 		session.put("user", user2);
 		session.remove("admin");
-		//System.out.println(user2.toString());
 		
 		return "valueMap";
 	}
@@ -100,6 +96,30 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		valueMap.put("info", "欢迎您管理员!");
 		session.put("admin", user);
 		session.remove("user");
+		return "valueMap";
+	}
+	
+	/**
+	 * 管理员修改密码
+	 * @return
+	 */
+	public String changeAdmPsw() {
+		
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		User adm = (User)session.get("admin");
+		boolean res = false;
+		if(adm != null) {
+			adm.setUsr_pwd(user.getUsr_pwd());
+			res = userService.changeAdmPse(adm);
+			if(res) {
+				valueMap.put("info", "恭喜~修改密码成功ヽ(=^･ω･^=)丿");
+			} else {
+				valueMap.put("info", "抱歉！修改失败");
+			}
+		} else {
+			valueMap.put("info", "抱歉！修改失败");
+		}
+		
 		return "valueMap";
 	}
 	

@@ -11,7 +11,9 @@
 <base href="<%=path%>">
 
 <title>查询成绩结果 | HNUC</title>
+<%--
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+--%>
 <meta http-equiv="description" content="查询成绩结果">
 <link rel='stylesheet prefetch'
 	href='<%=path%>/plugins/AmazeUI-2.7.1/assets/css/amazeui.min.css'>

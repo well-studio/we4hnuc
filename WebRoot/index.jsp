@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*,edu.hnuc.we.entity.User" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 	String path = request.getContextPath();
 	User user = (User)session.getAttribute("admin");
@@ -17,13 +18,21 @@
 	font-size: 1.7em;
 }
 </style>
-<title>微主页</title>
+<title><s:property value="#session.indexIteminfo[0][0]"/></title>
 </head>
 
 <body>
 	<div data-am-widget="slider" class="am-slider am-slider-a3"
 		data-am-slider='{&quot;directionNav&quot;:false}'>
 		<ul class="am-slides">
+			<s:iterator var="info" value="#session.indexPicinfo" status="st">
+				<li>
+					<a href="<s:property value="#info[0]"/>">
+						<img src="<s:property value="#info[0]"/>">
+					</a>
+				</li>
+			</s:iterator>
+			<!-- 静态数据
 			<li><img src="http://s.amazeui.org/media/i/demos/bing-1.jpg">
 
 			</li>
@@ -36,40 +45,27 @@
 			<li><img src="http://s.amazeui.org/media/i/demos/bing-4.jpg">
 
 			</li>
+			 -->
 		</ul>
 	</div>
 	<div class="weui_grids" id="cont">
-		<a
-		<c:if test="${empty user}">
-			<c:if test="${empty admin}">
-			href="javascript:layer.msg('请先登录!'),window.location='${pageContext.request.contextPath }/login.jsp'"
-			</c:if>
-		</c:if>
-		<c:if test="${!empty user}">
-		 onclick="showGradeTableterm()";
-		</c:if>
-		<c:if test="${!empty admin}">
-		onclick="showGradeTableterm()";
-		</c:if>
-		class="weui_grid">
+		<s:iterator var="info" value="#session.indexBtninfo" status="st">
+			<a class="weui_grid" href="<s:property value="#info[2]"/>">
+			<div class="weui_grid_icon">
+				<i class="fa <s:property value="#info[1]"/>" aria-hidden="true"></i>
+			</div>
+			<p class="weui_grid_label"><s:property value="#info[0]"/></p> 
+		</a> 
+		
+		</s:iterator>
+		<!-- 静态数据
+		<a class="weui_grid" onclick="showGradeTableterm()">
 			<div class="weui_grid_icon">
 				<i class="fa fa-mortar-board" aria-hidden="true"></i>
 			</div>
 			<p class="weui_grid_label">查询成绩</p> 
-		</a>
-		<a
-		<c:if test="${empty user}">
-			<c:if test="${empty admin}">
-			href="javascript:layer.msg('请先登录!'),window.location='${pageContext.request.contextPath }/login.jsp'"
-			</c:if>
-		</c:if>
-		<c:if test="${!empty user}">
-		 onclick="showTimeTableterm()";
-		</c:if>
-		<c:if test="${!empty admin}">
-		 onclick="showTimeTableterm()";
-		</c:if>
-		class="weui_grid">
+		</a> 
+		<a class="weui_grid" onclick="showTimeTableterm()">
 			<div class="weui_grid_icon">
 				<i class="fa fa-list-alt" aria-hidden="true"></i>
 			</div>
@@ -123,10 +119,11 @@
 			</div>
 			<p class="weui_grid_label">待定</p> 
 		</a>
+		 -->
 	</div>
 	<c:if test="${!empty admin }">
 	<center>
-	<a href="laf_goToManage.hnuc">
+	<a href="admin_getIndexInfo.hnuc">
 	<button type="button" class="am-btn am-btn-primary am-radius" style="width: 100px;height:44px;margin-top: 10px;">后台管理</button>
 	</a>
 	<a href="user_loginOut.hnuc">
@@ -143,7 +140,7 @@
   			area: ['100%', '100%'],
 			fix: false, //不固定
 			maxmin: true,
-  			content: '<%=path%>/jwgl/timeTableTerm.jsp'
+  			content: '<%=path%>/jwgl_timeTableTerm.hnuc'
 			});
 		}
 		
@@ -153,7 +150,7 @@
   			area: ['100%', '100%'],
 			fix: false, //不固定
 			maxmin: true,
-  			content: '<%=path%>/jwgl/gradeTerm.jsp'
+  			content: '<%=path%>/jwgl_gradeTerm.hnuc'
 			});
 		}
 		

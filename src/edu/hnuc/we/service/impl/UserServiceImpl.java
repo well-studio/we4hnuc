@@ -32,4 +32,10 @@ public class UserServiceImpl implements IUserService{
 		return userDao.adminLogin(user);
 	}
 
+	@Override
+	public boolean changeAdmPse(User user) {
+		
+		return userDao.changeAdmPse(user);
+	}
+
 }

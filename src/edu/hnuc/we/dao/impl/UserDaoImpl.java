@@ -27,11 +27,14 @@ public class UserDaoImpl implements IUserDao{
 	
 	@Override
 	public User login(User user) {
-		if(LoginCheck.check(GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd()))){
+		String cookie = GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd());
+		if(cookie == null) {
+			return null;
+		}
+		if(LoginCheck.check(cookie)){
 			return user;
 		}
 		return null;
-
 	}
 	
 	@Override
@@ -42,6 +45,12 @@ public class UserDaoImpl implements IUserDao{
 		List<User> userList = op.hqlQuery(hql, user.getUsr_stuId(), user.getUsr_pwd());
 		if(userList.size()==0) return null;
 		return userList.get(0);
+	}
+	
+	@Override
+	public boolean changeAdmPse(User user) {
+		Operation op = new Operation(getSession());
+		return op.update(user);
 	}
 
 }

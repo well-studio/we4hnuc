@@ -44,11 +44,13 @@ public class PowerFilter implements Filter {
 			if(uri.contains("goToManage") || uri.contains("letInfoBeTrue")
 				|| uri.contains("letInfoBeFalse") || uri.contains("letInfoBeTimeOut")
 				|| uri.contains("editInfo") || uri.contains("gotoGetInfo")
-				|| uri.contains("getAllValidInfoAdmin") || uri.contains("getAllDoingInfoAdmin")
+				|| uri.contains("getAllSucInfoAdmin") || uri.contains("getAllValidInfoAdmin")
+				|| uri.contains("getAllDoingInfoAdmin") || uri.contains("getAllImgNames")
 				|| uri.contains("delInfoById") || uri.contains("getAllTimeOutInfoAdmin")
 				|| uri.contains("getAllToCheckInfoAdmin") || uri.contains("searchInfo")
 				|| uri.contains("searchTimeOutInfo") || uri.contains("searchToCheckInfo")
-				|| uri.contains("letInfoRelive") || uri.contains("updateInfo")) {
+				|| uri.contains("letInfoRelive") || uri.contains("updateInfo")
+				|| uri.contains("changePsw")) {
 				
 				return ;
 			} else {

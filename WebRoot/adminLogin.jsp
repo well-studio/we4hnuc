@@ -52,7 +52,7 @@ String path = request.getContextPath();
 				var data = eval("("+backData+")");
 				layer.msg(data.info);
 				if(data.info == "欢迎您管理员!") {
-					window.location.href = "${pageContext.request.contextPath}/laf_goToManage.hnuc";
+					window.location.href = "${pageContext.request.contextPath}/admin_getIndexInfo.hnuc";
 				}
 			});
 		});
@@ -99,6 +99,15 @@ String path = request.getContextPath();
 		</div>
 	</div>
 	
-	<%@ include file="../WEB-INF/common/LostAndFoundPlatform/footer.jsp"%> 
+	<footer class="am-footer am-footer-default">
+		<div class="am-footer-miscs">
+			<p>由维尔创业工作室提供技术支持</p>
+			<p>Copyright © 2016 校宣传部</p>
+		</div>
+	</footer>
+	<script src='<%=path %>/plugins/jquery/jquery.min.js'></script>
+	<script src='<%=path %>/plugins/layer-v2.4/layer/layer.js'></script>
+	<script src='<%=path %>/plugins/weui/dist/weui.min.js'></script>
+	<script src='<%=path %>/plugins/AmazeUI-2.7.1/assets/js/amazeui.min.js'></script>
 </body>
 </html>
