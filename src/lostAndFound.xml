@@ -9,9 +9,15 @@
 		<interceptors>
 			<interceptor name="stuAuth"
 				class="edu.hnuc.we.interceptor.StuAuthInterceptor"></interceptor>
+			<interceptor name="moibleAuth"
+				class="edu.hnuc.we.interceptor.CheckUserAgentInterceptor"></interceptor>
 			<interceptor-stack name="isStuLoginCheckStack">
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 				<interceptor-ref name="stuAuth"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="isMobileCheckStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="moibleAuth"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		
@@ -26,9 +32,15 @@
 			<result name="index" type="redirectAction">
 				loadIndexInfo
 			</result>
-			<result name="indexPage" type="dispatcher">
-				loadIndexInfo
+			<result name="adminLogin" type="redirect">
+				/adminLogin.jsp
 			</result>
+			<result name="mobile">
+				/WEB-INF/error/noPC.html
+			</result>
+		<!-- 		<result name="indexPage" type="dispatcher">
+				loadIndexInfo
+			</result> -->
 		</global-results>
 		<!-- 捕获异常 -->
 		<global-exception-mappings>
@@ -98,6 +110,7 @@
 			<result name="reToIndex" type="redirectAction">
 				laf_getAllValidInfo.hnuc
 			</result>
+			<interceptor-ref name="isMobileCheckStack"></interceptor-ref>
 		</action>
 		
 		<action name="user_*" method="{1}" class="edu.hnuc.we.action.UserAction">
@@ -107,6 +120,7 @@
 		<action name="login">
 			<result>/login.jsp</result>
 		</action>
+		
 		
 		<action name="stu_getMyTimeTable" method="getMyTimeTable" class="edu.hnuc.we.action.UserAction">
 			<result name="courseTable" type="dispatcher">
@@ -123,7 +137,5 @@
 			<result name="reToLogin" type="redirectAction">login</result>
 			<interceptor-ref name="isStuLoginCheckStack"/>
 		</action>
-		
-		
 	</package>
 </struts>

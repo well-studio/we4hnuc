@@ -50,7 +50,7 @@ String path = request.getContextPath();
 
 <body>
  
-	<img class="top-img" src="/we4hnuc/imgs/jwgl.png" width="100%"/>
+	<img class="top-img" src="<%=path %>/imgs/jwgl.png" width="100%"/>
 	<div class="weui_cells_title">使用教务系统学号密码登入</div>
 	<div class="weui_cells weui_cells_form login-form">
 		<div class="weui_cell">

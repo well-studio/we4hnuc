@@ -12,7 +12,7 @@ import edu.hnuc.we.entity.User;
 public class GetStuCookie {
 
 	public static void main(String[] args) {
-		System.out.println(getCookie("150920045","150920045"));
+		System.out.println(getCookie("140940027","140940027"));
 	}
 	/**
 	 * @author xxmodd

@@ -9,9 +9,15 @@
 		<interceptors>
 			<interceptor name="admAuth"
 				class="edu.hnuc.we.interceptor.AdminAuthInterceptor"></interceptor>
+			<interceptor name="moibleAuth"
+				class="edu.hnuc.we.interceptor.CheckUserAgentInterceptor"></interceptor>
 			<interceptor-stack name="isAdminLoginCheckStack">
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 				<interceptor-ref name="admAuth"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="isMobileCheckStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="moibleAuth"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<global-results>
@@ -25,11 +31,14 @@
 			<result name="index" type="redirectAction">
 				loadIndexInfo
 			</result>
-			<result name="indexPage" type="redirectAction">
-				loadIndexInfo
+			<result name="mobile">
+				/WEB-INF/error/noPC.html
 			</result>
-			<result name="reToAdminLogin">
-				/WEB-INF/error/404.html
+			<!-- <result name="indexPage" type="redirectAction">
+				loadIndexInfo
+			</result> -->
+			<result name="reToAdminLogin" type="redirect">
+				/adminLogin.jsp
 			</result>
 		</global-results>
 		<!-- 捕获异常 -->
@@ -39,11 +48,21 @@
 				result="error" />
 		</global-exception-mappings>
 		-->
+		<action name="tip">
+			<result>/LostAndFoundAdmin/jsp/tip.jsp</result>
+			<interceptor-ref name="isAdminLoginCheckStack"></interceptor-ref>
+		</action>
 	
 		<action name="admin_priview">
 			<result>/LostAndFoundAdmin/jsp/priview.jsp</result>
 			<interceptor-ref name="isAdminLoginCheckStack"></interceptor-ref>
 		</action>
+		
+		<action name="admin_changePsw">
+			<result>/LostAndFoundAdmin/jsp/changeAdmPsw.jsp</result>
+			<interceptor-ref name="isAdminLoginCheckStack"></interceptor-ref>
+		</action>
+		
 		
 		<action name="admin_*" method="{1}" class="edu.hnuc.we.action.AdminConfigAction">
 			<result name="reToimgManage">/LostAndFoundAdmin/jsp/imgManage.jsp</result>
@@ -51,11 +70,13 @@
 			<result name="reToAdmIndex">/LostAndFoundAdmin/jsp/index.jsp</result>
 			<result name="uploadFail">/WEB-INF/error/Fail.html</result>
 			<result name="deleteFail">/WEB-INF/error/Fail.html</result>
+			<result name="reToTip" type="redirectAction">tip</result>
 			<interceptor-ref name="isAdminLoginCheckStack"></interceptor-ref>
 		</action>
 		
 		<action name="loadIndexInfo" method="loadIndexInfo" class="edu.hnuc.we.action.AdminConfigAction">
 			<result name="reToIndex">/index.jsp</result>
+			<interceptor-ref name="isMobileCheckStack"></interceptor-ref>
 		</action>
 		
 	</package>

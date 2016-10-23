@@ -52,7 +52,7 @@ String path = request.getContextPath();
 				var data = eval("("+backData+")");
 				layer.msg(data.info);
 				if(data.info == "欢迎您管理员!") {
-					window.location.href = "${pageContext.request.contextPath}/admin_getIndexInfo.hnuc";
+					window.location.href = "${pageContext.request.contextPath}/admin/admin_getIndexInfo.hnuc";
 				}
 			});
 		});

@@ -45,16 +45,6 @@
 		
 		</s:iterator>
 	</div>
-	<c:if test="${!empty admin }">
-	<center>
-	<a href="laf_goToManage.hnuc">
-	<button type="button" class="am-btn am-btn-primary am-radius" style="width: 100px;height:44px;margin-top: 10px;">后台管理</button>
-	</a>
-	<a href="user_loginOut.hnuc">
-	<button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;height:44px;margin-top: 10px;">注销</button>
-	</a>
-	</center>
-	</c:if>
 	<footer class="am-footer am-footer-default">
 		<div class="am-footer-miscs">
 			<p>由维尔创业工作室提供技术支持</p>

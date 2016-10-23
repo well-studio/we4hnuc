@@ -27,7 +27,7 @@ public class EncodingFilter implements Filter{
     	HttpServletRequest req = (HttpServletRequest) request;
     	req.setCharacterEncoding(encoding);
         response.setContentType("text/html;charset="+encoding);
-        System.out.println(req.getParameter("keyWord"));
+//        System.out.println(req.getParameter("keyWord"));
 //        String queryString = req.getQueryString();
         
         chain.doFilter(request, response); 

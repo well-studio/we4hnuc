@@ -13,6 +13,7 @@ import edu.hnuc.we.jwgl.GetGrade;
 import edu.hnuc.we.jwgl.GetJwglStat;
 import edu.hnuc.we.jwgl.GetStuCookie;
 import edu.hnuc.we.service.IUserService;
+import edu.hnuc.we.util.GetTermByActAndDateUtil;
 
 /**
  * 
@@ -65,14 +66,15 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 			return "valueMap";
 		}
 		valueMap.put("info", "登入成功!");
+		//获取cookie
 		session.put("cookie", GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd()));
-		
+		//获取名字
 		String cookie = (String) session.get("cookie");
 		user2.setUsr_name(GetCourse.getStuName(user2.getUsr_stuId(), term, cookie));
-		
 		session.put("user", user2);
 		session.remove("admin");
-		
+		//获取term数组
+		session.put("term", GetTermByActAndDateUtil.getTerm(user2.getUsr_stuId()));
 		return "valueMap";
 	}
 	/**
@@ -136,7 +138,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		} else {
 			session.remove("user");
 		}
-		return "index";
+		return "adminLogin";
 	}
 	
 	

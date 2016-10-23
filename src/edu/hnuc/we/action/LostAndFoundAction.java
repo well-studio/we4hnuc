@@ -129,11 +129,12 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 * 跳转到首页
 	 * @return
 	 */
-	public String index() {
+	/*public String index() {
 		// 获取信息
 		
 		return "indexPage";
 	}
+	*/
 	
 	/**
 	 * 通过审核(管理员)

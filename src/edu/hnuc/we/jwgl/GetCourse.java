@@ -20,7 +20,7 @@ public class GetCourse {
 	//
 	//main方法测试
 	public static void main(String[] args) {
-		System.out.println(getcourse("140920049","2016-2017-1",GetStuCookie.getCookie("140920049", "140920049")));
+		System.out.println(getcourse("140940027","2016-2017-1'",GetStuCookie.getCookie("140940027", "140940027")));
 	}
 	
 	/*

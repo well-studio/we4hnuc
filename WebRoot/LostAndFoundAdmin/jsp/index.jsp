@@ -8,7 +8,7 @@ String path = request.getContextPath();
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>we4hnuc后台管理</title>
+		<title>首页定制 | 后台管理</title>
 		<link rel="stylesheet" href="<%=path %>/LostAndFoundAdmin/assets/css/amazeui.css" />
 		<link rel="stylesheet" href="<%=path %>/LostAndFoundAdmin/assets/css/core.css" />
 		<link rel="stylesheet" href="<%=path %>/LostAndFoundAdmin/assets/css/menu.css" />
@@ -275,7 +275,7 @@ String path = request.getContextPath();
 			function showPriview(){
 				layer.open({
  					type: 2,
-  					title: '首页预览',
+  					title: $('[name="indexItem_title"]').val(),
   					shadeClose: true,
  				 	shade: 0.8,
   					area: ['380px', '80%'],

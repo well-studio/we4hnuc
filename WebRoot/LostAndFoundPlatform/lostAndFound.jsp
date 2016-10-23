@@ -278,7 +278,7 @@
 					<p style="text-align: center;padding: 0;margin:0;">(请尽量提供准确信息)</p>
 					</c:if>
 					<c:if test="${empty user && empty admin }">
-					<p style="text-align: center;padding: 0;margin:0;">(登录后方能发布信息  <a href="${pageContext.request.contextPath }/login.jsp">点我登录 </a>)</p>
+					<p style="text-align: center;padding: 0;margin:0;">(登录后方能发布信息  <a href="${pageContext.request.contextPath }/login.hnuc">点我登录 </a>)</p>
 					</c:if>
 					<form id="form" onsubmit="return subCheckText();" action="laf_releaseInfo.hnuc" method="post"
 						enctype="multipart/form-data">

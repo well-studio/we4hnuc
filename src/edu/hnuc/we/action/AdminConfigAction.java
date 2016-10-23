@@ -285,8 +285,7 @@ public class AdminConfigAction extends ActionSupport implements ModelDriven<Admi
 	 */
 	public String updateIndexItemInfo(){
 		//测试
-		System.out.println(indexItem_title == null || indexItem_copyright == null ? "首页配置项参数错误"
-						: "首页配置项参数正确");
+		//System.out.println(indexItem_title == null || indexItem_copyright == null ? "首页配置项参数错误": "首页配置项参数正确");
 		if(indexItem_title == null || indexItem_copyright == null){
 			return "error";
 		}
@@ -296,8 +295,8 @@ public class AdminConfigAction extends ActionSupport implements ModelDriven<Admi
 		Gson gson = new Gson();
 		String json = gson.toJson(infos);
 		boolean flag = adminConfigService.updateIndexBtnInfo("indexItem", json);
-		valueMap.put("info", flag ? "提交成功！" : "提交失败！");
-		return "valueMap";
+		session.put("info", flag ? "success" : "fail");
+		return "reToTip";
 	}
 	
 	
@@ -307,8 +306,7 @@ public class AdminConfigAction extends ActionSupport implements ModelDriven<Admi
 	 */
 	public String updateIndexPicInfo(){
 		//测试
-		System.out.println(indexpic_href == null || indexpic_picaddress == null ? "图片轮播参数错误"
-						: "图片轮播参数正确");
+		//System.out.println(indexpic_href == null || indexpic_picaddress == null ? "图片轮播参数错误": "图片轮播参数正确");
 		int hrefLen = indexpic_href.length;
 		int picaddressLen = indexpic_picaddress.length;
 		if(!(hrefLen == picaddressLen)){
@@ -322,8 +320,8 @@ public class AdminConfigAction extends ActionSupport implements ModelDriven<Admi
 		Gson gson = new Gson();
 		String json = gson.toJson(infos);
 		boolean flag = adminConfigService.updateIndexBtnInfo("indexPic",json);
-		valueMap.put("info", flag?"提交成功！":"提交失败！");
-		return "valueMap";
+		session.put("info", flag ? "success" : "fail");
+		return "reToTip";
 	}
 	
 	/**
@@ -332,8 +330,7 @@ public class AdminConfigAction extends ActionSupport implements ModelDriven<Admi
 	 */
 	public String updateIndexBtnInfo(){
 		//测试
-		System.out.println(indexbtn_title == null || indexbtn_icon == null
-				|| indexbtn_href == null ? "九宫格参数正确" : "九宫格参数错误");
+		//System.out.println(indexbtn_title == null || indexbtn_icon == null|| indexbtn_href == null ? "九宫格参数正确" : "九宫格参数错误");
 		if(indexbtn_title==null||indexbtn_icon==null||indexbtn_href==null) return "error";
 		int titleLen = indexbtn_title.length;
 		int iconLen = indexbtn_icon.length;
@@ -349,8 +346,8 @@ public class AdminConfigAction extends ActionSupport implements ModelDriven<Admi
 		String json = gson.toJson(infos);
 //		System.out.println(json);
 		boolean flag = adminConfigService.updateIndexBtnInfo("indexBtn" , json);
-		valueMap.put("info", flag?"提交成功！":"提交失败！");
-		return "valueMap";
+		session.put("info", flag ? "success" : "fail");
+		return "reToTip";
 	}
 	
 	

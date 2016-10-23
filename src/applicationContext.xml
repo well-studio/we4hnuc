@@ -12,7 +12,7 @@
 		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/we4hnuc?useUnicode=true&amp;characterEncoding=UTF-8"></property>
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
 		<property name="user" value="root"></property>
-		<property name="password" value="root"></property>
+		<property name="password" value=""></property>
 		<property name="initialPoolSize" value="10"></property>
 		<property name="maxPoolSize" value="200"></property>
 	</bean>
@@ -35,8 +35,8 @@
 					org.hibernate.dialect.MySQLDialect
 				</prop>
 				<!-- 配置是否在控制台输出 -->
-				<prop key="hibernate.show_sql">true</prop><!-- 测试阶段为true -->
-				<prop key="hibernate.format_sql">true</prop><!-- 测试阶段为true -->
+				<prop key="hibernate.show_sql">false</prop><!-- 测试阶段为true -->
+				<prop key="hibernate.format_sql">false</prop><!-- 测试阶段为true -->
 				<prop key="hibernate.current_session_context_class">
                     thread
                 </prop>

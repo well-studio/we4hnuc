@@ -10,7 +10,7 @@ String path = request.getContextPath();
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>we4hnuc后台管理</title>
+		<title>图片管理 | 后台管理</title>
 		<link rel="stylesheet" href="<%=path %>/LostAndFoundAdmin/assets/css/amazeui.css" />
 		<link rel="stylesheet" href="<%=path %>/LostAndFoundAdmin/assets/css/core.css" />
 		<link rel="stylesheet" href="<%=path %>/LostAndFoundAdmin/assets/css/menu.css" />
@@ -79,16 +79,17 @@ String path = request.getContextPath();
 								<p class="am-form-help">请选择要上传的图片...</p>
 							</div>
 							--%>
+							<!--  
 							<img src="<%=path %>/imgs/addimg.jpg" />
+							-->
 							<div class="am-form-group am-form-file">
-								<button type="button" class="am-btn am-btn-danger am-btn-sm">
+								<button type="button" class="am-btn am-btn-danger am-btn-sm" style="width: 100%;">
 									<i class="am-icon-cloud-upload"></i> 选择要上传的文件
 								</button>
-								<input id="doc-form-file" type="file" name="images" accept="image/jpg,image/jpeg,image/png,image/gif">
-								
+								<input id="doc-form-file" type="file" name="images" accept="image/jpg,image/jpeg,image/png,image/gif" multiple>
 							</div>
-							<input type="submit" value="提交"/>
-							
+							<div id="file-list"></div>
+							<input id="img-sub"  class="am-btn am-btn-primary" type="submit" value="提交" style="width: 100%;" disabled/>
 						</form>
 					</div>
 				</li>
@@ -145,14 +146,20 @@ String path = request.getContextPath();
 
 	<!-- navbar -->
 		<a href="admin-offcanvas" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"><!--<i class="fa fa-bars" aria-hidden="true"></i>--></a>
-		
 		<script type="text/javascript" src="<%=path %>/LostAndFoundAdmin/assets/js/jquery-2.1.0.js" ></script>
 		<script type="text/javascript" src="<%=path %>/LostAndFoundAdmin/assets/js/amazeui.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/LostAndFoundAdmin/assets/js/app.js" ></script>
-		<script type="text/javascript" src="<%=path %>/LostAndFoundAdmin/assets/js/blockUI.js" ></script>
-		<script type="text/javascript" src="<%=path %>/LostAndFoundAdmin/assets/js/charts/echarts.min.js" ></script>
-		<script type="text/javascript" src="<%=path %>/LostAndFoundAdmin/assets/js/charts/indexChart.js" ></script>
-
+		<script>
+		  $(function() {
+		    $('#doc-form-file').on('change', function() {
+		      var fileNames = '';
+		      $.each(this.files, function() {
+		        fileNames += '<span class="am-badge">' + this.name + '</span> ';
+		      });
+		      $('#file-list').html(fileNames);
+		      $('#img-sub').removeAttr('disabled');
+		    });
+		  });
+		</script>
 	</body>
 	
 </html>

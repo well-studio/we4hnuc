@@ -52,11 +52,11 @@
 						class="am-icon-angle-right am-fr am-margin-right"></span></a>
 					<ul class="am-list am-collapse admin-sidebar-sub am-in"
 						id="collapse-nav1">
-						<li><a href="${pageContext.request.contextPath}/laf_getAllDoingInfoAdmin.hnuc"
+						<li><a href="${pageContext.request.contextPath}/admin//laf_getAllDoingInfoAdmin.hnuc"
 							class="am-cf"> 正在进行 </span></a></li>
-						<li><a href="${pageContext.request.contextPath}/laf_getAllSucInfoAdmin.hnuc" class="am-cf"> 已完成 </span></a></li>
-						<li><a href="${pageContext.request.contextPath}/laf_getAllToCheckInfoAdmin.hnuc" class="am-cf"> 待审核 </span></a></li>
-						<li><a href="${pageContext.request.contextPath}/laf_getAllTimeOutInfoAdmin.hnuc"> 已失效</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin//laf_getAllSucInfoAdmin.hnuc" class="am-cf"> 已完成 </span></a></li>
+						<li><a href="${pageContext.request.contextPath}/admin//laf_getAllToCheckInfoAdmin.hnuc" class="am-cf"> 待审核 </span></a></li>
+						<li><a href="${pageContext.request.contextPath}/admin//laf_getAllTimeOutInfoAdmin.hnuc"> 已失效</a></li>
 					</ul></li>
 				<li>
 					<a href="${pageContext.request.contextPath}/admin/admin_getAllImgNames.hnuc">
@@ -65,7 +65,7 @@
 			</ul>
 			
 			<div style="position: fixed;bottom: 50px;left:100px;">
-			<a target="_blank" href="${pageContext.request.contextPath }/LostAndFoundAdmin/jsp/changeAdmPsw.jsp">修改密码</a>
+			<a target="_blank" href="${pageContext.request.contextPath }/admin/admin_changePsw.hnuc">修改密码</a>
 			</div>
 		</div>
 		

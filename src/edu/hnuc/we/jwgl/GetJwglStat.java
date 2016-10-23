@@ -41,7 +41,7 @@ public class GetJwglStat {
 			while ((line = in.readLine()) != null) {
 				result += line;
 			}
-			System.out.println(result);
+//			System.out.println(result);
 			if(result.contains("湖南商学院教务管理系统")) {
 				stat = true;
 			}

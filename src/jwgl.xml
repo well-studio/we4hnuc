@@ -9,9 +9,15 @@
 		<interceptors>
 			<interceptor name="stuAuth"
 				class="edu.hnuc.we.interceptor.StuAuthInterceptor"></interceptor>
+			<interceptor name="moibleAuth"
+				class="edu.hnuc.we.interceptor.CheckUserAgentInterceptor"></interceptor>
 			<interceptor-stack name="isStuLoginCheckStack">
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 				<interceptor-ref name="stuAuth"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="isMobileCheckStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="moibleAuth"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<global-results>
@@ -25,9 +31,12 @@
 			<result name="index" type="redirectAction">
 				loadIndexInfo
 			</result>
-			<result name="indexPage" type="redirectAction">
-				loadIndexInfo
+			<result name="mobile">
+				/WEB-INF/error/noPC.html
 			</result>
+			<!-- <result name="indexPage" type="redirectAction">
+				loadIndexInfo
+			</result> -->
 		</global-results>
 		<!-- 捕获异常 -->
 		<!--  
@@ -38,13 +47,15 @@
 		-->
 		<action name="login">
 			<result>/login.jsp</result>
+			<interceptor-ref name="isMobileCheckStack"></interceptor-ref>
 		</action>
+		
 		<action name="jwgl_*">
 			<result>/jwgl/{1}.jsp</result>
 			<result name="reToLogin" type="redirectAction">login</result>
 			<interceptor-ref name="isStuLoginCheckStack"/>
+			<interceptor-ref name="isMobileCheckStack"></interceptor-ref>
 		</action>
-
 	
 	</package>
 </struts>

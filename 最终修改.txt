@@ -1,0 +1,13 @@
+1.gotoIndex.jsp
+
+2.priview.jsp
+
+3.admin/jsp/index.jsp
+
+4.admin/jsp/失物招领4个jsp文件title ，imgManage.jsp title。
+
+5.admin/jsp/下没用的文件放到bak文件夹了。
+
+6.三个xml文件 
+
+7.修改LostAndFoundAction.java

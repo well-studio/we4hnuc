@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>失物招领ing</title>
+<title>失物招领管理 | 后台管理</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/LostAndFoundAdmin/assets/css/amazeui.css" />
 <link rel="stylesheet"

@@ -19,6 +19,8 @@
 }
 </style>
 <title><s:property value="#session.indexIteminfo[0][0]"/></title>
+<st
+
 </head>
 
 <body>
@@ -123,10 +125,10 @@
 	</div>
 	<c:if test="${!empty admin }">
 	<center>
-	<a href="admin_getIndexInfo.hnuc">
+	<a href="<%=path %>/admin/admin_getIndexInfo.hnuc">
 	<button type="button" class="am-btn am-btn-primary am-radius" style="width: 100px;height:44px;margin-top: 10px;">后台管理</button>
 	</a>
-	<a href="user_loginOut.hnuc">
+	<a href="<%=path %>/admin/user_loginOut.hnuc">
 	<button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;height:44px;margin-top: 10px;">注销</button>
 	</a>
 	</center>

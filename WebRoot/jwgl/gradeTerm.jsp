@@ -1,11 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<%----%>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <link rel='stylesheet prefetch' href='<%=path %>/plugins/AmazeUI-2.7.1/assets/css/amazeui.min.css'>
@@ -90,7 +90,7 @@ String path = request.getContextPath();
                         <a href="<%=path%>/user_getMyGrade.hnuc?term=2012-2013-2">2012-2013-2</a><br> 
                         --%>
                     <!-- 这里需要动态获取 -->
-                    
+                    <%-- 
                     <a href="<%=path%>/stu_getMyGrade.hnuc?term=2013-2014-1" onclick="loadding()">2013-2014-1</a><br>
 
 					<a href="<%=path%>/stu_getMyGrade.hnuc?term=2013-2014-2" onclick="loadding()">2013-2014-2</a><br>
@@ -104,6 +104,14 @@ String path = request.getContextPath();
 					<a href="<%=path%>/stu_getMyGrade.hnuc?term=2015-2016-2" onclick="loadding()">2015-2016-2</a><br>
 
 					<a href="<%=path%>/stu_getMyGrade.hnuc?term=2016-2017-1" onclick="loadding()">2016-2017-1</a><br>
+					--%>
+					<%-- 动态获取 --%>
+					<s:iterator value="#session.term" var="t">
+							<a href="<%=path%>/stu_getMyGrade.hnuc?term=<s:property value="#t" />"
+								onclick="loadding()"><s:property value="#t" /> </a>
+							<br>
+					</s:iterator> 
+				
 				</div>
 			</dd>
 		</dl>
