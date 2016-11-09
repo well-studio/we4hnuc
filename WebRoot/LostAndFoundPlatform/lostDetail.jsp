@@ -10,16 +10,34 @@ String path = request.getContextPath();
 
 <title>湖商失物招领详情</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="SHORTCUT ICON" href="<%=path %>/imgs/hnuc.png"/>
 <link rel='stylesheet prefetch'
-	href='/we4hnuc/plugins/weui/dist/style/weui.css'>
+	href='<%=path %>/plugins/weui/dist/style/weui.css'>
 	<script src='<%=path %>/plugins/jquery/jquery.min.js'></script>
 <script src='<%=path %>/plugins/layer-v2.4/layer/layer.js'></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	function getInfo() {
-		
-	}
+	$("#getConfirm").click(function findSuc() {
+		var btn = $('#getConfirm');
+		var url = "${pageContext.request.contextPath}/laf_letInfoBeSuc.hnuc?lafId="+"${laf.laf_id}"+"&time="+new Date().getTime();
+		var sendData = {
+		};
+		layer.confirm('确认已经找到了么？', {
+			  btn: ['确认','还没有'] //按钮
+			}, function(){
+				$.post(url,sendData,function(backData,textStatus,ajax) {
+					var json = eval("("+backData+")");
+					layer.msg(json.info)
+					window.location.href = "${pageContext.request.contextPath}/laf_getAllValidInfo.hnuc";
+				});
+			 	layer.msg('恭喜您失而复得ヾ(o◕∀◕)ﾉヾ');
+			  	window.location.href="${pageContext.request.contextPath}/laf_getAllValidInfo.hnuc";
+			}, function(){
+				layer.msg('', {
+				    time: 1,
+				});
+			});
+	});
 });
 </script>
 
@@ -149,7 +167,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 
-		<c:if test="${laf.laf_stuid eq user.usr_stuId }">
+		<c:if test="${laf.laf_stuid eq user.usr_stuId || !empty admin}">
 			<c:if test="${laf.laf_stat == 1 }">
 				<div class="button_sp_area" style="margin-bottom: 80px;">
 					<br>
@@ -159,9 +177,9 @@ $(document).ready(function(){
 							class="weui_icon_success"></i> 成功认领 </a>
 					</c:if>
 					<c:if test="${laf.laf_type == 1 }">
-						<a href="laf_letInfoBeSuc.hnuc?lafId=${laf.laf_id }"
-							class="weui_btn weui_btn_plain_primary"><i
-							class="weui_icon_success"></i> 成功找到 </a>
+						<button id="getConfirm" class="weui_btn weui_btn_plain_primary"><i
+							class="weui_icon_success"></i> 成功找到
+						</button>
 					</c:if>
 				</div>
 			</c:if>

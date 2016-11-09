@@ -11,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import edu.hnuc.we.dao.impl.LostAndFoundDaoImpl;
 import edu.hnuc.we.entity.LostAndFound;
 import edu.hnuc.we.entity.PageBean;
+import edu.hnuc.we.jwgl.GetJwglStat;
 import edu.hnuc.we.util.ValidateUtil;
 
 /**
@@ -126,6 +127,13 @@ public class LostAndFoundTest {
 		System.out.println(ValidateUtil.isValidDetail("对方三"));
 	}
 	
-
+	@Test
+	public void testGetJwglStat() {
+		if(GetJwglStat.getStat()) {
+			System.out.println("Yes");
+		} else {
+			System.out.println("No");
+		}
+	}
 	
 }

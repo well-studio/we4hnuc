@@ -24,6 +24,10 @@
 			%>
 		}
 	};
+	
+	function lock() {
+		var load = layer.load(2, {time: 100*1000});
+	}
 </script>
 </head>
 
@@ -71,9 +75,12 @@
 					<div class="weui_panel_bd">
 						<c:if test="${empty lafPage.pageData && empty keyWord}">
 							<div style="text-align: center;margin-top: 100px;">
-							<span style="font-size: 2em;">
-							暂时还没有人发布失物信息 <br><br> 赶快抢个沙发吧ヾ|≧_≦|〃
+							<span style="font-size: 1.5em;">
+							暂时还没有人发布失物信息 <br><br> 
+							赶快抢个沙发吧ヾ|≧_≦|〃
 							</span>
+							<hr>
+							<span style="font-size: 1em;color: #CC3333;">登录后点击下面蓝色"发布信息"即可</span>
 							</div>
 						</c:if>
 						<c:forEach items="${lafPage.pageData}" var="laf">
@@ -128,7 +135,7 @@
 							</c:if>
 						</c:if>
 						
-						<c:if test="${empty lafPage.pageData }">
+						<c:if test="${empty lafPage.pageData && not empty keyWord}">
 							<div style="text-align: center;">
 							<a style="font-size: 1.3em;" href="laf_getAllValidInfo.hnuc">
 								<img alt="" src="${pageContext.request.contextPath }/imgs/return.png"> 传送回家
@@ -338,9 +345,15 @@
 									<label class="weui_label">学号</label>
 								</div>
 								<div class="weui_cell_bd weui_cell_primary">
+									<c:if test="${!empty admin }">
+									<input name="laf_stuid" class="weui_input" type="number" value="${user.usr_stuId }"
+										placeholder="管理员可输可不输" emptyTips="请输入学号" notMatchTips="请输入正确的学号">
+									</c:if>
+									<c:if test="${empty admin }">
 									<input name="laf_stuid" class="weui_input" type="number"
 										required pattern="^[0-9]{9}$" maxlength="11" value="${user.usr_stuId }"
 										placeholder="输入您的学号" emptyTips="请输入学号" notMatchTips="请输入正确的学号">
+									</c:if>
 								</div>
 								<div class="weui_cell_ft">
 									<i class="weui_icon_warn"></i>
@@ -509,6 +522,7 @@
 			return false;
 		} else {
 			tar.innerHTML = "";
+			lock();
 			return true;
 		}
 	}

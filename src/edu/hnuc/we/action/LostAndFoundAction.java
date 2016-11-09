@@ -12,6 +12,7 @@ import java.util.Map;
 
 
 
+
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -23,6 +24,7 @@ import edu.hnuc.we.entity.PageBean;
 import edu.hnuc.we.entity.User;
 import edu.hnuc.we.service.ILostAndFoundService;
 import edu.hnuc.we.util.ImageUtil;
+import edu.hnuc.we.util.ValidateUtil;
 
 
 /**
@@ -375,7 +377,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-//		handleKeyWord(keyWord);
+		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -391,7 +393,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchValidInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-//		handleKeyWord(keyWord);
+		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchValidInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.remove("lostMark");
@@ -408,7 +410,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchDoingInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-//		handleKeyWord(keyWord);
+		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchDoingInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -424,7 +426,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchSucInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-//		handleKeyWord(keyWord);
+		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchSucInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -440,7 +442,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchTimeOutInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-//		handleKeyWord(keyWord);
+		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchTimeOutInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -456,7 +458,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchToCheckInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-//		handleKeyWord(keyWord);
+		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchToCheckInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -488,8 +490,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 			if(images != null && images.length > 0) {
 				long imgSize = images[0].length();
 				if(imgSize > 5242880) {
-					session.put("info", "上传的图片超过5M<br>请选择尺寸更小的图片上传!");
-					return "reToIndex";
+					return "uploadFail";
 				}
 				Long tsmp = new Date().getTime();
 				imagesFileName[0] = tsmp + " " + imagesFileName[0];
@@ -500,6 +501,13 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 					ImageUtil.zipImageFile(images[0], new File(picPath), 1000, 0);
 				}
 				lostAndFound.setLaf_pic("/upload/lafImgs/" + imagesFileName[0]);
+			}
+			if(admin == null) {
+				boolean f = ValidateUtil.isValidStuId(lostAndFound.getLaf_stuid());
+				if(!f){
+					session.put("info", "发布失败<br>请稍后再试~ヾ(Ő∀Ő๑)ﾉ");
+					return "reToIndex";
+				}
 			}
 			boolean res = lostAndFoundService.releaseInfo(lostAndFound);
 			if(res) {
@@ -556,26 +564,30 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	public String letInfoBeSuc() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("user");
+		User admin = (User) session.get("admin");
 		LostAndFound laf = lostAndFoundService.getInfoById(lafId, false);
 		String laf_stuid = laf.getLaf_stuid();
 		
-		if(user == null) {
-			session.put("info", "认领失败 请不要攻击我们ヾ(×× ) ﾂ");
-			return "reToIndex";
+		if(user == null && admin == null) {
+			valueMap.put("info", "认领失败 请不要攻击我们ヾ(×× ) ﾂ");
+//			return "reToIndex";
+			return "valueMap";
 		}
-		if(!user.getUsr_stuId().equals(laf_stuid)) {
-			session.put("info", "认领失败 请登录正确帐号认领ヾ(×× ) ﾂ");
-			return "reToIndex";
+		if(admin == null) {
+			if(!user.getUsr_stuId().equals(laf_stuid)) {
+				valueMap.put("info", "认领失败 请登录正确帐号认领ヾ(×× ) ﾂ");
+				return "valueMap";
+			}
 		}
 		
 		boolean res = lostAndFoundService.letInfoBeSuc(lafId,sucName,sucPhone);
 		
 		if(res) {
-			session.put("info", "认领成功 恭喜恭喜ヽ(=^･ω･^=)丿");
+			valueMap.put("info", "认领成功 恭喜恭喜ヽ(=^･ω･^=)丿");
 		} else {
-			session.put("info", "认领失败 请稍后再试ヾ(×× ) ﾂ");
+			valueMap.put("info", "认领失败 请稍后再试ヾ(×× ) ﾂ");
 		}
-		return "reToIndex";
+		return "valueMap";
 	}
 	
 	/**

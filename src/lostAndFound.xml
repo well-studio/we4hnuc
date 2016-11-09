@@ -71,6 +71,9 @@
 			<result name="lostAndFound" type="dispatcher">
 				/LostAndFoundPlatform/lostAndFound.jsp
 			</result>
+			<result name="uploadFail">
+				/WEB-INF/error/fileTipUser.html
+			</result>
 			<result name="detail" type="dispatcher">
 				/LostAndFoundPlatform/lostDetail.jsp
 			</result>

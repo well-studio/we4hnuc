@@ -2,6 +2,7 @@ package edu.hnuc.we.service.impl;
 
 import java.util.List;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import edu.hnuc.we.dao.ILostAndFoundDao;
 import edu.hnuc.we.entity.LostAndFound;
 import edu.hnuc.we.entity.PageBean;
@@ -68,7 +69,12 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 
 	@Override
 	public LostAndFound getInfoById(Integer id, boolean isAdmin) {
-		return lostAndFoundDao.getInfoById(id, isAdmin);
+		LostAndFound laf = lostAndFoundDao.getInfoById(id, isAdmin);
+		String str = laf.getLaf_detail();
+		str = str.replaceAll("\r\n|\n", "<br>");
+		laf.setLaf_detail(str);
+		
+		return laf;
 	}
 
 	@Override
@@ -78,9 +84,13 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 		if(ValidateUtil.isValidName(laf.getLaf_name())
 			&& ValidateUtil.isValidPhone(laf.getLaf_phone())
 			&& ValidateUtil.isValidQQ(laf.getLaf_qq())
-			&& ValidateUtil.isValidStuId(laf.getLaf_stuid())
 			&& ValidateUtil.isValidWeChat(laf.getLaf_wechat())
 			&& ValidateUtil.isValidDetail(laf.getLaf_detail())) {
+			
+			// 内容处理
+//			String str = laf.getLaf_detail();
+//			str =  str.replaceAll("\n|\r\n","<br>");
+//			laf.setLaf_detail(str);
 			
 			return lostAndFoundDao.releaseInfo(laf);
 		}
@@ -204,6 +214,7 @@ public class LostAndFoundServiceImpl implements ILostAndFoundService{
 	public PageBean<LostAndFound> handleMainDetail(PageBean<LostAndFound> lafPage) {
 		for(LostAndFound laf : lafPage.getPageData()) {
 			String con = laf.getLaf_detail();
+			con = con.replaceAll("<br>", "\n");
 			if(con.length() > 50) {
 				laf.setLaf_mainDetail(con.substring(0,50)+"......");
 			} else {

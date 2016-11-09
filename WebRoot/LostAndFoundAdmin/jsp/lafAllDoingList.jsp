@@ -3,15 +3,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+%>
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>失物招领管理 | 后台管理</title>
+<link rel="SHORTCUT ICON" href="<%=path %>/imgs/hnuc.png"/>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/LostAndFoundAdmin/assets/css/amazeui.css" />
 <link rel="stylesheet"
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	href="${pageContext.request.contextPath }/plugins/font-awesome-4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/LostAndFoundAdmin/assets/css/core.css" />
 <link rel="stylesheet"
@@ -38,7 +42,7 @@
 	<!-- Begin page -->
 	<header class="am-topbar am-topbar-fixed-top">
 		<div class="am-topbar-left am-hide-sm-only">
-			<a href="index.html" class="logo"><span>后台管理中心</span><i
+			<a href="<%=path %>/admin/admin_getIndexInfo.hnuc" class="logo"><span>后台管理中心</span><i
 				class="zmdi zmdi-layers"></i></a>
 		</div>
 

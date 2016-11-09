@@ -12,8 +12,10 @@
 			<!-- User -->
 			<div class="user-box am-hide-sm-only">
 				<div class="user-img">
+					<a href="${pageContext.request.contextPath }/">
 					<img src="${pageContext.request.contextPath}/imgs/hnuc2.jpg"
 						class="img-circle img-thumbnail img-responsive">
+					</a>
 					<div class="user-status offline">
 						<%--
 	                            <i class="am-icon-dot-circle-o" aria-hidden="true"></i>
@@ -21,7 +23,7 @@
 					</div>
 				</div>
 				<h5>
-					<a href="#">湖南商学院</a>
+					<a href="#">湖南商学院 | 校宣传部</a>
 				</h5>
 				<%--
 	                        <ul class="list-inline">

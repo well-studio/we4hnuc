@@ -10,6 +10,7 @@ String path = request.getContextPath();
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="SHORTCUT ICON" href="<%=path %>/imgs/hnuc.png"/>
 		<title>图片管理 | 后台管理</title>
 		<link rel="stylesheet" href="<%=path %>/LostAndFoundAdmin/assets/css/amazeui.css" />
 		<link rel="stylesheet" href="<%=path %>/LostAndFoundAdmin/assets/css/core.css" />
@@ -24,13 +25,13 @@ String path = request.getContextPath();
 		<!-- Begin page -->
 		<header class="am-topbar am-topbar-fixed-top">
 			<div class="am-topbar-left am-hide-sm-only">
-                <a href="javascript:window.location.reload();" class="logo"><span>后台管理中心</span><i class="zmdi zmdi-layers"></i></a>
+                <a href="<%=path %>/admin/admin_getIndexInfo.hnuc" class="logo"><span>后台管理中心</span><i class="zmdi zmdi-layers"></i></a>
             </div>
 
 			<div class="contain">
 				<ul class="am-nav am-navbar-nav am-navbar-left">
 
-					<li><h4 class="page-title">图片管理</h4></li>
+					<li><h4 class="page-title">图片管理(① 图片名称中请不要有中文 ② 图片不能超过5M ③ 首页轮播图片需要等比例)</h4></li>
 				</ul>
 
 			</div>
@@ -51,7 +52,9 @@ String path = request.getContextPath();
 				<s:iterator  value="#session.imgNames" var="ent">
 					<li>
 					<div class="am-gallery-item">
-						<img src="<%=path %>/upload/adminImgs/<s:property value='#ent'/>" />
+						<a href="<%=path %>/upload/adminImgsZip/<s:property value='#ent'/>" target="_blank">
+							<img src="<%=path %>/upload/adminImgs/<s:property value='#ent'/>" />
+						</a>
 						<div class="am-g">
 							<div style="padding:0px" class="am-u-sm-6 am-u-md-6 am-u-lg-6">
 								<a href="<%=path %>/upload/adminImgs/<s:property value='#ent'/>" target="_blank">

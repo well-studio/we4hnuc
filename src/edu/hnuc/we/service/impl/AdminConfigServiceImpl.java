@@ -23,7 +23,4 @@ public class AdminConfigServiceImpl implements IAdminConfigService {
 		return adminConfigDao.updateIndexBtnInfo(conf_key , json);
 	}
 
-	
-	
-	
 }

@@ -68,7 +68,7 @@
 			<result name="reToimgManage">/LostAndFoundAdmin/jsp/imgManage.jsp</result>
 			<result name="reTogetAllImgNames" type="redirectAction">admin_getAllImgNames</result>
 			<result name="reToAdmIndex">/LostAndFoundAdmin/jsp/index.jsp</result>
-			<result name="uploadFail">/WEB-INF/error/Fail.html</result>
+			<result name="uploadFail">/WEB-INF/error/fileTip.html</result>
 			<result name="deleteFail">/WEB-INF/error/Fail.html</result>
 			<result name="reToTip" type="redirectAction">tip</result>
 			<interceptor-ref name="isAdminLoginCheckStack"></interceptor-ref>

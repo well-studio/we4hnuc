@@ -6,4 +6,5 @@
 	<link rel='stylesheet prefetch' href='<%=path %>/plugins/weui/dist/style/weui.css'>
 	<link rel='stylesheet prefetch' href='<%=path %>/plugins/weui/dist/example/example.css'>
 	<link rel='stylesheet prefetch' href='<%=path %>/plugins/AmazeUI-2.7.1/assets/css/amazeui.min.css'>
+	<link rel="SHORTCUT ICON" href="<%=path %>/imgs/hnuc.png"/>
 	

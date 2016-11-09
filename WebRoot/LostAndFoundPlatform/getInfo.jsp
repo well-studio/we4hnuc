@@ -38,8 +38,9 @@ String path = request.getContextPath();
 			};
 	
 			$.post(url,sendData,function(backData,textStatus,ajax) {
+				var json = eval("("+backData+")");
+				layer.msg(json.info)
 				layer.close(load);
-				layer.msg("谢谢合作 祝你生活愉快！")
 				window.location.href = "${pageContext.request.contextPath}/laf_getAllValidInfo.hnuc";
 			});
 		});

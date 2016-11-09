@@ -38,6 +38,7 @@
 				loadIndexInfo
 			</result> -->
 		</global-results>
+		
 		<!-- 捕获异常 -->
 		<!--  
 		<global-exception-mappings>
@@ -45,6 +46,7 @@
 				result="error" />
 		</global-exception-mappings>
 		-->
+		
 		<action name="login">
 			<result>/login.jsp</result>
 			<interceptor-ref name="isMobileCheckStack"></interceptor-ref>

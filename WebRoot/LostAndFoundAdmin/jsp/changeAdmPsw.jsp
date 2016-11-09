@@ -5,7 +5,7 @@ String path = request.getContextPath();
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <%@include file="../../WEB-INF/common/LostAndFoundPlatform/head.jsp"%>
-<title>教务系统登入</title>
+<title>管理员更改密码</title>
 <link rel="stylesheet" href="<%=path%>/css/login.css">
 <script src='<%=path %>/plugins/jquery/jquery.min.js'></script>
 <script type="text/javascript">

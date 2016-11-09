@@ -16,6 +16,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import edu.hnuc.we.entity.AdminConfig;
 import edu.hnuc.we.service.IAdminConfigService;
 import edu.hnuc.we.util.AdminImgs;
+import edu.hnuc.we.util.ImageUtil;
 /**
  * @author xxmodd
  *
@@ -391,6 +392,10 @@ public class AdminConfigAction extends ActionSupport implements ModelDriven<Admi
 		boolean flag = false;
 //		User admin = (User)session.get("admin");
 //		if(admin!=null){
+		int size = (int) images[0].length();
+		if(size > 5242880) {
+			return "uploadFail";
+		}
 			if (images != null && images.length > 0) {
 				Long tsmp = new Date().getTime();
 				imagesFileName[0] = tsmp + " " + imagesFileName[0];
@@ -399,6 +404,10 @@ public class AdminConfigAction extends ActionSupport implements ModelDriven<Admi
 						File.separator)
 						+ "/upload/adminImgs/" + imagesFileName[0];
 				flag = AdminImgs.saveImg(images[0], path); // 保存图片
+				String zippath = ServletActionContext.getServletContext().getRealPath(
+						File.separator)
+						+ "/upload/adminImgsZip/" + imagesFileName[0];
+				ImageUtil.zipImageFile(images[0], new File(zippath), 952, 400);//保存压缩图片
 			} else {
 				return "error";
 			}
@@ -433,8 +442,9 @@ public class AdminConfigAction extends ActionSupport implements ModelDriven<Admi
 			return "error";
 		}
 		//获取上传图片的路径
-		String path = ServletActionContext.getServletContext().getRealPath(File.separator) + "/upload/adminImgs/";
-		boolean flag = AdminImgs.deleteImg(path+delImgName);
+		String path1 = ServletActionContext.getServletContext().getRealPath(File.separator) + "/upload/adminImgs/";
+		String path2 = ServletActionContext.getServletContext().getRealPath(File.separator) + "/upload/adminImgsZip/";
+		boolean flag = AdminImgs.deleteImg(path1+delImgName)&&AdminImgs.deleteImg(path2+delImgName);;
 		if(flag){
 			return "reTogetAllImgNames";
 		}

@@ -8,7 +8,9 @@
     <constant name="struts.devMode" value="false" />
     <constant name="struts.ui.theme" value="simple" />
 	<constant name="struts.action.extension" value="hnuc" />
-	<constant name="struts.multipart.maxSize" value="5242880"></constant>
+	<!--  -->
+	<constant name="struts.multipart.maxSize" value="15728640"></constant>
+	
 	
 	<package name="default" extends="struts-default">
 		<!-- 捕获404页面 -->

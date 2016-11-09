@@ -9,6 +9,7 @@ String path = request.getContextPath();
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>首页定制 | 后台管理</title>
+		<link rel="SHORTCUT ICON" href="<%=path %>/imgs/hnuc.png"/>
 		<link rel="stylesheet" href="<%=path %>/LostAndFoundAdmin/assets/css/amazeui.css" />
 		<link rel="stylesheet" href="<%=path %>/LostAndFoundAdmin/assets/css/core.css" />
 		<link rel="stylesheet" href="<%=path %>/LostAndFoundAdmin/assets/css/menu.css" />
@@ -22,7 +23,7 @@ String path = request.getContextPath();
 		<!-- Begin page -->
 		<header class="am-topbar am-topbar-fixed-top">
 			<div class="am-topbar-left am-hide-sm-only">
-                <a href="javascript:window.location.reload();" class="logo"><span>后台管理中心</span><i class="zmdi zmdi-layers"></i></a>
+                <a href="<%=path %>/admin/admin_getIndexInfo.hnuc" class="logo"><span>后台管理中心</span><i class="zmdi zmdi-layers"></i></a>
             </div>
 
 			<div class="contain">
@@ -184,7 +185,7 @@ String path = request.getContextPath();
 								    <thead>
 								        <tr>
 								            <th>标题</th>
-								            <th><a href="http://fontawesome.io/" target="_blank">图标class</a></th>
+								            <th><a href="http://fontawesome.dashgame.com/" target="_blank">图标class</a></th>
 								            <th>链接地址</th>
 								            <th>操作</th>
 								        </tr>

@@ -11,9 +11,7 @@ public class CheckUserAgent {
 
 	public static boolean checkAgentIsMobile(String ua) {
 		boolean flag = false;
-		if (!ua.contains("Windows NT")
-				|| (ua.contains("Windows NT") && ua
-						.contains("compatible; MSIE 9.0;"))) {
+		if (!ua.contains("Windows NT") || (ua.contains("Windows NT") && ua.contains("compatible; MSIE 9.0;"))) {
 			// 排除 苹果桌面系统
 			if (!ua.contains("Windows NT") && !ua.contains("Macintosh")) {
 				for (String item : agent) {

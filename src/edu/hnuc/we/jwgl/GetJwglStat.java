@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.junit.Test;
+
 /**
  * 获取jwgl开闭状态
  * @author Hallbow
@@ -15,7 +17,8 @@ import java.net.URLConnection;
 public class GetJwglStat {
 	
 //	private static String url = "http://jwgl.hnuc.edu.cn/jwxs/";
-	private static String url = "http://jwgl.hnuc.edu.cn";
+//	private static String url = "http://jwgl.hnuc.edu.cn";
+	private static String url = "http://218.76.42.73/";
 	
 	public static boolean getStat(){
 		PrintWriter out = null;
@@ -27,8 +30,7 @@ public class GetJwglStat {
 			URLConnection conn = realUrl.openConnection();
 //			conn.setRequestProperty("accept", "*/*");
 //			conn.setRequestProperty("connection", "Keep-Alive");
-//			conn.setRequestProperty("user-agent",
-//					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+//			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)"); 
 			conn.setConnectTimeout(10000);
 			conn.setReadTimeout(10000);
 			conn.setDoOutput(true);
@@ -49,6 +51,7 @@ public class GetJwglStat {
 			System.out.println("教务系统暂未开放！" + e);
 			e.printStackTrace();
 		}
+		
 		// 使用finally块来关闭输出流、输入流
 		finally {
 			try {
@@ -66,7 +69,7 @@ public class GetJwglStat {
 	}
 	
 	public static void main(String[] args) {
-		getStat();
+		System.out.println(getStat());
 	}
 	
 }

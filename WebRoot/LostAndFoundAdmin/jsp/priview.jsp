@@ -28,7 +28,7 @@
 			<s:iterator var="info" value="#session.indexPicPriviewInfo" status="st">
 				<li>
 					<a href="<s:property value="#info[0]"/>">
-						<img src="<s:property value="#info[0]"/>">
+						<img src="<s:property value="#info[1]"/>">
 					</a>
 				</li>
 			</s:iterator>

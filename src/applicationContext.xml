@@ -12,9 +12,14 @@
 		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/we4hnuc?useUnicode=true&amp;characterEncoding=UTF-8"></property>
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
 		<property name="user" value="root"></property>
-		<property name="password" value=""></property>
-		<property name="initialPoolSize" value="10"></property>
-		<property name="maxPoolSize" value="200"></property>
+		<property name="password" value="root"></property>
+        <property name="maxPoolSize" value="200"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="initialPoolSize" value="20"/>
+        <property name="maxIdleTime" value="600"/>
+        <property name="acquireIncrement" value="5"/>
+        <property name="maxStatements" value="5"/>
+        <property name="idleConnectionTestPeriod" value="60"/>
 	</bean>
 
 
