@@ -32,7 +32,7 @@
 	                                    <i class="fa fa-cog" aria-hidden="true"></i>
 	                                </a>
 	                            </li>
-	
+
 	                            <li>
 	                                <a href="#" class="text-custom">
 	                                    <i class="fa fa-cog" aria-hidden="true"></i>
@@ -50,14 +50,14 @@
 				</li>
 				<li class="admin-parent"><a class="am-cf"
 					data-am-collapse="{target: '#collapse-nav1'}"><span
-						class="am-icon-table"></span> 失物招领 <span
+						class="am-icon-table"></span> 失物招领<span
 						class="am-icon-angle-right am-fr am-margin-right"></span></a>
 					<ul class="am-list am-collapse admin-sidebar-sub am-in"
 						id="collapse-nav1">
 						<li><a href="${pageContext.request.contextPath}/admin//laf_getAllDoingInfoAdmin.hnuc"
-							class="am-cf"> 正在进行 </span></a></li>
-						<li><a href="${pageContext.request.contextPath}/admin//laf_getAllSucInfoAdmin.hnuc" class="am-cf"> 已完成 </span></a></li>
-						<li><a href="${pageContext.request.contextPath}/admin//laf_getAllToCheckInfoAdmin.hnuc" class="am-cf"> 待审核 </span></a></li>
+							class="am-cf"> 正在进行 </a></li>
+						<li><a href="${pageContext.request.contextPath}/admin//laf_getAllSucInfoAdmin.hnuc" class="am-cf"> 已完成</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin//laf_getAllToCheckInfoAdmin.hnuc" class="am-cf"> 待审核</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin//laf_getAllTimeOutInfoAdmin.hnuc"> 已失效</a></li>
 					</ul></li>
 				<li>
@@ -65,12 +65,12 @@
 					<span class="am-icon-file-image-o"></span> 图片管理 </a>
 				</li>
 			</ul>
-			
+
 			<div style="position: fixed;bottom: 50px;left:100px;">
 			<a target="_blank" href="${pageContext.request.contextPath }/admin/admin_changePsw.hnuc">修改密码</a>
 			</div>
 		</div>
-		
+
 </div>
 <!-- sidebar end -->
 

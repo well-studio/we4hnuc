@@ -1,11 +1,11 @@
 package edu.hnuc.we.interceptor;
 
 
-import java.util.Map;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
+
+import java.util.Map;
 
 /**
  * @author xxmodd
@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
  * 
  */
 public class StuAuthInterceptor extends AbstractInterceptor {
-	private static final long serialVersionUID = 1L;
+//	private static final long serialVersionUID = 1L;
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {

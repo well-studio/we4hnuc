@@ -1,19 +1,15 @@
 package edu.hnuc.we.action;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-
 import edu.hnuc.we.entity.User;
-import edu.hnuc.we.jwgl.GetCourse;
-import edu.hnuc.we.jwgl.GetGrade;
-import edu.hnuc.we.jwgl.GetJwglStat;
-import edu.hnuc.we.jwgl.GetStuCookie;
 import edu.hnuc.we.service.IUserService;
 import edu.hnuc.we.util.GetTermByActAndDateUtil;
+import edu.hnuc.we.util.getStuUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 
@@ -54,10 +50,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	 */
 	public String login() {
 		
-		if(!GetJwglStat.getStat()) {
+/*		if(!GetJwglStat.getStat()) {
 			valueMap.put("info", "教务系统暂未开放!~<br>请稍后再试ヾ|≧_≦|〃");
 			return "valueMap";
-		}
+		}*/
 		
 		User user2 = userService.login(user);
 		Map<String, Object> session = ActionContext.getContext().getSession();
@@ -67,10 +63,12 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		}
 		valueMap.put("info", "登入成功!");
 		//获取cookie
-		session.put("cookie", GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd()));
+//		session.put("cookie", GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd()));
+		session.put("cookie", getStuUtil.getCookie(user.getUsr_stuId(), user.getUsr_pwd()));
 		//获取名字
 		String cookie = (String) session.get("cookie");
-		user2.setUsr_name(GetCourse.getStuName(user2.getUsr_stuId(), term, cookie));
+//		user2.setUsr_name(GetCourse.getStuName(user2.getUsr_stuId(), term, cookie));
+		user2.setUsr_name(getStuUtil.getName(cookie));
 		session.put("user", user2);
 		session.remove("admin");
 		//获取term数组
@@ -153,7 +151,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 //		Admin admin = (Admin)session.get("admin");
 		if(nowuser!= null) {
 			String cookie = (String) session.get("cookie");
-			session.put("grade", GetGrade.getGrade(nowuser.getUsr_stuId(), term, cookie));
+//			session.put("grade", GetGrade.getGrade(nowuser.getUsr_stuId(), term, cookie));
+			session.put("grade", getStuUtil.getGrade(term, cookie));
 			return "gradeTable";
 		}
 		return "error";
@@ -173,7 +172,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		if(nowuser!= null) {
 			//System.out.println(user.toString());
 			String cookie = (String) session.get("cookie");
-			session.put("course", GetCourse.getcourse(nowuser.getUsr_stuId(), term, cookie));
+//			session.put("course", GetCourse.getcourse(nowuser.getUsr_stuId(), term, cookie));
+			session.put("course", getStuUtil.getCourse(term, cookie));
 			return "courseTable";
 		}
 		return "error";

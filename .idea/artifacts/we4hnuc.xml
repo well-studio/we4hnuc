@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="we4hnuc">
+    <output-path>$PROJECT_DIR$/out/artifacts/we4hnuc</output-path>
+    <root id="archive" name="we4hnuc.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="we4hnuc" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="we4hnuc/web/Web" />
+    </root>
+  </artifact>
+</component>

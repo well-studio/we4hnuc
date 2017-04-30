@@ -377,7 +377,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -393,7 +393,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchValidInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchValidInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.remove("lostMark");
@@ -410,7 +410,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchDoingInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchDoingInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -426,7 +426,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchSucInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchSucInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -442,7 +442,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchTimeOutInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchTimeOutInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);
@@ -458,7 +458,7 @@ public class LostAndFoundAction extends ActionSupport implements ModelDriven<Los
 	 */
 	public String searchToCheckInfo() {
 //		valueMap.put("Info", lostAndFoundService.searchInfo(keyWord));
-		handleKeyWord(keyWord);
+//		handleKeyWord(keyWord);
 		lafPage = lostAndFoundService.searchToCheckInfo(lafPage, keyWord);
 		Map<String, Object> request = ActionContext.getContext().getContextMap();
 		request.put("lafPage", lafPage);

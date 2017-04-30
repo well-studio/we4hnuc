@@ -2,7 +2,6 @@ package edu.hnuc.we.util;
 
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * @author xxmodd

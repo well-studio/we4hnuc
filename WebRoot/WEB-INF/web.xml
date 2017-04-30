@@ -82,9 +82,8 @@
 
 	<error-page>
 		<error-code>500</error-code>
-		<location>/WEB-INF/error/500.html</location>
+		<location>/WEB-INF/error/Fail.html</location>
 	</error-page>
-
 
 </web-app>
 

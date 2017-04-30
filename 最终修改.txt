@@ -8,7 +8,8 @@
 
 5.admin/jsp/下没用的文件放到bak文件夹了。
 
-6.三个xml文件 
+6.三个xml文件
 
 7.修改LostAndFoundAction.java
 
+8、Java.lang.UnsupportClassVersion Error  高版本JDK兼容低版本JDK，反之不行（高版本JDK编译的类 ，放到低版本JDK1.7中运行 可能报的错误）

@@ -1,15 +1,13 @@
 package edu.hnuc.we.dao.impl;
 
-import java.util.List;
-
+import edu.hnuc.we.dao.IUserDao;
+import edu.hnuc.we.entity.User;
+import edu.hnuc.we.util.Operation;
+import edu.hnuc.we.util.getStuUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import edu.hnuc.we.dao.IUserDao;
-import edu.hnuc.we.entity.User;
-import edu.hnuc.we.jwgl.GetStuCookie;
-import edu.hnuc.we.jwgl.LoginCheck;
-import edu.hnuc.we.util.Operation;
+import java.util.List;
 
 /**
  * 用户持久实现
@@ -27,14 +25,16 @@ public class UserDaoImpl implements IUserDao{
 	
 	@Override
 	public User login(User user) {
-		String cookie = GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd());
+//		String cookie = GetStuCookie.getCookie(user.getUsr_stuId(), user.getUsr_pwd());
+		String cookie = getStuUtil.getCookie(user.getUsr_stuId(), user.getUsr_pwd());
 		if(cookie == null) {
 			return null;
 		}
-		if(LoginCheck.check(cookie)){
+		// 为什么需要验证？
+/*		if(LoginCheck.check(cookie)){
 			return user;
-		}
-		return null;
+		}*/
+		return user;
 	}
 	
 	@Override
